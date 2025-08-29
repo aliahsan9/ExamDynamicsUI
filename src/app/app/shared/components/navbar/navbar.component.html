@@ -1,0 +1,34 @@
+<nav class="navbar navbar-expand-lg" data-aos="fade-down" data-aos-duration="1000">
+  <div class="container-fluid">
+    <!-- Logo -->
+    <a class="navbar-brand" href="#">
+      <img src="assets/images/logo.png" alt="Logo" class="logo">
+    </a>
+
+    <!-- Hamburger Toggle -->
+    <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar Links & Buttons -->
+    <div class="navbar-collapse" [ngClass]="{'show-sidebar': sidebarOpen}">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="#" data-aos="fade-right" data-aos-delay="100">Home</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/about" data-aos="fade-right" data-aos-delay="200">About</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/exams" data-aos="fade-right" data-aos-delay="300">Exams</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/notes" data-aos="fade-right" data-aos-delay="400">Notes</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/quiz" data-aos="fade-right" data-aos-delay="400">Quiz</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/ai" data-aos="fade-right" data-aos-delay="500">AI Tutor</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/blogs" data-aos="fade-right" data-aos-delay="600">Blogs</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/contact" data-aos="fade-right" data-aos-delay="700">Contact Us</a></li>
+      </ul>
+
+      <!-- Dark Mode Icon & Buttons -->
+      <div class="d-flex align-items-center">
+        <i class="bi bi-moon-stars-fill dark-mode-toggle me-3" data-aos="fade-left" data-aos-delay="800"></i>
+        <a routerLink="/register" class="btn btn-primary me-2" data-aos="fade-left" data-aos-delay="900">SignUp</a>
+        <a routerLink="/login" class="btn btn-primary" data-aos="fade-left" data-aos-delay="1000">Login</a>
+      </div> 
+    </div>
+  </div>
+</nav>

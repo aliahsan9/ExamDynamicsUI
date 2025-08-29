@@ -1,0 +1,30 @@
+.subscription-section {
+  background-color: #ffffff;
+
+  .form-control-lg {
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .btn-lg {
+    font-size: 1rem;
+    border-radius: 5px;
+  }
+
+  .back-to-top {
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.2s;
+
+    i {
+      font-size: 1.2rem;
+    }
+
+    &:hover {
+      color: #0047ff;
+      text-decoration: underline;
+    }
+  }
+}

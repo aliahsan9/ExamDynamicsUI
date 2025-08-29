@@ -1,0 +1,43 @@
+  .exam-detail-section {
+  background-color: #f9f9f9;
+
+  .section-title {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #0000ff;
+  }
+
+  .exam-card {
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    text-align: center;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .exam-icon {
+      font-size: 2.5rem;
+      color: #007bff;
+    }
+
+    h5 {
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .exam-link {
+      color: #000;
+      font-weight: 500;
+      text-decoration: none;
+
+      &:hover {
+        color: #007bff;
+        text-decoration: underline;
+      }
+    }
+  }
+}

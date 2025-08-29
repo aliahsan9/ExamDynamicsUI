@@ -1,0 +1,91 @@
+.hero-section {
+  background: #e6f2fb; // light blue like in Figma
+  padding: 4rem 0;
+
+  .hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #06174e;
+
+    span {
+      color: #1e3a8a; // highlight
+    }
+  }
+
+  .hero-subtitle {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  .hero-btn {
+    margin-top: 1.5rem;
+    background: linear-gradient(45deg, #2563eb, #1e40af);
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(45deg, #1e40af, #172554);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+    }
+  }
+
+  .hero-rating {
+    font-size: 1.4rem;
+    color: #fbbf24; // golden stars
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 1rem;
+
+    .stat-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      min-width: 140px;
+
+      h5 {
+        font-weight: 700;
+        color: #1e3a8a;
+      }
+
+      p {
+        margin: 0;
+        font-size: 0.9rem;
+        color: #555;
+      }
+    }
+  }
+
+  .hero-img {
+    max-width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+
+  @media (max-width: 768px) {
+    text-align: center;
+
+    .hero-title {
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .hero-stats {
+      justify-content: center;
+    }
+  }
+}

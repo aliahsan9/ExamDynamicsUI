@@ -1,0 +1,61 @@
+<div class="manage-quiz-container">
+  <h2>Manage Quizzes</h2>
+
+  <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" novalidate>
+    <div>
+      <label for="title">Title</label>
+      <input id="title" formControlName="title" />
+      <div *ngIf="quizForm.get('title')?.invalid && quizForm.get('title')?.touched" class="error">
+        Title is required and must be less than 100 characters.
+      </div>
+    </div>
+
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description"></textarea>
+      <div *ngIf="quizForm.get('description')?.invalid && quizForm.get('description')?.touched" class="error">
+        Description is required and must be less than 500 characters.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="quizForm.invalid">
+      {{ isEditMode ? 'Update Quiz' : 'Create Quiz' }}
+    </button>
+    <button type="button" (click)="resetForm()" *ngIf="isEditMode">Cancel</button>
+  </form>
+
+  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+  <hr />
+
+  <h3>Existing Quizzes</h3>
+
+  <div *ngIf="loading">Loading quizzes...</div>
+  <div *ngIf="!loading && quizzes.length === 0">No quizzes found.</div>
+
+  <table *ngIf="quizzes.length > 0" class="quiz-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Total Questions</th>
+        <th>Time Limit (min)</th>
+        <th>Created At</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let quiz of quizzes">
+        <td>{{ quiz.title }}</td>
+        <td>{{ quiz.description }}</td>
+        <td>{{ quiz.totalQuestions }}</td>
+        <td>{{ quiz.timeLimit }}</td>
+        <td>{{ quiz.createdAt | date:'short' }}</td>
+        <td>
+          <button (click)="editQuiz(quiz)">Edit</button>
+          <button (click)="deleteQuiz(quiz.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

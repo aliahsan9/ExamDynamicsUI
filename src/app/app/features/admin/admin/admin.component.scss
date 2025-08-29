@@ -1,0 +1,36 @@
+.admin-dashboard {
+  h2 {
+    font-weight: 700;
+    color: #003087;
+  }
+
+  .admin-card {
+    border-radius: 1rem;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.15);
+    }
+
+    .admin-icon {
+      font-size: 3rem;
+      color: #003087;
+      transition: color 0.3s ease;
+    }
+
+    &:hover .admin-icon {
+      color: #00205b;
+    }
+
+    h5 {
+      font-weight: 600;
+      margin-top: 0.8rem;
+    }
+
+    p {
+      font-size: 0.9rem;
+    }
+  }
+}

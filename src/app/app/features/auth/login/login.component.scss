@@ -1,0 +1,104 @@
+.login-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #f7f7fc, #ffffff);
+  padding: 2rem;
+  flex-wrap: wrap; // Important for responsiveness
+
+  .info-section {
+    max-width: 500px;
+    flex: 1;
+    padding: 1rem;
+
+    .logo {
+      width: 70px;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: #5a5a5a;
+    }
+  }
+
+  .login-card {
+    flex: 1;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 2rem;
+    border-radius: 1rem;
+    background: #ffffff;
+    transition: transform 0.3s ease;
+    animation: fadeInUp 1s ease;
+    padding: 2rem;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    input.form-control {
+      height: 45px;
+      border-radius: 0.5rem;
+    }
+
+    button {
+      height: 45px;
+      border-radius: 0.5rem;
+    }
+  }
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Responsive Styles
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem;
+
+    .info-section,
+    .login-card {
+      max-width: 100%;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .info-section .logo {
+      margin: 0 auto 1rem;
+    }
+
+    .login-card {
+      margin-top: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .info-section h2 {
+      font-size: 1.5rem;
+    }
+
+    .info-section p {
+      font-size: 0.9rem;
+    }
+
+    .login-card {
+      padding: 1.5rem 1rem;
+    }
+  }
+}

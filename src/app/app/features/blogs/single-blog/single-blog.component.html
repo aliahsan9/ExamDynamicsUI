@@ -1,0 +1,24 @@
+<section class="single-blog py-5" *ngIf="blog">
+  <div class="container">
+    <!-- Blog Title and Date -->
+    <h2 class="mb-3">{{ blog.title }}</h2>
+    <p class="text-muted">Published at: {{ blog.publishedAt | date:'medium' }}</p>
+
+    <!-- Blog Content -->
+    <div class="blog-content">
+      <p>{{ blog.content }}</p>
+
+      <!-- Additional Images for Visual Appeal -->
+      <div class="my-4 text-center">
+        <img src="assets/images/students.jpg" alt="Related Visual 1" class="img-fluid mb-3" style="max-width:100%; border-radius:8px;">
+        <img src="assets/images/students.jpg" alt="Related Visual 2" class="img-fluid" style="max-width:100%; border-radius:8px;">
+      </div>
+
+      <!-- Optional Highlight Section -->
+      <p class="text-muted mt-3">
+        Tip: Keep your notes clear and concise for better retention.
+      </p>
+    </div>
+  </div>
+</section>
+ 

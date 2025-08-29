@@ -1,0 +1,36 @@
+.feature-card {
+  min-height: 100%;
+  height: 100%;
+  border-radius: 15px;
+  padding: 2rem;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  text-align: center;
+
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .feature-icon {
+    font-size: 2.8rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+  }
+
+  h5 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #222;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #555;
+    flex-grow: 1;
+  }
+}

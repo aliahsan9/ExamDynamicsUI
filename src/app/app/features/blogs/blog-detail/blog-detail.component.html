@@ -1,0 +1,28 @@
+<section class="blog-section py-5">
+  <div class="container">
+    
+    <!-- Blog Heading -->
+    <div class="text-center mb-5" data-aos="fade-down">
+      <h2 class="blog-title">The Latest from <span class="highlight">Our Blog</span></h2>
+    </div>
+
+    <!-- Blog Cards -->
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 d-flex" *ngFor="let blog of blogs; let i = index" [attr.data-aos-delay]="100 + i*100" data-aos="zoom-in">
+        <div class="blog-card w-100 shadow-sm rounded overflow-hidden">
+          <img src="assets/images/students.jpg" class="blog-img" alt="Blog Thumbnail">
+          <div class="p-3 bg-light-blue h-100 d-flex flex-column justify-content-between">
+            <div>
+              <h5 class="fw-bold mb-2">{{ blog.title }}</h5>
+              <p class="text-muted small">{{ truncateText(blog.content, 100) }}</p>
+            </div>
+            <div class="mt-2">
+              <a [routerLink]="['/blog', blog.blogPostId]" class="read-more">Read more... <i class="bi bi-arrow-right-short"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>

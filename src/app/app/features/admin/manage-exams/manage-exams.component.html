@@ -1,0 +1,58 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Manage Exams</h2>
+    <button class="btn btn-primary" (click)="openForm()">+ Add Exam</button>
+  </div>
+
+  <!-- Inline Form for Create/Edit -->
+  <div *ngIf="showForm" class="card mb-4 p-3">
+    <h5>{{ editingExamId ? 'Edit Exam' : 'Add Exam' }}</h5>
+    <form [formGroup]="examForm" (ngSubmit)="saveExam()">
+      <div class="mb-3">
+        <label class="form-label">Title</label>
+        <input type="text" formControlName="title" class="form-control" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea formControlName="description" class="form-control" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Exam Category ID</label>
+        <input type="number" formControlName="examCategoryId" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-success me-2">{{ editingExamId ? 'Update' : 'Create' }}</button>
+      <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+    </form>
+  </div>
+
+  <!-- Exams Table -->
+  <table class="table table-bordered table-hover">
+    <thead class="table-light">
+      <tr>
+        <th>ID</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Created At</th>
+        <th>Subjects</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exam of exams">
+        <td>{{ exam.examId }}</td>
+        <td>{{ exam.title }}</td>
+        <td>{{ exam.description }}</td>
+        <td>{{ exam.createdAt | date:'short' }}</td>
+       <td>
+  <span *ngFor="let s of exam.subjects ?? []; let i = index">
+    {{ s.name }}<span *ngIf="i < (exam.subjects?.length ?? 0) - 1">, </span>
+  </span>
+</td>
+        <td>
+          <button class="btn btn-sm btn-warning me-2" (click)="openForm(exam)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteExam(exam.examId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
