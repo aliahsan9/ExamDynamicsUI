@@ -1,0 +1,15 @@
+.container {
+  max-width: 900px;
+}
+
+.card {
+  border-radius: 12px;
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
+
+button {
+  border-radius: 8px;
+}

@@ -1,0 +1,59 @@
+<div class="container mt-4">
+  <h2>Manage Data Analysis MCQs</h2>
+
+  <!-- Form -->
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="card p-3 shadow-sm">
+    <div class="mb-2">
+      <label class="form-label">Question Text</label>
+      <input type="text" formControlName="text" class="form-control" />
+    </div>
+
+    <!-- Options -->
+    <div formArrayName="options">
+      <div *ngFor="let opt of options.controls; let i = index" [formGroupName]="i" class="row mb-2">
+        <div class="col-8">
+          <input type="text" formControlName="text" class="form-control" placeholder="Option text" />
+        </div>
+        <div class="col-2 d-flex align-items-center">
+          <input type="checkbox" formControlName="isCorrect" class="form-check-input me-2" />
+          Correct
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeOption(i)">Remove</button>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-secondary btn-sm mb-2" (click)="addOption()">+ Add Option</button>
+
+    <div class="mb-2">
+      <label class="form-label">Correct Answer (text)</label>
+      <input type="text" formControlName="correctAnswer" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success me-2">
+      {{ isEditing ? 'Update Question' : 'Add Question' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+  </form>
+
+  <!-- Questions List -->
+  <div class="mt-4">
+    <h4>Data Analysis Questions</h4>
+    <div *ngFor="let q of DataQuestions" class="card p-3 mb-3 shadow-sm">
+      <h5>{{ q.text }}</h5>
+      <ul class="list-group">
+        <li *ngFor="let opt of optionsMap[q.questionId]"
+            class="list-group-item"
+            [ngClass]="{'list-group-item-success': opt.isCorrect}">
+          {{ opt.text }}
+        </li>
+      </ul>
+
+      <div class="mt-2">
+        <button class="btn btn-primary btn-sm me-2" (click)="editQuestion(q)">Edit</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteQuestion(q.questionId)">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

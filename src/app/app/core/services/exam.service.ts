@@ -26,6 +26,7 @@ export interface ExamDto {
   title: string;
   description: string;
   createdAt: string;
+  examCategoryId:number;
   subjects?: SubjectDto[];
 }
 
@@ -33,7 +34,7 @@ export interface ExamDto {
   providedIn: 'root'
 })
 export class ExamService {
-  private apiUrl = `${environment.apiUrl}/api/exam`;
+  private apiUrl = `${environment.apiUrl}/exam`;
 
   constructor(private http: HttpClient) {}
 

@@ -1,0 +1,24 @@
+:host {
+  display: block;
+  background-color: #f9fbff;
+  min-height: 100vh;
+}
+
+.card {
+  border-radius: 1rem;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.card-title {
+  font-weight: 600;
+}
+
+.btn-primary {
+  border-radius: 2rem;
+  font-weight: 500;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

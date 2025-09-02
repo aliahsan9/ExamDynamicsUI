@@ -1,31 +1,51 @@
-<section class="hero-section d-flex align-items-center">
+<section class="hero-section d-flex align-items-center" id="top">
   <div class="container">
-    <div class="row align-items-center">
+    <div class="row align-items-center gy-4">
+      
       <!-- Left Content -->
-      <div class="col-lg-6 hero-content" data-aos="fade-right">
-        <h1 class="hero-title">Ace Your Exams with <span>ExamDynamics</span></h1>
+      <div class="col-lg-6 hero-content text-lg-start text-center" data-aos="fade-right">
+        <h1 class="hero-title">
+          Ace Your Exams with <span>ExamDynamics</span>
+        </h1>
         <p class="hero-subtitle">
-          5 Million Questions | 100+ Exams | AI Tutor Assistance <br />
+          <i class="bi bi-patch-check-fill text-primary me-1"></i> 5 Million Questions | 
+          <i class="bi bi-journal-richtext text-success me-1"></i> 100+ Exams | 
+          <i class="bi bi-robot text-warning me-1"></i> AI Tutor Assistance <br />
           MCQs with solutions, hints & video explanations — everything you need in one place.
         </p>
 
-        <a href="#" class="btn btn-primary hero-btn">Start Practicing Free &gt;</a>
+        <a routerLink="/quiz" class="btn hero-btn btn-lg">
+          <i class="bi bi-play-circle-fill me-2"></i> Start Practicing Free
+        </a>
 
-        <div class="hero-rating mt-3">
-          ⭐⭐⭐⭐⭐
-        </div>
+       <div class="hero-rating mt-3">
+  <div class="stars">
+    <span class="star" *ngFor="let star of [1,2,3,4,5]; let i = index" 
+          [class.filled]="i < 4.8">&#9733;</span>
+  </div>
+  <span class="rating-text">(Trusted by students worldwide)</span>
+</div>
+<div class="hero-rating-average mt-2">
+  <i class="a-icon a-icon-star">
+    <span class="a-icon-alt">4.8 out of 5 stars</span>
+  </i>
+</div>
+
 
         <!-- Stats Row -->
-        <div class="hero-stats mt-4 d-flex flex-wrap gap-3">
+        <div class="hero-stats mt-4 d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
           <div class="stat-card" data-aos="zoom-in">
+            <i class="bi bi-people-fill text-primary fs-3 mb-2"></i>
             <h5>1000+</h5>
             <p>Happy Students</p>
           </div>
           <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+            <i class="bi bi-pencil-square text-success fs-3 mb-2"></i>
             <h5>10,000+</h5>
             <p>Mock Exams Taken</p>
           </div>
           <div class="stat-card" data-aos="zoom-in" data-aos-delay="200">
+            <i class="bi bi-journal-check text-warning fs-3 mb-2"></i>
             <h5>800,000+</h5>
             <p>MCQs Solved</p>
           </div>
@@ -38,9 +58,10 @@
       </div>
     </div>
   </div>
-</section> 
+</section>
+
+<!-- Other Sections -->
 <app-exam-detail></app-exam-detail>
 <app-about></app-about>
 <app-blog-detail></app-blog-detail>
 <app-subscription-list></app-subscription-list>
-<

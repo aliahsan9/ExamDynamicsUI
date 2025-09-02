@@ -1,0 +1,61 @@
+<div class="container py-4">
+  <h2 class="mb-4 text-primary">Manage Chemistry MCQs</h2>
+
+  <!-- Form -->
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="mb-4">
+    <div class="mb-3">
+      <label class="form-label">Question Text</label>
+      <input type="text" class="form-control" formControlName="text">
+    </div>
+
+    <div formArrayName="options" class="mb-3">
+      <label class="form-label">Options</label>
+      <div *ngFor="let opt of options.controls; let i=index" [formGroupName]="i" class="d-flex mb-2">
+        <input type="text" class="form-control me-2" formControlName="text" placeholder="Option text">
+        <div class="form-check me-2">
+          <input type="checkbox" class="form-check-input" formControlName="isCorrect">
+          <label class="form-check-label">Correct</label>
+        </div>
+        <button type="button" class="btn btn-sm btn-danger" (click)="removeOption(i)">✕</button>
+      </div>
+      <button type="button" class="btn btn-sm btn-outline-primary" (click)="addOption()">+ Add Option</button>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Correct Answer</label>
+      <input type="text" class="form-control" formControlName="correctAnswer">
+    </div>
+
+    <button type="submit" class="btn btn-success me-2">{{ isEditing ? 'Update' : 'Create' }} Question</button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+  </form>
+
+  <!-- Chemistry Questions Table -->
+  <table class="table table-bordered table-striped">
+    <thead>
+      <tr>
+        <th>Question</th>
+        <th>Options</th>
+        <th>Correct Answer</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let q of chemistryQuestions">
+        <td>{{ q.text }}</td>
+        <td>
+          <ul class="mb-0">
+            <li *ngFor="let opt of optionsMap[q.questionId]">
+              {{ opt.text }} <span *ngIf="opt.isCorrect" class="badge bg-success">Correct</span>
+            </li>
+          </ul>
+        </td>
+        <td>{{ q.correctAnswer }}</td>
+        <td>
+          <button class="btn btn-sm btn-primary me-2" (click)="editQuestion(q)">Edit</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteQuestion(q.questionId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

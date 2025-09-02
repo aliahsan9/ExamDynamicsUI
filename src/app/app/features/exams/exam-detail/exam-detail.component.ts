@@ -1,40 +1,30 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExamService, ExamDto } from '../../../core/services/exam.service';
+import { Component, OnInit } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import * as AOS from 'aos';
 
 @Component({
   selector: 'app-exam-detail',
-  standalone: true,
-  imports: [CommonModule],
+  imports:[CommonModule,RouterModule],
   templateUrl: './exam-detail.component.html',
   styleUrls: ['./exam-detail.component.scss']
 })
 export class ExamDetailComponent implements OnInit {
-  exams: ExamDto[] = [];
 
-  constructor(private examService: ExamService) {}
+  exams = [
+    { title: 'MDCAT', desc: 'Pakistan medical students', link: '/quiz', icon: 'bi-heart-pulse' },
+    { title: 'ECAT', desc: 'Pakistan engineering students', link: '/quiz', icon: 'bi-tools' },
+    { title: 'SAT', desc: 'High school students (US colleges)', link: '/sat-detail', icon: 'bi-mortarboard' },
+    { title: 'GRE', desc: 'Graduate students (Masters/PhD)', link: '/gre', icon: 'bi-book' },
+    { title: 'GMAT', desc: 'MBA aspirants', link: '/gmat', icon: 'bi-graph-up' },
+    { title: 'IELTS', desc: 'Students + Immigrants (UK, Canada, Australia)', link: '/ielts', icon: 'bi-globe' },
+    { title: 'CSS', desc: 'Pakistan civil service aspirants', link: '/css', icon: 'bi-building' }
+  ];
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.loadExams();
+    AOS.init({ duration: 800, once: true });
   }
 
-  loadExams(): void {
-    this.examService.getAll().subscribe({
-      next: (data) => this.exams = data,
-      error: (err) => console.error(err)
-    });
-  }
-
-  // Optional: Generate a fallback icon for each exam based on index
-  getExamIcon(index: number): string {
-    const icons = [
-      'bi-heart-pulse-fill',
-      'bi-cpu-fill',
-      'bi-bank',
-      'bi-book',
-      'bi-mortarboard',
-      'bi-globe2'
-    ];
-    return icons[index % icons.length];
-  }
 }

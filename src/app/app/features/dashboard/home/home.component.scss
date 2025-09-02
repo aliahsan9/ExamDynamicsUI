@@ -1,29 +1,29 @@
 .hero-section {
-  background: #e6f2fb; // light blue like in Figma
+  background: #e6f2fb; // keep the same bg
   padding: 4rem 0;
 
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-weight: 800;
     color: #06174e;
 
     span {
-      color: #1e3a8a; // highlight
+      color: #1e3a8a;
     }
   }
 
   .hero-subtitle {
     margin-top: 1rem;
     font-size: 1.1rem;
-    color: #333;
-    line-height: 1.6;
+    color: #444;
+    line-height: 1.7;
   }
 
   .hero-btn {
     margin-top: 1.5rem;
     background: linear-gradient(45deg, #2563eb, #1e40af);
     border: none;
-    padding: 0.75rem 2rem;
+    padding: 0.8rem 2.2rem;
     border-radius: 50px;
     font-weight: 600;
     font-size: 1.1rem;
@@ -37,22 +37,110 @@
     }
   }
 
-  .hero-rating {
-    font-size: 1.4rem;
-    color: #fbbf24; // golden stars
+ .hero-rating {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; // allow stars + text to wrap on smaller screens
+  gap: 0.6rem;
+  font-family: 'Montserrat', sans-serif;
+
+  .stars {
+    display: flex;
+    gap: 0.2rem;
+
+    .star {
+      font-size: clamp(1rem, 2vw, 1.6rem); // scales with screen size
+      color: #ccc; // default gray
+      position: relative;
+      display: inline-block;
+      transition: transform 0.3s ease, color 0.3s ease;
+
+      &.filled {
+        color: #ffb400; // gold for filled stars
+      }
+
+      &:hover {
+        transform: scale(1.2);
+        color: #ffca28; // brighter gold on hover
+      }
+    }
   }
 
+  .rating-text {
+    font-size: clamp(0.8rem, 2vw, 0.95rem); // flexible size
+    color: #0d1b2a;
+    font-weight: 500;
+  }
+}
+
+.hero-rating-average {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+
+  .a-icon {
+    color: #ffb400;
+    font-size: clamp(1rem, 2vw, 1.2rem); // responsive star
+    margin-right: 0.4rem;
+  }
+
+  .a-icon-alt {
+    font-size: clamp(0.8rem, 2vw, 0.95rem); // responsive text
+    color: #0d1b2a;
+    font-weight: 500;
+  }
+}
+
+// Extra fine-tuning with media queries
+@media (max-width: 768px) {
+  .hero-rating {
+    justify-content: center; // center align on tablets
+    gap: 0.4rem;
+
+    .rating-text {
+      font-size: 0.85rem;
+    }
+  }
+
+  .hero-rating-average {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-rating {
+    flex-direction: column; // stack stars + text on small screens
+    align-items: center;
+    gap: 0.3rem;
+
+    .stars {
+      justify-content: center;
+    }
+
+    .rating-text {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+
+
   .hero-stats {
-    display: flex;
     gap: 1rem;
 
     .stat-card {
       background: #fff;
-      border-radius: 12px;
-      padding: 1rem 1.5rem;
+      border-radius: 14px;
+      padding: 1rem 1.25rem;
       text-align: center;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-      min-width: 140px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      min-width: 150px;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      }
 
       h5 {
         font-weight: 700;
@@ -68,9 +156,19 @@
   }
 
   .hero-img {
-    max-width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    max-width: 95%;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  // ✅ Responsive adjustments
+  @media (max-width: 992px) {
+    .hero-title {
+      font-size: 2.3rem;
+    }
+    .hero-subtitle {
+      font-size: 1rem;
+    }
   }
 
   @media (max-width: 768px) {
@@ -79,11 +177,12 @@
     .hero-title {
       font-size: 2rem;
     }
-
     .hero-subtitle {
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
-
+    .hero-btn {
+      width: 100%;
+    }
     .hero-stats {
       justify-content: center;
     }

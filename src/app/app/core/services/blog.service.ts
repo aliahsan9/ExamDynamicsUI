@@ -25,7 +25,7 @@ export interface UpdateBlogPostDto {
   providedIn: 'root'
 })
 export class BlogService {
-  private apiUrl = `${environment.apiUrl}/api/blogpost`;
+  private apiUrl = `${environment.apiUrl}/blogpost`;
 
   constructor(private http: HttpClient) {}
 

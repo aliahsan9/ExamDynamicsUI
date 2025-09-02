@@ -1,0 +1,99 @@
+// Container adjustments
+.container {
+  max-width: 1200px;
+  padding: 0 15px;
+}
+
+// Form Card Styling
+.card {
+  border-radius: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &.shadow-sm {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Card Titles
+.card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+// List Group Styling for Options
+.list-group-item {
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #f8f9fa;
+  }
+
+  .badge {
+    font-size: 0.8rem;
+  }
+}
+
+// Form Elements
+textarea.form-control {
+  border-radius: 0.5rem;
+}
+
+input.form-control {
+  border-radius: 0.5rem;
+}
+
+// Buttons
+button.btn {
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  i {
+    margin-right: 4px;
+  }
+}
+
+// Dynamic Option Card inside form
+.form-array .card {
+  border: 1px solid #dee2e6;
+  padding: 1rem;
+  position: relative;
+  border-radius: 0.7rem;
+  transition: box-shadow 0.2s ease;
+
+  &:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  }
+
+  .btn-danger {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}
+
+// Responsive Adjustments
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 1.5rem;
+  }
+
+  .d-flex.justify-content-end {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

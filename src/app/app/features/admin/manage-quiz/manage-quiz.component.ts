@@ -1,123 +1,118 @@
+// src/app/features/admin/manage-quiz/manage-quiz.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { QuizService } from '../../../core/services/quiz.service';
 import { QuizCreateDto, QuizDto, QuizUpdateDto } from '../../../../models/quiz.models';
-import { RouterModule } from '@angular/router';
+import { QuizService } from '../../../core/services/quiz.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-manage-quiz',
-  imports:[RouterModule,CommonModule,FormsModule, ReactiveFormsModule],
+  imports:[CommonModule,RouterModule,FormsModule,ReactiveFormsModule],
   templateUrl: './manage-quiz.component.html',
   styleUrls: ['./manage-quiz.component.scss']
 })
 export class ManageQuizComponent implements OnInit {
   quizzes: QuizDto[] = [];
-  quizForm: FormGroup;
-  isEditMode = false;
+  quizForm!: FormGroup;
+  isEditing = false;
   selectedQuizId: number | null = null;
-  loading = false;
-  errorMessage = '';
 
-  constructor(
-    private quizService: QuizService,
-    private fb: FormBuilder
-  ) {
-    this.quizForm = this.fb.group({
-      title: ['', [Validators.required, Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.maxLength(500)]]
-    });
-  }
+  // Example subjects & exams (could come from API later)
+  subjects = ['Math', 'Biology', 'Chemistry', 'Physics'];
+  exams = ['Midterm', 'Final', 'Quiz Test'];
+
+  constructor(private fb: FormBuilder, private quizService: QuizService) {}
 
   ngOnInit(): void {
+    this.initForm();
     this.loadQuizzes();
   }
 
-  loadQuizzes(): void {
-    this.loading = true;
-    this.quizService.getAllQuizzes().subscribe({
-      next: (data) => {
-        this.quizzes = data;
-        this.loading = false;
-      },
-      error: (err) => {
-        this.errorMessage = 'Failed to load quizzes.';
-        this.loading = false;
-      }
+  initForm(): void {
+    this.quizForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      subject: ['', Validators.required],
+      exam: ['', Validators.required]
     });
   }
 
+  // Load all quizzes
+  loadQuizzes(): void {
+    this.quizService.getAll().subscribe({
+      next: (data: QuizDto[]) => {
+        this.quizzes = data;
+      },
+      error: (err) => console.error(err)
+    });
+  }
+
+  // Submit form (Create or Update)
   onSubmit(): void {
-    if (this.quizForm.invalid) {
-      return;
-    }
+    if (this.quizForm.invalid) return;
 
-    const formValue = this.quizForm.value;
+    const formValues = this.quizForm.value;
 
-    if (this.isEditMode && this.selectedQuizId !== null) {
+    if (this.isEditing && this.selectedQuizId !== null) {
       // Update quiz
       const updateDto: QuizUpdateDto = {
         id: this.selectedQuizId,
-        title: formValue.title,
-        description: formValue.description
+        title: formValues.title,
+        description: formValues.description
       };
-      this.quizService.updateQuiz(this.selectedQuizId, updateDto).subscribe({
+
+      this.quizService.update(this.selectedQuizId, updateDto).subscribe({
         next: () => {
           this.loadQuizzes();
           this.resetForm();
         },
-        error: () => {
-          this.errorMessage = 'Failed to update quiz.';
-        }
+        error: (err) => console.error(err)
       });
+
     } else {
-      // Create new quiz
+      // Create quiz
       const createDto: QuizCreateDto = {
-        title: formValue.title,
-        description: formValue.description
+        title: formValues.title,
+        description: formValues.description
       };
-      this.quizService.createQuiz(createDto).subscribe({
+
+      this.quizService.create(createDto).subscribe({
         next: () => {
           this.loadQuizzes();
           this.resetForm();
         },
-        error: () => {
-          this.errorMessage = 'Failed to create quiz.';
-        }
+        error: (err) => console.error(err)
       });
     }
   }
 
-  editQuiz(quiz: QuizDto): void {
-    this.isEditMode = true;
+  // Edit quiz
+  onEdit(quiz: QuizDto): void {
+    this.isEditing = true;
     this.selectedQuizId = quiz.id;
     this.quizForm.patchValue({
       title: quiz.title,
-      description: quiz.description
+      description: quiz.description,
+      subject: this.subjects[0], // For now
+      exam: this.exams[0]
     });
-    this.errorMessage = '';
   }
 
-  deleteQuiz(id: number): void {
+  // Delete quiz
+  onDelete(id: number): void {
     if (confirm('Are you sure you want to delete this quiz?')) {
-      this.quizService.deleteQuiz(id).subscribe({
-        next: () => {
-          this.loadQuizzes();
-          if (this.selectedQuizId === id) {
-            this.resetForm();
-          }
-        },
-        error: () => {
-          this.errorMessage = 'Failed to delete quiz.';
-        }
+      this.quizService.delete(id).subscribe({
+        next: () => this.loadQuizzes(),
+        error: (err) => console.error(err)
       });
     }
   }
 
+  // Reset form
   resetForm(): void {
-    this.isEditMode = false;
+    this.isEditing = false;
     this.selectedQuizId = null;
     this.quizForm.reset();
-    this.errorMessage = '';
   }
 }

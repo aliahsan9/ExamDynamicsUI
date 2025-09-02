@@ -1,49 +1,49 @@
+// src/app/services/quiz.service.ts
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {
-  QuizCreateDto,
-  QuizDto,
-  QuizUpdateDto,
-  QuizWithQuestionsDto
-} from '../../../models/quiz.models';
 import { environment } from '../../../../environments/environment';
+import { QuizCreateDto, QuizDto, QuizUpdateDto, QuizWithQuestionsDto } from '../../../models/quiz.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
-  private apiUrl = `${environment.apiUrl}/quiz`; // ✅ Use environment
+  getQuizzes() {
+    throw new Error('Method not implemented.');
+  }
+  private apiUrl = `${environment.apiUrl}/quiz`;
 
   constructor(private http: HttpClient) {}
 
   // Get all quizzes
-  getAllQuizzes(): Observable<QuizDto[]> {
+  getAll(): Observable<QuizDto[]> {
     return this.http.get<QuizDto[]>(this.apiUrl);
   }
 
-  // Get quiz by ID
-  getQuizById(id: number): Observable<QuizDto> {
+  // Get quiz by id
+  getById(id: number): Observable<QuizDto> {
     return this.http.get<QuizDto>(`${this.apiUrl}/${id}`);
   }
 
-  // Create a new quiz
-  createQuiz(data: QuizCreateDto): Observable<QuizDto> {
-    return this.http.post<QuizDto>(this.apiUrl, data);
-  }
-
-  // Update a quiz
-  updateQuiz(id: number, data: QuizUpdateDto): Observable<void> {
-    return this.http.put<void>(`${this.apiUrl}/${id}`, data);
-  }
-
-  // Delete a quiz
-  deleteQuiz(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
-  }
-
-  // Get quiz with questions (same endpoint assumed)
+  // Get quiz with questions
   getQuizWithQuestions(id: number): Observable<QuizWithQuestionsDto> {
     return this.http.get<QuizWithQuestionsDto>(`${this.apiUrl}/${id}`);
+  }
+
+  // Create a new quiz
+  create(quiz: QuizCreateDto): Observable<QuizDto> {
+    return this.http.post<QuizDto>(this.apiUrl, quiz);
+  }
+
+  // Update quiz
+  update(id: number, quiz: QuizUpdateDto): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${id}`, quiz);
+  }
+
+  // Delete quiz
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

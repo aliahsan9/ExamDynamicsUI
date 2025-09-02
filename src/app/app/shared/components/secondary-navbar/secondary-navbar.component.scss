@@ -20,7 +20,7 @@ $breakpoint-md: 768px;
   .exam-links {
     display: flex;
     white-space: nowrap;
-    animation: slide 25s linear infinite;
+    animation: slide 20s linear infinite;
     will-change: transform;
     touch-action: pan-x;
 
@@ -67,7 +67,7 @@ $breakpoint-md: 768px;
     height: 35px;
 
     .exam-links {
-      animation: slide 20s linear infinite;
+      animation: slide 7s linear infinite;
 
       .nav-item {
         margin: 0 0.8rem;

@@ -1,0 +1,89 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Manage Math MCQs</h2>
+
+  <!-- 🚀 Question Form -->
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm">
+    <div class="mb-3">
+      <label class="form-label fw-bold">Question</label>
+      <input type="text" class="form-control" formControlName="text" placeholder="Enter question text">
+    </div>
+
+    <!-- Options -->
+    <div formArrayName="options">
+      <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i" class="row align-items-center mb-2">
+        <div class="col-md-8">
+          <input type="text" class="form-control" formControlName="text" placeholder="Enter option text">
+        </div>
+        <div class="col-md-2 form-check">
+          <input type="checkbox" class="form-check-input" formControlName="isCorrect">
+          <label class="form-check-label">Correct</label>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeOption(i)" *ngIf="options.length > 1">
+            <i class="bi bi-trash"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <button type="button" class="btn btn-outline-primary btn-sm" (click)="addOption()">
+        <i class="bi bi-plus-circle"></i> Add Option
+      </button>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label fw-bold">Correct Answer</label>
+      <input type="text" class="form-control" formControlName="correctAnswer" placeholder="Enter correct answer text">
+    </div>
+
+    <button type="submit" class="btn btn-success me-2">
+      {{ isEditing ? 'Update Question' : 'Add Question' }}
+    </button>
+    <button type="button" class="btn btn-secondary" (click)="resetForm()" *ngIf="isEditing">Cancel</button>
+  </form>
+
+  <!-- 🚀 Questions List -->
+  <div class="mt-4">
+    <h4 class="mb-3">Existing Questions</h4>
+    <table class="table table-bordered table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Question</th>
+          <th>Options</th>
+          <th>Correct Answer</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let q of mathQuestions">
+          <td>{{ q.questionId }}</td>
+          <td>{{ q.text }}</td>
+          <td>
+            <ul class="list-unstyled mb-0">
+              <li *ngFor="let opt of optionsMap[q.questionId]">
+                <span [ngClass]="{'text-success fw-bold': opt.isCorrect}">
+                  {{ opt.text }}
+                  <i *ngIf="opt.isCorrect" class="bi bi-check-circle-fill"></i>
+                </span>
+              </li>
+            </ul>
+          </td>
+          <td class="fw-bold text-primary">{{ q.correctAnswer }}</td>
+          <td>
+            <button class="btn btn-warning btn-sm me-2" (click)="editQuestion(q)">
+              <i class="bi bi-pencil-square"></i> Edit
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="deleteQuestion(q.questionId)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="mathQuestions.length === 0">
+          <td colspan="5" class="text-center text-muted">No Math questions found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

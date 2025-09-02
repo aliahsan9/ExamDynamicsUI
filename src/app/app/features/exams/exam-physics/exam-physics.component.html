@@ -1,0 +1,49 @@
+<div class="exam-container container py-4">
+  <h2 class="text-center mb-4">Physics Exam</h2>
+
+  <!-- Show exam form if not submitted -->
+  <form *ngIf="!submitted">
+    <div *ngFor="let q of physicsQuestions; let i = index" class="mb-4 p-3 border rounded shadow-sm">
+      <h5>Q{{ i + 1 }}. {{ q.text }}</h5>
+
+      <div *ngFor="let opt of optionsMap[q.questionId]" class="form-check">
+        <input 
+          class="form-check-input"
+          type="radio"
+          [name]="'question' + q.questionId"
+          [value]="opt.text"
+          [(ngModel)]="userAnswers[q.questionId]"
+          (change)="selectAnswer(q.questionId, opt.text)"
+        />
+        <label class="form-check-label">{{ opt.text }}</label>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="button" class="btn btn-primary" (click)="submitExam()">Submit Exam</button>
+    </div>
+  </form>
+
+  <!-- ✅ Results -->
+  <div *ngIf="submitted" class="result-section text-center mt-4">
+    <h4>Your Score: {{ score }} / {{ physicsQuestions.length }}</h4>
+
+    <div *ngFor="let q of physicsQuestions; let i = index" class="mt-3 text-start p-3 border rounded">
+      <h6>Q{{ i + 1 }}. {{ q.text }}</h6>
+
+      <p>
+        ✅ Correct Answer: 
+        <strong class="text-success">{{ q.correctAnswer }}</strong>
+      </p>
+      <p>
+        📝 Your Answer: 
+        <strong [class.text-success]="userAnswers[q.questionId] === q.correctAnswer"
+                [class.text-danger]="userAnswers[q.questionId] !== q.correctAnswer">
+          {{ userAnswers[q.questionId] || 'Not Attempted' }}
+        </strong>
+      </p>
+    </div>
+
+    <button class="btn btn-secondary mt-4" (click)="resetExam()">Try Again</button>
+  </div>
+</div>

@@ -1,20 +1,19 @@
-<section class="exam-detail-section py-5" id="explore-exams">
-  <div class="container text-center">
-    <h2 class="section-title mb-5" data-aos="fade-up">Explore Exams</h2>
+<div class="exam-detail-page py-5">
+  <div class="container">
     <div class="row g-4 justify-content-center">
-      <div 
-        class="col-md-4 col-sm-6" 
-        *ngFor="let exam of exams; let i = index" 
-        [attr.data-aos-delay]="100 + i*50" 
-        data-aos="zoom-in"
-      >
-        <div class="exam-card shadow-sm p-4 rounded">
-          <i class="bi {{ getExamIcon(i) }} exam-icon"></i>
-          <h5 class="mt-3">{{ exam.title }}</h5>
-          <p>{{ exam.description }}</p>
-          <a href="#" class="exam-link">Click to access →</a>
+      <div class="col-md-6 col-lg-4" *ngFor="let exam of exams" [attr.data-aos]="'zoom-in'">
+        <div class="card exam-card h-100 shadow-lg text-center">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <div class="icon-wrapper mb-3">
+              <i class="bi {{ exam.icon }}"></i>
+            </div>
+            <h5 class="card-title">{{ exam.title }}</h5>
+            <p class="card-text">{{ exam.desc }}</p>
+            <a [routerLink]="exam.link" class="btn btn-gradient mt-3">Click to access</a>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
-</section>
+</div>

@@ -1,0 +1,40 @@
+<div class="container my-5">
+  <h2 class="text-center mb-4" data-aos="fade-down">SAT Reading & Writing MCQs</h2>
+
+  <div class="row g-4">
+    <div class="col-md-6" *ngFor="let q of questions" data-aos="fade-up">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5 class="card-title">{{ q.text }}</h5>
+          <ul class="list-group list-group-flush mt-3">
+            <li class="list-group-item" *ngFor="let opt of optionsMap[q.questionId]">
+              <div class="form-check">
+                <input class="form-check-input" type="radio" 
+                       [name]="'q' + q.questionId" 
+                       [value]="opt.optionId"
+                       [(ngModel)]="selectedAnswers[q.questionId]" 
+                       [disabled]="showResults">
+                <label class="form-check-label">{{ opt.text }}</label>
+                <i *ngIf="showResults && opt.isCorrect" class="bi bi-check-circle-fill text-success ms-2"></i>
+                <i *ngIf="showResults && !opt.isCorrect && selectedAnswers[q.questionId] === opt.optionId" class="bi bi-x-circle-fill text-danger ms-2"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center mt-4">
+    <button class="btn btn-primary me-2" (click)="submitQuiz()" [disabled]="showResults">
+      <i class="bi bi-check2-circle"></i> Submit Quiz
+    </button>
+    <button class="btn btn-secondary" (click)="resetQuiz()">
+      <i class="bi bi-arrow-clockwise"></i> Reset
+    </button>
+  </div>
+
+  <div class="text-center mt-3" *ngIf="showResults">
+    <h4>Your Score: {{ score }} / {{ questions.length }}</h4>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="container py-5" data-aos="fade-up">
+  <h2 class="text-center mb-4 fw-bold text-primary">
+    📊 Data Analysis Quiz
+  </h2>
+
+  <form *ngIf="questions.length > 0; else loading">
+    <div *ngFor="let q of questions; let i = index" class="card shadow-sm mb-4 quiz-card" data-aos="zoom-in">
+      <div class="card-body">
+        <h5 class="card-title">
+          {{ i + 1 }}. {{ q.text }}
+        </h5>
+
+        <div *ngFor="let opt of optionsMap[q.questionId]" class="form-check my-2">
+          <input
+            class="form-check-input"
+            type="radio"
+            [name]="'q' + q.questionId"
+            [value]="opt.text"
+            [(ngModel)]="userAnswers[q.questionId]"
+            [disabled]="submitted"
+          />
+          <label class="form-check-label">
+            {{ opt.text }}
+          </label>
+
+          <!-- Show correct/incorrect after submit -->
+          <span *ngIf="submitted && opt.text === q.correctAnswer" class="text-success ms-2">
+            <i class="bi bi-check-circle-fill"></i> Correct Answer
+          </span>
+          <span *ngIf="submitted && userAnswers[q.questionId] === opt.text && opt.text !== q.correctAnswer" class="text-danger ms-2">
+            <i class="bi bi-x-circle-fill"></i> Your Choice
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button type="button" class="btn btn-primary px-4 me-2" (click)="submitQuiz()" [disabled]="submitted">
+        <i class="bi bi-check2-circle"></i> Submit
+      </button>
+      <button type="button" class="btn btn-outline-secondary px-4" (click)="resetQuiz()" *ngIf="submitted">
+        <i class="bi bi-arrow-repeat"></i> Try Again
+      </button>
+    </div>
+
+    <div *ngIf="submitted" class="alert alert-info mt-4 text-center" data-aos="fade-in">
+      <h5 class="mb-0">Your Score: {{ score }} / {{ questions.length }}</h5>
+    </div>
+  </form>
+
+  <ng-template #loading>
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-2">Loading questions...</p>
+    </div>
+  </ng-template>
+</div>

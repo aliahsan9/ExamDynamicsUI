@@ -1,61 +1,74 @@
-<div class="manage-quiz-container">
-  <h2>Manage Quizzes</h2>
+<div class="container py-4">
+  <h2 class="mb-4">Manage Quizzes</h2>
 
-  <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" novalidate>
-    <div>
-      <label for="title">Title</label>
-      <input id="title" formControlName="title" />
-      <div *ngIf="quizForm.get('title')?.invalid && quizForm.get('title')?.touched" class="error">
-        Title is required and must be less than 100 characters.
-      </div>
+  <!-- Quiz Form -->
+  <form [formGroup]="quizForm" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm mb-4">
+    <div class="mb-3">
+      <label class="form-label">Quiz Title</label>
+      <input type="text" formControlName="title" class="form-control" placeholder="Enter quiz title">
     </div>
 
-    <div>
-      <label for="description">Description</label>
-      <textarea id="description" formControlName="description"></textarea>
-      <div *ngIf="quizForm.get('description')?.invalid && quizForm.get('description')?.touched" class="error">
-        Description is required and must be less than 500 characters.
-      </div>
+    <div class="mb-3">
+      <label class="form-label">Description</label>
+      <textarea formControlName="description" class="form-control" rows="3" placeholder="Enter quiz description"></textarea>
     </div>
 
-    <button type="submit" [disabled]="quizForm.invalid">
-      {{ isEditMode ? 'Update Quiz' : 'Create Quiz' }}
+    <div class="mb-3">
+      <label class="form-label">Subject</label>
+      <select formControlName="subject" class="form-select">
+        <option *ngFor="let subject of subjects" [value]="subject">{{ subject }}</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Exam</label>
+      <select formControlName="exam" class="form-select">
+        <option *ngFor="let exam of exams" [value]="exam">{{ exam }}</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary me-2">
+      {{ isEditing ? 'Update Quiz' : 'Create Quiz' }}
     </button>
-    <button type="button" (click)="resetForm()" *ngIf="isEditMode">Cancel</button>
+    <button type="button" (click)="resetForm()" class="btn btn-secondary">Reset</button>
   </form>
 
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-
-  <hr />
-
-  <h3>Existing Quizzes</h3>
-
-  <div *ngIf="loading">Loading quizzes...</div>
-  <div *ngIf="!loading && quizzes.length === 0">No quizzes found.</div>
-
-  <table *ngIf="quizzes.length > 0" class="quiz-table">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Total Questions</th>
-        <th>Time Limit (min)</th>
-        <th>Created At</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let quiz of quizzes">
-        <td>{{ quiz.title }}</td>
-        <td>{{ quiz.description }}</td>
-        <td>{{ quiz.totalQuestions }}</td>
-        <td>{{ quiz.timeLimit }}</td>
-        <td>{{ quiz.createdAt | date:'short' }}</td>
-        <td>
-          <button (click)="editQuiz(quiz)">Edit</button>
-          <button (click)="deleteQuiz(quiz.id)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Quiz List -->
+  <div class="card shadow-sm">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0">All Quizzes</h5>
+    </div>
+    <div class="card-body">
+      <table class="table table-bordered table-hover">
+        <thead class="table-light">
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Total Questions</th>
+            <th>Time Limit</th>
+            <th>Created At</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let quiz of quizzes">
+            <td>{{ quiz.id }}</td>
+            <td>{{ quiz.title }}</td>
+            <td>{{ quiz.description }}</td>
+            <td>{{ quiz.totalQuestions }}</td>
+            <td>{{ quiz.timeLimit }} min</td>
+            <td>{{ quiz.createdAt | date:'medium' }}</td>
+            <td>
+              <button class="btn btn-sm btn-warning me-2" (click)="onEdit(quiz)">Edit</button>
+              <button class="btn btn-sm btn-danger" (click)="onDelete(quiz.id)">Delete</button>
+            </td>
+          </tr>
+          <tr *ngIf="quizzes.length === 0">
+            <td colspan="7" class="text-center text-muted">No quizzes available</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

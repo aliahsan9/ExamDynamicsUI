@@ -1,0 +1,23 @@
+.quiz-card {
+  border-radius: 1rem;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-title {
+    font-weight: 600;
+    color: #1e3a8a;
+  }
+
+  .form-check-label {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}
+
+.btn {
+  border-radius: 2rem;
+  font-weight: 500;
+}
