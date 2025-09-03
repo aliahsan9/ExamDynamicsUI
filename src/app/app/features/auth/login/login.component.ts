@@ -26,13 +26,15 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     AOS.init();
+
+    // Initialize Reactive Form
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginForm.invalid) return;
 
     this.loading = true;
@@ -44,17 +46,27 @@ export class LoginComponent implements OnInit {
       next: (response: UserResponse) => {
         this.loading = false;
 
-        // ✅ Save roles array in localStorage as JSON string
+        // Save userId to localStorage
+        if (response.user?.id) {
+          localStorage.setItem('userId', response.user.id.toString());
+        }
+
+        // Save full user info to localStorage
+        if (response.user) {
+          localStorage.setItem('user', JSON.stringify(response.user));
+        }
+
+        // Save roles array to localStorage
         if (response.user?.roles) {
           localStorage.setItem('roles', JSON.stringify(response.user.roles));
         }
 
-        // ✅ Redirect based on roles
+        // Redirect based on roles
         const roles = response.user?.roles || [];
         if (roles.includes('Admin')) {
           this.router.navigate(['/admin']);
         } else {
-          this.router.navigate(['/dashboard']); // normal user dashboard
+          this.router.navigate(['/dashboard']);
         }
       },
       error: (err) => {

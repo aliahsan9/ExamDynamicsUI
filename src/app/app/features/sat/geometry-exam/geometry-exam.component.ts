@@ -39,8 +39,9 @@ export class GeometryExamComponent implements OnInit {
 
   selectAnswer(questionId: number, optionId: number) {
     this.answers[questionId] = optionId;
+    this.updateProgress();
   }
-
+  
   checkResults() {
     let correct = 0;
     this.questions.forEach(q => {
@@ -53,9 +54,21 @@ export class GeometryExamComponent implements OnInit {
     });
     this.score = correct;
   }
+progress = 0;
 
-  resetExam() {
-    this.answers = {};
-    this.score = null;
-  }
+updateProgress() {
+  const answeredCount = Object.keys(this.answers).filter(
+    (key) => this.answers[+key] !== undefined
+  ).length;
+
+  this.progress = (answeredCount / this.questions.length) * 100;
+}
+
+resetExam() {
+  this.answers = {};
+  this.score = null;
+  this.progress = 0;
+}
+
+ 
 }

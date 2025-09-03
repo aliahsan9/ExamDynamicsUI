@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- Logo -->
     <a class="navbar-brand" href="#">
-      <img src="assets/images/logo.png" alt="Logo" class="logo">
+      <img src="assets/images/logo1.png" alt="Logo" class="logo">
     </a>
 
     <!-- Hamburger Toggle -->
@@ -17,22 +17,50 @@
         <li class="nav-item"><a class="nav-link" routerLink="/about" data-aos="fade-right" data-aos-delay="200">About</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/exams" data-aos="fade-right" data-aos-delay="300">Exams</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/notes" data-aos="fade-right" data-aos-delay="400">Notes</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/" data-aos="fade-right" data-aos-delay="400">Announcements</a></li>
-        <li class="nav-item"><a class="nav-link" routerLink="/ai" data-aos="fade-right" data-aos-delay="500">AI Tutor</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/blogs" data-aos="fade-right" data-aos-delay="600">Blogs</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/faq" data-aos="fade-right" data-aos-delay="600">Faqs</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/privacy" data-aos="fade-right" data-aos-delay="600">Privacy</a></li>
         <li class="nav-item"><a class="nav-link" routerLink="/contact" data-aos="fade-right" data-aos-delay="700">Contact Us</a></li>
       </ul>
 
-      <!-- Dark Mode Icon & Buttons -->
-      <div class="d-flex align-items-center">
-       <button class="btn btn-outline-light" (click)="toggleTheme()">
-  <i class="bi bi-sun-fill" *ngIf="currentTheme === 'dark'"></i>
-  <i class="bi bi-moon-fill" *ngIf="currentTheme === 'light'"></i>
-</button>
-        <!-- <i class="bi bi-moon-stars-fill dark-mode-toggle me-3" data-aos="fade-left" data-aos-delay="800"></i> -->
-        <a routerLink="/register" class="btn btn-primary me-2" data-aos="fade-left" data-aos-delay="900">SignUp</a>
-        <a routerLink="/login" class="btn btn-primary" data-aos="fade-left" data-aos-delay="1000">Login</a>
-      </div> 
-    </div>
+<!-- If NOT logged in → show SignUp & Login -->
+<ng-container *ngIf="!isLoggedIn; else profileMenu">
+  <a
+    routerLink="/register"
+    class="btn btn-primary me-2"
+    data-aos="fade-left"
+    data-aos-delay="900"
+    >SignUp</a
+  >
+  <a
+    routerLink="/login"
+    class="btn btn-primary"
+    data-aos="fade-left"
+    data-aos-delay="1000"
+    >Login</a
+  >
+</ng-container>
+
+<!-- If logged in → show Profile Icon -->
+<ng-template #profileMenu>
+  <div class="dropdown" data-aos="fade-left" data-aos-delay="900">
+    <a
+      class="nav-link dropdown-toggle d-flex align-items-center"
+      href="#"
+      role="button"
+      id="profileDropdown"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      <i class="bi bi-person-circle fs-4"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+      <!-- <li><a class="dropdown-item" routerLink="/profile">Profile</a></li> -->
+      <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+    </ul>
   </div>
+</ng-template>
+       
+</div> 
+    </div>
 </nav>

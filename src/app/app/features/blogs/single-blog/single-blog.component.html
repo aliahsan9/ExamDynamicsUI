@@ -1,72 +1,66 @@
-<section class="single-blog py-5" *ngIf="blog">
-  <div class="container">
+<div class="container my-5" *ngIf="!loading && blog">
+  <!-- Motivational Header -->
+  <div class="motivation-box text-center mb-5 p-4 shadow-sm rounded" data-aos="fade-up">
+    <h3 class="fw-bold text-gradient">✨ Stay Inspired ✨</h3>
+    <p class="lead fst-italic">
+      "Great things never come from comfort zones."
+    </p>
+  </div>
 
-    <!-- Welcome Static Section -->
-    <div class="welcome-box text-center mb-5 p-4 rounded shadow" data-aos="fade-down">
-      <h3 class="fw-bold">
-        <i class="bi bi-stars text-primary"></i> Welcome to Our Blog
-      </h3>
-      <p class="mb-0 text-muted">Get inspired, stay motivated, and learn something new every day.</p>
-    </div>
-
-    <!-- Blog Title and Date -->
-    <div class="text-center mb-5" data-aos="fade-up">
-      <h1 class="blog-title mb-3">
-        <span class="highlight">{{ blog.title }}</span>
-      </h1>
-      <p class="text-muted">
-        <i class="bi bi-calendar3 me-2"></i>
-        {{ blog.publishedAt | date: 'longDate' }}
+  <!-- Blog Card -->
+  <div class="card shadow-lg border-0 blog-single" data-aos="fade-up" data-aos-delay="200">
+    <img
+      *ngIf="blog.thumbnailUrl"
+      [src]="blog.thumbnailUrl"
+      class="card-img-top blog-thumbnail"
+      alt="Blog Thumbnail"
+    />
+    <div class="card-body p-4">
+      <h2 class="blog-title">{{ blog.title }}</h2>
+      <p class="text-muted small mb-3">
+        <i class="bi bi-calendar3"></i>
+        Published: {{ blog.publishedAt | date:'longDate' }}
       </p>
-    </div>
+      <p class="blog-content">
+        {{ blog.content }}
+      </p>
 
-    <!-- Blog Content -->
-    <div class="blog-content bg-white p-4 p-md-5 rounded shadow" data-aos="fade-up" data-aos-delay="200">
-      <p class="lead">{{ blog.content }}</p>
-
-      <!-- Middle Quote -->
-      <div class="quote-box text-center my-5 p-4 rounded" data-aos="zoom-in">
-        <blockquote class="blockquote">
-          <p class="mb-0">
-            <i class="bi bi-quote text-warning fs-3"></i>
-            The future belongs to those who believe in the beauty of their dreams.
-            <i class="bi bi-quote text-warning fs-3"></i>
-          </p>
-          <footer class="blockquote-footer mt-2">Eleanor Roosevelt</footer>
-        </blockquote>
+      <!-- Static Extra Content -->
+      <div class="extra-content mt-5 p-4 rounded shadow-sm" data-aos="fade-right">
+        <h4 class="fw-bold mb-3"><i class="bi bi-lightbulb"></i> Did You Know?</h4>
+        <ul class="list-unstyled">
+          <li><i class="bi bi-check-circle-fill text-success"></i> Consistency beats motivation every single time.</li>
+          <li><i class="bi bi-check-circle-fill text-success"></i> Small daily progress adds up to big results.</li>
+          <li><i class="bi bi-check-circle-fill text-success"></i> Reading blogs daily can spark new creative ideas.</li>
+        </ul>
       </div>
 
-      <!-- Decorative Images (Equal Height) -->
-      <div class="row g-4 my-4">
-        <div class="col-md-6" data-aos="fade-right">
-          <div class="image-box">
-            <img src="assets/images/blog1.jpg" alt="Inspiration" class="blog-img rounded-3 shadow">
-          </div>
-        </div>
-        <div class="col-md-6" data-aos="fade-left">
-          <div class="image-box">
-            <img src="assets/images/blog2.jpg" alt="Growth" class="blog-img rounded-3 shadow">
-          </div>
-        </div>
-      </div>
-
-      <!-- Motivation Section -->
-      <div class="motivation-box p-4 rounded-3 text-center mt-5" data-aos="fade-up">
-        <h4 class="fw-bold text-primary">
-          <i class="bi bi-lightbulb me-2"></i> Daily Motivation
-        </h4>
-        <p class="fst-italic mb-0">
-          "Success is not final, failure is not fatal: it is the courage to continue that counts."
+      <!-- Static Image -->
+      <div class="static-img text-center mt-5" data-aos="zoom-in">
+        <img src="assets/images/about3.jpg" alt="Stay Inspired"
+          class="img-fluid rounded shadow-lg" />
+        <p class="text-muted mt-2 fst-italic">
+          "Every day is a chance to get better. Stay consistent, stay focused."
         </p>
-      </div>
-
-      <!-- Closing CTA -->
-      <div class="end-box text-center mt-5 p-4 rounded shadow" data-aos="fade-up" data-aos-delay="300">
-        <h4 class="fw-bold">
-          🚀 Keep Growing with Us
-        </h4>
-        <p class="mb-0 text-muted">Don’t just read — apply these ideas in your daily life and see the change.</p>
       </div>
     </div>
   </div>
-</section>
+
+  <!-- Motivational Footer -->
+  <div class="motivation-box text-center mt-5 p-4 shadow-sm rounded" data-aos="fade-up" data-aos-delay="300">
+    <h4 class="fw-semibold"><i class="bi bi-rocket-takeoff"></i> Keep Going!</h4>
+    <p class="fst-italic">
+      "Your limitation—it’s only your imagination."
+    </p>
+  </div>
+</div>
+
+<!-- Loading State -->
+<div class="text-center my-5" *ngIf="loading">
+  <div class="spinner-border text-primary" role="status"></div>
+</div>
+
+<!-- Blog not found -->
+<div class="text-center my-5" *ngIf="!loading && !blog">
+  <p class="text-danger fw-semibold">❌ Blog not found!</p>
+</div>

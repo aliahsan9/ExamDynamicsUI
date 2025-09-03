@@ -1,0 +1,141 @@
+.privacy-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(135deg, #cce0ff, #f1f5f9);
+  overflow: hidden;
+  padding: 4rem 1rem;
+
+  .privacy-card {
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 3rem;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      color: #004080;
+      font-weight: 800;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #495057;
+    }
+
+    .accordion-item {
+      border: none;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+      }
+
+      .accordion-button {
+        background-color: #e9f2ff;
+        color: #004080;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-radius: 12px;
+
+        i {
+          font-size: 1.3rem;
+          color: #0066cc;
+        }
+
+        &:not(.collapsed) {
+          background-color: #cfe0ff;
+          color: #00264d;
+        }
+      }
+
+      .accordion-body {
+        font-size: 0.95rem;
+        color: #495057;
+        background-color: #ffffff;
+        border-radius: 0 0 12px 12px;
+        line-height: 1.7;
+      }
+    }
+  }
+
+  // Floating shapes
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+
+    &.shape1 {
+      width: 250px;
+      height: 250px;
+      background-color: #004080;
+      top: -100px;
+      left: -80px;
+    }
+
+    &.shape2 {
+      width: 180px;
+      height: 180px;
+      background-color: #0066cc;
+      bottom: -90px;
+      right: -60px;
+      animation-delay: 2s;
+    }
+
+    &.shape3 {
+      width: 120px;
+      height: 120px;
+      background-color: #00aaff;
+      top: 20%;
+      right: 10%;
+      animation-delay: 4s;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @media(max-width: 768px) {
+    padding: 3rem 1rem;
+    .privacy-card {
+      padding: 2rem;
+    }
+
+    .accordion-button {
+      font-size: 1rem;
+    }
+
+    .accordion-body {
+      font-size: 0.9rem;
+    }
+  }
+
+  @media(max-width: 480px) {
+    padding: 2rem 0.5rem;
+    .privacy-card {
+      padding: 1.5rem;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+    }
+  }
+}

@@ -19,14 +19,18 @@ export class BlogDetailComponent implements OnInit {
     this.loadBlogs();
   }
 
+  // ✅ Fetch blogs
   loadBlogs(): void {
     this.blogService.getAll().subscribe({
-      next: data => this.blogs = data,
+      next: data => (this.blogs = data),
       error: err => console.error(err)
     });
   }
 
+  // ✅ Truncate long content for card preview
   truncateText(text: string, limit: number): string {
+    if (!text) return '';
     return text.length > limit ? text.substring(0, limit) + '...' : text;
   }
+  
 }

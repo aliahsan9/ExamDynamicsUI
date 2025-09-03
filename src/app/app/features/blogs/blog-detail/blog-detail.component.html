@@ -1,43 +1,25 @@
-<section class="blog-section py-5">
-  <div class="container">
-
-    <!-- Blog Heading -->
-    <div class="text-center mb-5" data-aos="fade-down">
-      <h2 class="blog-title">
-        The Latest from <span class="highlight">Our Blog</span>
-      </h2>
-      <p class="text-muted">
-        <i class="bi bi-journal-text me-2 text-primary"></i> Insights, tips, and stories to inspire your journey
-      </p>
-    </div>
-
-    <!-- Blog Cards -->
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-4 d-flex" *ngFor="let blog of blogs; let i = index" 
-           [attr.data-aos-delay]="100 + i*100" data-aos="zoom-in">
-
-        <div class="blog-card w-100 rounded overflow-hidden shadow-sm">
-          <!-- Blog Image -->
-          <div class="image-wrapper">
-            <img src="assets/images/blog1.jpg" class="blog-img" alt="Blog Thumbnail">
-            <div class="date-badge">
-              <i class="bi bi-calendar-event me-1"></i>
-              {{ blog.publishedAt | date: 'MMM d, y' }}
-            </div>
-          </div>
-
-          <!-- Blog Content -->
-          <div class="card-body d-flex flex-column">
-            <h5 class="fw-bold mb-2 blog-title-text">{{ blog.title }}</h5>
-            <p class="text-muted small flex-grow-1">{{ truncateText(blog.content, 100) }}</p>
-
-            <a [routerLink]="['/blog', blog.blogPostId]" class="btn btn-outline-primary btn-sm mt-3 align-self-start">
-              Read More <i class="bi bi-arrow-right-circle ms-1"></i>
-            </a>
-          </div>
+<div class="container my-5">
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-4" *ngFor="let blog of blogs">
+      <div class="card shadow-sm border-0 h-100 blog-card d-flex flex-column">
+        <div class="blog-thumbnail-wrapper">
+          <img
+            *ngIf="blog.thumbnailUrl"
+            [src]="blog.thumbnailUrl"
+            class="card-img-top blog-thumbnail"
+            alt="Blog Thumbnail"
+          />
         </div>
-
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{ blog.title }}</h5>
+          <p class="card-text text-muted flex-grow-1">
+            {{ truncateText(blog.content, 120) }}
+          </p>
+          <a [routerLink]="['/blog', blog.blogPostId]" class="btn btn-primary mt-auto">
+            Read More
+          </a>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>

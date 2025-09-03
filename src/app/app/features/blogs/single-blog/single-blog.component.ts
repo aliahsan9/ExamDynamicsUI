@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class SingleBlogComponent implements OnInit {
   blog?: BlogPostDto;
+  loading: boolean = true;
 
   constructor(private route: ActivatedRoute, private blogService: BlogService) {}
 
@@ -19,8 +20,14 @@ export class SingleBlogComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
       this.blogService.getById(id).subscribe({
-        next: data => this.blog = data,
-        error: err => console.error(err)
+        next: (data) => {
+          this.blog = data;
+          this.loading = false;
+        },
+        error: (err) => {
+          console.error(err);
+          this.loading = false;
+        }
       });
     }
   }

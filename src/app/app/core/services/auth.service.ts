@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { LoginDto } from '../../../models/AuthModels/login.model';
 import { RegisterDto } from '../../../models/AuthModels/register.model';
@@ -11,6 +12,10 @@ import { UserResponse } from '../../../models/AuthModels/user.model';
 })
 export class AuthService {
   private baseUrl = `${environment.apiUrl}/Auth`;
+
+  // ✅ Reactive auth state
+  private authStatusSubject = new BehaviorSubject<boolean>(this.hasToken());
+  authStatus$ = this.authStatusSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -24,6 +29,9 @@ export class AuthService {
           // Save roles as comma-separated string
           const roles = response.user?.roles || [];
           localStorage.setItem('role', roles.join(','));
+
+          // ✅ update auth status
+          this.authStatusSubject.next(true);
         }
       })
     );
@@ -38,6 +46,9 @@ export class AuthService {
 
           const roles = response.user?.roles || [];
           localStorage.setItem('role', roles.join(','));
+
+          // ✅ update auth status
+          this.authStatusSubject.next(true);
         }
       })
     );
@@ -45,7 +56,7 @@ export class AuthService {
 
   // ✅ Check if logged in
   isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
+    return this.hasToken();
   }
 
   // ✅ Get roles as array
@@ -58,5 +69,13 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+
+    // ✅ update auth status
+    this.authStatusSubject.next(false);
+  }
+
+  // 🔹 Utility to check token existence
+  private hasToken(): boolean {
+    return !!localStorage.getItem('token');
   }
 }

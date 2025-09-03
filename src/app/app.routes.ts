@@ -36,6 +36,11 @@ import { GeometryExamComponent } from './app/features/sat/geometry-exam/geometry
 import { DataAnalysisExamComponent } from './app/features/sat/data-analysis-exam/data-analysis-exam.component';
 import { AlgebraExamComponent } from './app/features/sat/algebra-exam/algebra-exam.component';
 import { SatDetailComponent } from './app/features/sat/sat-detail/sat-detail.component';
+import { ProfileComponent } from './app/features/dashboard/profile/profile.component';
+import { ProfileSettingComponent } from './app/features/dashboard/profile-setting/profile-setting.component';
+import { PrivacyPolicyComponent } from './app/features/dashboard/privacy-policy/privacy-policy.component';
+import { FaqComponent } from './app/features/dashboard/faq/faq.component';
+import { SubscriptionListComponent } from './app/features/subscriptions/subscription-list/subscription-list.component';
 
 export const routes: Routes = [
   // ✅ Public routes
@@ -43,7 +48,12 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'profile-setting', component: ProfileSettingComponent },
   { path: 'contact', component: ContactComponent },
+  { path: 'privacy', component: PrivacyPolicyComponent },
+  { path: 'subscribe', component: SubscriptionListComponent },
+  { path: 'faq', component: FaqComponent },
   { path: 'blogs', component: BlogDetailComponent },
     { path: 'blog/:id', component: SingleBlogComponent },
     { path: 'exams', component: ExamDetailComponent },

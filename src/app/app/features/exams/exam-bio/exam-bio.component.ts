@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionDto } from '../../../../models/question.moel';
 import { OptionDto } from '../../../../models/option.model';
 import { QuestionService } from '../../../core/services/question.service';
 import { OptionService } from '../../../core/services/option.service';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { QuestionDto } from '../../../../models/question.moel';
 
 @Component({
   selector: 'app-exam-bio',
@@ -34,9 +34,12 @@ export class ExamBioComponent implements OnInit {
 
   loadQuestions() {
     this.questionService.getAll().subscribe(qs => {
-      this.questions = qs.filter(q => q.examId === this.BIOLOGY_EXAM_ID);
+      // Filter biology exam questions and sort by questionId
+      this.questions = qs
+        .filter(q => q.examId === this.BIOLOGY_EXAM_ID)
+        .sort((a, b) => a.questionId - b.questionId);
 
-      // load options for each question
+      // Load options for each question
       this.questions.forEach(q => {
         this.optionService.getByQuestionId(q.questionId).subscribe(opts => {
           this.optionsMap[q.questionId] = opts;
@@ -46,6 +49,7 @@ export class ExamBioComponent implements OnInit {
     });
   }
 
+  // Initialize form dynamically based on question IDs
   initForm() {
     const group: any = {};
     this.questions.forEach(q => {
@@ -54,6 +58,7 @@ export class ExamBioComponent implements OnInit {
     this.answersForm = this.fb.group(group);
   }
 
+  // Submit logic
   onSubmit() {
     this.submitted = true;
     this.score = 0;
@@ -65,7 +70,30 @@ export class ExamBioComponent implements OnInit {
       }
     });
   }
+// Count how many questions are answered
+answeredCount(): number {
+  if (!this.answersForm) return 0;
 
+  return this.questions.filter(q => {
+    const val = this.answersForm.get(''+q.questionId)?.value;
+    return val !== null && val !== '';
+  }).length;
+}
+// Reset form and restart exam
+restartExam(): void {
+  this.submitted = false;
+  this.score = 0;
+
+  // Reset all form controls
+  Object.keys(this.answersForm.controls).forEach(key => {
+    this.answersForm.get(key)?.setValue('');
+  });
+
+  // Scroll to top (optional for better UX)
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+  // Get options for a question
   getOptions(questionId: number): OptionDto[] {
     return this.optionsMap[questionId] || [];
   }

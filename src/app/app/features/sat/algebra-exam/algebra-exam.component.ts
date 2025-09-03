@@ -55,10 +55,20 @@ export class AlgebraExamComponent implements OnInit {
 
     this.score = correctCount;
   }
+progress = 0; // percentage completed
 
-  resetQuiz() {
-    this.userAnswers = {};
-    this.submitted = false;
-    this.score = 0;
-  }
+updateProgress() {
+  const answeredCount = Object.keys(this.userAnswers).filter(
+    (key) => this.userAnswers[+key]
+  ).length;
+
+  this.progress = (answeredCount / this.questions.length) * 100;
+}
+
+resetQuiz() {
+  this.userAnswers = {};
+  this.submitted = false;
+  this.score = 0;
+  this.progress = 0;
+}
 }

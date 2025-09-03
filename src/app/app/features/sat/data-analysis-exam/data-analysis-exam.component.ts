@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OptionDto } from '../../../../models/option.model';
-import { QuestionDto } from '../../../../models/question.moel';
 import { QuestionService } from '../../../core/services/question.service';
 import { OptionService } from '../../../core/services/option.service';
+import { QuestionDto } from '../../../../models/question.moel';
 
 @Component({
   selector: 'app-data-analysis-exam',
@@ -16,9 +16,10 @@ import { OptionService } from '../../../core/services/option.service';
 export class DataAnalysisExamComponent implements OnInit {
   questions: QuestionDto[] = [];
   optionsMap: { [key: number]: OptionDto[] } = {};
-  userAnswers: { [key: number]: string } = {}; // selected option per question
-  submitted: boolean = false;
-  score: number = 0;
+  userAnswers: { [key: number]: string } = {};
+  submitted = false;
+  score = 0;
+  progress = 0; // ✅ Added
 
   readonly DATA_EXAM_ID = 10;
 
@@ -43,6 +44,14 @@ export class DataAnalysisExamComponent implements OnInit {
     });
   }
 
+  // ✅ Progress update
+  updateProgress() {
+    const answered = Object.keys(this.userAnswers).length;
+    this.progress = this.questions.length
+      ? (answered / this.questions.length) * 100
+      : 0;
+  }
+
   submitQuiz() {
     this.submitted = true;
     let correctCount = 0;
@@ -60,5 +69,6 @@ export class DataAnalysisExamComponent implements OnInit {
     this.userAnswers = {};
     this.submitted = false;
     this.score = 0;
+    this.progress = 0;
   }
 }

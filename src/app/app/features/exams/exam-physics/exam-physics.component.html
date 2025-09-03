@@ -1,49 +1,80 @@
 <div class="exam-container container py-4">
-  <h2 class="text-center mb-4">Physics Exam</h2>
+  <h2 class="text-center mb-4 fw-bold">Physics Exam</h2>
 
-  <!-- Show exam form if not submitted -->
+  <!-- Progress Bar -->
+  <div *ngIf="physicsQuestions.length > 0 && !submitted" class="mb-4">
+    <label class="form-label">
+      Progress: {{ answeredCount() }} / {{ physicsQuestions.length }} answered
+    </label>
+    <div class="progress" style="height: 25px;">
+      <div class="progress-bar bg-info"
+           role="progressbar"
+           [style.width.%]="(answeredCount()/physicsQuestions.length)*100"
+           [attr.aria-valuenow]="answeredCount()"
+           [attr.aria-valuemin]="0"
+           [attr.aria-valuemax]="physicsQuestions.length">
+        {{ ((answeredCount()/physicsQuestions.length)*100) | number:'1.0-0' }}%
+      </div>
+    </div>
+  </div>
+
+  <!-- Exam Form -->
   <form *ngIf="!submitted">
-    <div *ngFor="let q of physicsQuestions; let i = index" class="mb-4 p-3 border rounded shadow-sm">
-      <h5>Q{{ i + 1 }}. {{ q.text }}</h5>
+    <div *ngFor="let q of physicsQuestions; let i = index"
+         class="mb-4 p-3 border rounded shadow-sm question-card"
+         data-aos="fade-up">
+      <h5>
+        <span class="badge bg-primary me-2">{{ i + 1 }}</span>
+        {{ q.text }}
+      </h5>
 
-      <div *ngFor="let opt of optionsMap[q.questionId]" class="form-check">
-        <input 
-          class="form-check-input"
-          type="radio"
-          [name]="'question' + q.questionId"
-          [value]="opt.text"
-          [(ngModel)]="userAnswers[q.questionId]"
-          (change)="selectAnswer(q.questionId, opt.text)"
-        />
-        <label class="form-check-label">{{ opt.text }}</label>
+      <div *ngFor="let opt of optionsMap[q.questionId]" class="form-check my-2">
+        <input class="form-check-input"
+               type="radio"
+               [name]="'question' + q.questionId"
+               [value]="opt.text"
+               [(ngModel)]="userAnswers[q.questionId]"
+               (change)="selectAnswer(q.questionId, opt.text)"
+               [id]="'q' + q.questionId + '_opt' + opt.optionId" />
+        <label class="form-check-label" [for]="'q' + q.questionId + '_opt' + opt.optionId">
+          {{ opt.text }}
+        </label>
       </div>
     </div>
 
     <div class="text-center">
-      <button type="button" class="btn btn-primary" (click)="submitExam()">Submit Exam</button>
+      <button type="button" class="btn btn-success btn-lg px-5" (click)="submitExam()">Submit Exam</button>
     </div>
   </form>
 
-  <!-- ✅ Results -->
-  <div *ngIf="submitted" class="result-section text-center mt-4">
-    <h4>Your Score: {{ score }} / {{ physicsQuestions.length }}</h4>
+  <!-- Result Section -->
+  <div *ngIf="submitted" class="mt-4">
+    <h3 class="text-center mb-4">
+      Your Score: <span class="text-success">{{ score }}</span> / {{ physicsQuestions.length }}
+    </h3>
 
-    <div *ngFor="let q of physicsQuestions; let i = index" class="mt-3 text-start p-3 border rounded">
-      <h6>Q{{ i + 1 }}. {{ q.text }}</h6>
-
-      <p>
-        ✅ Correct Answer: 
-        <strong class="text-success">{{ q.correctAnswer }}</strong>
-      </p>
-      <p>
-        📝 Your Answer: 
-        <strong [class.text-success]="userAnswers[q.questionId] === q.correctAnswer"
-                [class.text-danger]="userAnswers[q.questionId] !== q.correctAnswer">
-          {{ userAnswers[q.questionId] || 'Not Attempted' }}
-        </strong>
-      </p>
+    <div *ngFor="let q of physicsQuestions; let i = index"
+         class="card mb-3 border-success"
+         data-aos="fade-up">
+      <div class="card-body">
+        <h5 class="card-title">
+          <span class="badge bg-primary me-2">{{ i + 1 }}</span> {{ q.text }}
+        </h5>
+        <p>Your Answer: 
+          <span [ngClass]="{
+            'text-success': userAnswers[q.questionId] === q.correctAnswer,
+            'text-danger': userAnswers[q.questionId] !== q.correctAnswer
+          }">
+            {{ userAnswers[q.questionId] || 'No Answer' }}
+          </span>
+        </p>
+        <p>Correct Answer: <span class="text-success">{{ q.correctAnswer }}</span></p>
+      </div>
     </div>
 
-    <button class="btn btn-secondary mt-4" (click)="resetExam()">Try Again</button>
+    <!-- Restart Button -->
+    <div class="text-center mt-4">
+      <button class="btn btn-secondary btn-lg px-5" (click)="resetExam()">Restart Exam</button>
+    </div>
   </div>
 </div>

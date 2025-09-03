@@ -64,6 +64,13 @@ export class ExamMathComponent implements OnInit {
     });
   }
 
+  // ✅ count how many questions answered (fix TS error)
+  answeredCount(): number {
+    return Object.keys(this.userAnswers)
+                 .filter(qId => this.userAnswers[+qId]) // cast string key to number
+                 .length;
+  }
+
   // ✅ reset exam
   resetExam() {
     this.submitted = false;

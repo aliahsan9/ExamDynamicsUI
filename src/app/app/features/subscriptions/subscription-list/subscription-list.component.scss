@@ -1,26 +1,111 @@
-.subscribe-section {
-  background: #f8f9fa;
+.subscription-card {
+  background: linear-gradient(135deg, #004080, #0066cc);
+  color: #fff;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  max-width: 420px;
+  margin: 2rem auto;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease;
 
-  h3 {
-    font-size: 1.75rem;
+  &:hover {
+    transform: translateY(-5px) scale(1.02);
   }
 
-  .input-group {
-    .form-control {
-      height: 50px;
-      font-size: 1rem;
-      &:focus {
-        box-shadow: none;
+  .card-header h5 {
+    font-weight: 800;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-header p {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.85);
+    margin-bottom: 1.5rem;
+  }
+
+  .subscription-form {
+    .input-group {
+      display: flex;
+      width: 100%;
+
+      input.form-control {
+        flex: 1;
+        padding: 0.65rem 1rem;
+        font-size: 0.95rem;
+        border-radius: 50px 0 0 50px;
+        border: none;
+        outline: none;
+        transition: all 0.3s ease;
+
+        &:focus {
+          box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+      }
+
+      button.btn-primary {
+        padding: 0.65rem 1.8rem;
+        border-radius: 0 50px 50px 0;
+        font-weight: 700;
+        background: #ffd700;
+        color: #004080;
+        border: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: #ffbf00;
+          transform: scale(1.05);
+        }
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
       }
     }
 
-    .btn {
-      height: 50px;
-      font-size: 1rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .alert {
+      font-size: 0.85rem;
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      margin-top: 0.75rem;
+    }
+  }
+
+  .card-footer {
+    margin-top: 1.5rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Responsive */
+  @media (max-width: 576px) {
+    padding: 1.8rem 1rem;
+    .card-header h5 {
+      font-size: 1.3rem;
+    }
+    .card-header p {
+      font-size: 0.9rem;
+    }
+
+    .subscription-form .input-group {
+      flex-direction: column;
+
+      input.form-control,
+      button.btn-primary {
+        border-radius: 50px;
+        width: 100%;
+      }
+
+      button.btn-primary {
+        margin-top: 0.6rem;
+      }
+    }
+
+    .card-footer {
+      font-size: 0.75rem;
     }
   }
 }

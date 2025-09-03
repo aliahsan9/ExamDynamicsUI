@@ -16,11 +16,10 @@ import { OptionDto } from '../../../../models/option.model';
 export class ExamChemistryComponent implements OnInit {
   chemistryQuestions: QuestionDto[] = [];
   optionsMap: { [key: number]: OptionDto[] } = {};
-  userAnswers: { [key: number]: string } = {}; // questionId -> selected option text
+  userAnswers: { [key: number]: string } = {};
   submitted = false;
   score = 0;
 
-  // ✅ Chemistry examId (replace with actual from DB)
   readonly CHEMISTRY_EXAM_ID = 2;
 
   constructor(
@@ -32,7 +31,7 @@ export class ExamChemistryComponent implements OnInit {
     this.loadChemistryQuestions();
   }
 
-  // ✅ Load Chemistry questions + options
+  // ✅ Load questions + options
   loadChemistryQuestions() {
     this.questionService.getAll().subscribe(qs => {
       this.chemistryQuestions = qs.filter(q => q.examId === this.CHEMISTRY_EXAM_ID);
@@ -45,12 +44,12 @@ export class ExamChemistryComponent implements OnInit {
     });
   }
 
-  // ✅ Select user’s answer
+  // ✅ Select answer
   selectAnswer(questionId: number, optionText: string) {
     this.userAnswers[questionId] = optionText;
   }
 
-  // ✅ Submit answers
+  // ✅ Submit exam
   submitExam() {
     this.score = 0;
     this.submitted = true;
@@ -69,5 +68,16 @@ export class ExamChemistryComponent implements OnInit {
     this.submitted = false;
     this.userAnswers = {};
     this.score = 0;
+  }
+
+  // ✅ Helper to replace Object.keys in template
+  getKeys(obj: any): string[] {
+    return obj ? Object.keys(obj) : [];
+  }
+
+  // ✅ Progress %
+  get progressPercent(): number {
+    if (!this.chemistryQuestions.length) return 0;
+    return (Object.keys(this.userAnswers).length / this.chemistryQuestions.length) * 100;
   }
 }

@@ -5,11 +5,12 @@ import { BlogDetailComponent } from "../../blogs/blog-detail/blog-detail.compone
 import { SubscriptionListComponent } from "../../subscriptions/subscription-list/subscription-list.component";
 import { AiAssistantRoutingModule } from "../../ai-assistant/ai-assistant/ai-assistant-routing.module";
 import { CommonModule } from '@angular/common';
+import { ContactComponent } from "../contact/contact.component";
 
 
 @Component({
   selector: 'app-home',
-  imports: [ExamDetailComponent, AboutComponent, BlogDetailComponent, SubscriptionListComponent, AiAssistantRoutingModule,CommonModule],
+  imports: [ExamDetailComponent, AboutComponent, BlogDetailComponent, SubscriptionListComponent, AiAssistantRoutingModule, CommonModule, ContactComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

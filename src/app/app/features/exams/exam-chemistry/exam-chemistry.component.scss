@@ -1,24 +1,113 @@
-:host {
-  display: block;
-  background-color: #f9fbff;
-  min-height: 100vh;
-}
+.exam-container {
+  max-width: 900px;
+  margin: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #1d3557;
 
-.card {
-  border-radius: 1rem;
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-5px);
+  h2 {
+    font-weight: bold;
+    color: #003366;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
   }
-}
 
-.card-title {
-  font-weight: 600;
-}
+  /* Question Card Styling */
+  .question-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #e6e6e6;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 
-.btn-primary {
-  border-radius: 2rem;
-  font-weight: 500;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+    }
+
+    h5 {
+      font-weight: 600;
+      color: #1d3557;
+    }
+
+    .form-check {
+      margin: 0.6rem 0;
+
+      .form-check-input {
+        cursor: pointer;
+        accent-color: #0d6efd; /* Premium blue */
+        transform: scale(1.1);
+      }
+
+      .form-check-label {
+        margin-left: 0.5rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: #0d6efd;
+        }
+      }
+    }
+  }
+
+  /* Progress Bar */
+  .progress {
+    height: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #e9ecef;
+
+    .progress-bar {
+      background: linear-gradient(90deg, #0d6efd, #0056b3);
+      font-weight: 600;
+      font-size: 0.85rem;
+      line-height: 20px;
+      transition: width 0.4s ease;
+    }
+  }
+
+  /* Buttons */
+  button {
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    padding: 0.6rem 1.5rem;
+
+    &:hover {
+      transform: scale(1.07);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  /* Result Section */
+  .result-section {
+    .card {
+      border-radius: 12px;
+      border: none;
+      background: #f8f9fa;
+      transition: transform 0.2s ease;
+
+      &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .card-body {
+        h6 {
+          font-weight: 600;
+          color: #003366;
+        }
+
+        p {
+          margin: 0.4rem 0;
+          font-size: 0.95rem;
+
+          strong {
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
 }

@@ -4,21 +4,25 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 
 // ================== DTO Models ==================
+// ================== DTO Models ==================
 export interface BlogPostDto {
   blogPostId: number;
   title: string;
   content: string;
-  publishedAt: string; // ISO string
+  thumbnailUrl: string;  // ✅ must match backend JSON (camelCase from ThumbnailUrl)
+  publishedAt: string;
 }
 
 export interface CreateBlogPostDto {
   title: string;
   content: string;
+  thumbnailUrl: string; // ✅ match backend UpdateBlogPostDto
 }
 
 export interface UpdateBlogPostDto {
   title: string;
   content: string;
+  thumbnailUrl: string; // ✅ match backend UpdateBlogPostDto
 }
 
 @Injectable({
@@ -49,12 +53,12 @@ export class BlogService {
     return this.http.get<BlogPostDto[]>(`${this.apiUrl}/author/${authorId}`);
   }
 
-  // ================== CREATE BLOG ==================
+  // ================== CREATE BLOG (JSON) ==================
   create(dto: CreateBlogPostDto): Observable<BlogPostDto> {
     return this.http.post<BlogPostDto>(this.apiUrl, dto);
   }
 
-  // ================== UPDATE BLOG ==================
+  // ================== UPDATE BLOG (JSON) ==================
   update(id: number, dto: UpdateBlogPostDto): Observable<void> {
     return this.http.put<void>(`${this.apiUrl}/${id}`, dto);
   }

@@ -64,6 +64,13 @@ export class ExamPhysicsComponent implements OnInit {
     });
   }
 
+  // ✅ Count answered questions (fix TS error)
+  answeredCount(): number {
+    return Object.keys(this.userAnswers)
+                 .filter(qId => this.userAnswers[+qId]) // convert string -> number
+                 .length;
+  }
+
   // ✅ Reset exam
   resetExam() {
     this.submitted = false;
