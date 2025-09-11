@@ -1,0 +1,62 @@
+.notes-section {
+  background: linear-gradient(135deg, #f8f9fa, #eef2f7);
+
+  .text-gradient {
+    background: linear-gradient(45deg, #0dcaf0, #0d6efd);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .notes-card {
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    }
+
+    .exam-icon {
+      font-size: 2.5rem;
+      color: #0d6efd;
+    }
+
+    .notes-btn {
+      margin-top: 1rem;
+      border-radius: 30px;
+      padding: 0.5rem 1.5rem;
+      transition: 0.3s;
+
+      &:hover {
+        background: #0dcaf0;
+        border-color: #0dcaf0;
+      }
+    }
+  }
+}
+
+// Responsive Adjustments
+@media (max-width: 768px) {
+  .notes-section {
+    .card-title {
+      font-size: 1rem;
+    }
+    .exam-icon {
+      font-size: 2rem;
+    }
+    .notes-btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .notes-section {
+    .card-text {
+      font-size: 0.85rem;
+    }
+  }
+}

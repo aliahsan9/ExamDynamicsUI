@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { QuestionDto, CreateQuestionDto } from '../../../../models/question.moel';
+import { QuestionDto, CreateQuestionDto, UpdateQuestionDto } from '../../../../models/question.moel';
 import { OptionDto, OptionCreate } from '../../../../models/option.model';
 import { QuestionService } from '../../../core/services/question.service';
 import { OptionService } from '../../../core/services/option.service';
@@ -16,7 +16,7 @@ import { RouterModule } from '@angular/router';
 })
 export class ManageBiologyComponent implements OnInit {
   biologyQuestions: QuestionDto[] = [];
-  optionsMap: { [key: number]: OptionDto[] } = {}; // options per questionId
+  optionsMap: { [key: number]: OptionDto[] } = {};
   questionForm!: FormGroup;
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
@@ -33,15 +33,16 @@ export class ManageBiologyComponent implements OnInit {
   ngOnInit(): void {
     this.loadBiologyQuestions();
     this.initForm();
-    this.addOption(); // start with one option
+    this.addOption();
   }
 
-  // ✅ initialize form
+  // ✅ initialize form (added explanation)
   initForm() {
     this.questionForm = this.fb.group({
       examId: [this.BIOLOGY_EXAM_ID, Validators.required],
-      topicId: [1, Validators.required], // can replace with dynamic topic selection
+      topicId: [1, Validators.required],
       text: ['', Validators.required],
+      explanation: ['', Validators.required], // ✅ added explanation
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
@@ -53,7 +54,6 @@ export class ManageBiologyComponent implements OnInit {
     return this.questionForm.get('options') as FormArray;
   }
 
-  // ✅ add option
   addOption() {
     this.options.push(this.fb.group({
       text: ['', Validators.required],
@@ -61,7 +61,6 @@ export class ManageBiologyComponent implements OnInit {
     }));
   }
 
-  // ✅ remove option
   removeOption(index: number) {
     this.options.removeAt(index);
   }
@@ -79,30 +78,39 @@ export class ManageBiologyComponent implements OnInit {
     });
   }
 
-  // ✅ submit question
+  // ✅ submit question (added explanation in create/update)
   onSubmit() {
     if (this.questionForm.invalid) return;
 
     const formValue = this.questionForm.value;
 
     if (this.isEditing && this.editingQuestionId) {
-      // Update
-      this.questionService.update({ ...formValue, id: this.editingQuestionId }).subscribe(() => {
+      const updateDto: UpdateQuestionDto = {
+        questionId: this.editingQuestionId,
+        examId: this.BIOLOGY_EXAM_ID,
+        topicId: formValue.topicId,
+        subjectId: 0, // adjust if subjectId is needed
+        text: formValue.text,
+        explanation: formValue.explanation, // ✅ include explanation
+        questionType: formValue.questionType,
+        correctAnswer: formValue.correctAnswer
+      };
+
+      this.questionService.update(updateDto).subscribe(() => {
         this.resetForm();
         this.loadBiologyQuestions();
       });
     } else {
-      // Create new Biology question
       const newQuestion: CreateQuestionDto = {
         examId: this.BIOLOGY_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
+        explanation: formValue.explanation, // ✅ include explanation
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
 
       this.questionService.create(newQuestion).subscribe((createdQ) => {
-        // Save options for new question
         formValue.options.forEach((opt: OptionCreate) => {
           this.optionService.create({
             text: opt.text,
@@ -118,7 +126,7 @@ export class ManageBiologyComponent implements OnInit {
     }
   }
 
-  // ✅ edit Biology question
+  // ✅ edit Biology question (added explanation)
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
@@ -127,11 +135,11 @@ export class ManageBiologyComponent implements OnInit {
       examId: this.BIOLOGY_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
+      explanation: question.explanation, // ✅ include explanation
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
 
-    // refill options
     this.options.clear();
     this.optionService.getByQuestionId(question.questionId).subscribe(opts => {
       opts.forEach(opt => {
@@ -143,7 +151,6 @@ export class ManageBiologyComponent implements OnInit {
     });
   }
 
-  // ✅ delete Biology question
   deleteQuestion(id: number) {
     if (confirm('Are you sure you want to delete this Biology question?')) {
       this.questionService.delete(id).subscribe(() => {
@@ -152,7 +159,6 @@ export class ManageBiologyComponent implements OnInit {
     }
   }
 
-  // ✅ reset form
   resetForm() {
     this.isEditing = false;
     this.editingQuestionId = null;
@@ -160,6 +166,7 @@ export class ManageBiologyComponent implements OnInit {
       examId: this.BIOLOGY_EXAM_ID,
       topicId: 1,
       text: '',
+      explanation: '', // ✅ reset explanation
       questionType: 'MCQ',
       correctAnswer: ''
     });

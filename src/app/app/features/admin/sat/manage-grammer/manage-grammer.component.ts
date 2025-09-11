@@ -15,14 +15,14 @@ import { OptionService } from '../../../../core/services/option.service';
   styleUrls: ['./manage-grammer.component.scss']
 })
 export class ManageGrammerComponent implements OnInit {
-  GrammarQuestions: QuestionDto[] = [];
+  grammerQuestions: QuestionDto[] = [];
   optionsMap: { [key: number]: OptionDto[] } = {}; // options per questionId
   questionForm!: FormGroup;
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
 
-  // ✅ examId for Grammar
-  readonly GRAMMAR_EXAM_ID = 12;
+  // ✅ Grammer examId (replace with actual ID for Grammer subject in your DB)
+  readonly GRAMMER_EXAM_ID = 12;
 
   constructor(
     private fb: FormBuilder,
@@ -31,7 +31,7 @@ export class ManageGrammerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadGrammarQuestions();
+    this.loadGrammerQuestions();
     this.initForm();
     this.addOption(); // start with one option
   }
@@ -39,9 +39,10 @@ export class ManageGrammerComponent implements OnInit {
   // ✅ initialize form
   initForm() {
     this.questionForm = this.fb.group({
-      examId: [this.GRAMMAR_EXAM_ID, Validators.required],
-      topicId: [1, Validators.required], // adjust dynamically if needed
+      examId: [this.GRAMMER_EXAM_ID, Validators.required],
+      topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
+      explanation: [''], // ✅ NEW
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
@@ -66,12 +67,12 @@ export class ManageGrammerComponent implements OnInit {
     this.options.removeAt(index);
   }
 
-  // ✅ load Grammar questions
-  loadGrammarQuestions() {
+  // ✅ load only Grammer questions
+  loadGrammerQuestions() {
     this.questionService.getAll().subscribe(qs => {
-      this.GrammarQuestions = qs.filter(q => q.examId === this.GRAMMAR_EXAM_ID);
+      this.grammerQuestions = qs.filter(q => q.examId === this.GRAMMER_EXAM_ID);
 
-      this.GrammarQuestions.forEach(q => {
+      this.grammerQuestions.forEach(q => {
         this.optionService.getByQuestionId(q.questionId).subscribe(opts => {
           this.optionsMap[q.questionId] = opts;
         });
@@ -87,16 +88,20 @@ export class ManageGrammerComponent implements OnInit {
 
     if (this.isEditing && this.editingQuestionId) {
       // Update
-      this.questionService.update({ ...formValue, id: this.editingQuestionId }).subscribe(() => {
+      this.questionService.update({
+        ...formValue,
+        id: this.editingQuestionId
+      }).subscribe(() => {
         this.resetForm();
-        this.loadGrammarQuestions();
+        this.loadGrammerQuestions();
       });
     } else {
-      // Create new Grammar question
+      // Create new Grammer question
       const newQuestion: CreateQuestionDto = {
-        examId: this.GRAMMAR_EXAM_ID,
+        examId: this.GRAMMER_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
+        explanation: formValue.explanation, // ✅ NEW
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -109,7 +114,7 @@ export class ManageGrammerComponent implements OnInit {
             isCorrect: opt.isCorrect,
             questionId: createdQ.questionId
           }).subscribe(() => {
-            this.loadGrammarQuestions();
+            this.loadGrammerQuestions();
           });
         });
 
@@ -118,15 +123,16 @@ export class ManageGrammerComponent implements OnInit {
     }
   }
 
-  // ✅ edit Grammar question
+  // ✅ edit Grammer question
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
 
     this.questionForm.patchValue({
-      examId: this.GRAMMAR_EXAM_ID,
+      examId: this.GRAMMER_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
+      explanation: question.explanation || '', // ✅ NEW
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -143,11 +149,11 @@ export class ManageGrammerComponent implements OnInit {
     });
   }
 
-  // ✅ delete Grammar question
+  // ✅ delete Grammer question
   deleteQuestion(id: number) {
-    if (confirm('Are you sure you want to delete this Grammar question?')) {
+    if (confirm('Are you sure you want to delete this Grammer question?')) {
       this.questionService.delete(id).subscribe(() => {
-        this.loadGrammarQuestions();
+        this.loadGrammerQuestions();
       });
     }
   }
@@ -157,9 +163,10 @@ export class ManageGrammerComponent implements OnInit {
     this.isEditing = false;
     this.editingQuestionId = null;
     this.questionForm.reset({
-      examId: this.GRAMMAR_EXAM_ID,
+      examId: this.GRAMMER_EXAM_ID,
       topicId: 1,
       text: '',
+      explanation: '', // ✅ NEW
       questionType: 'MCQ',
       correctAnswer: ''
     });

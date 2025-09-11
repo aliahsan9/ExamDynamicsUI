@@ -3,24 +3,46 @@
   width: 100%;
   background: #ffffff;
   border: none;
-  transition: transform 0.3s ease-in-out;
+  border-radius: 1.2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 1.2rem 2rem rgba(0, 0, 0, 0.15);
+  }
+
+  h3 {
+    background: linear-gradient(45deg, #0d6efd, #6610f2, #20c997);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
   input {
-    border-radius: 10px;
-    padding: 10px 15px;
+    border-radius: 0.6rem;
+    padding: 12px 15px;
+    border: 1px solid #dee2e6;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      border-color: #0d6efd;
+      box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.2);
+    }
   }
 
   button {
-    border-radius: 10px;
+    border-radius: 0.6rem;
     font-weight: 600;
-    transition: all 0.3s ease-in-out;
+    height: 45px;
+    transition: all 0.3s ease;
 
     &:hover {
-      background-color: darken(#0d6efd, 10%);
+      background-color: darken(#0d6efd, 7%);
+      transform: scale(1.02);
     }
+  }
+
+  p {
+    font-size: 0.9rem;
   }
 }

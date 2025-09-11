@@ -5,49 +5,81 @@
   padding: 5rem 1rem;
   overflow: hidden;
 
-  .exam-card {
-    border: none;
-    border-radius: 20px;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(15px);
-    padding: 2rem;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  .hero-title {
+    font-size: 2.5rem;
+    color: #004080;
+  }
 
-    &:hover {
-      transform: translateY(-10px) scale(1.03);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
-    }
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: #333;
+  }
 
-    .icon-wrapper {
-      font-size: 3rem;
-      color: #5a73ff;
-      background-color: rgba(90, 115, 255, 0.1);
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto;
+  .badges {
+    .badge-item {
+      background: #fff;
+      border-radius: 20px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
 
       &:hover {
-        transform: rotate(15deg) scale(1.15);
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .exam-card {
+    border: none;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    padding: 1.5rem;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+    &:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .image-wrapper {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      overflow: hidden;
+
+      .exam-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover .exam-image {
+        transform: scale(1.15) rotate(5deg);
       }
     }
 
     .card-title {
-      margin-top: 15px;
+      margin-top: 10px;
       font-weight: 700;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       color: #004080;
     }
 
     .card-text {
       color: #555;
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-top: 10px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    .tip-text {
+      color: #0066cc;
+      font-size: 0.85rem;
     }
 
     .btn-gradient {
@@ -55,6 +87,9 @@
       border: none;
       color: #fff;
       font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.4rem 1rem;
+      border-radius: 25px;
       transition: background 0.3s ease, transform 0.3s ease;
 
       &:hover {
@@ -64,86 +99,68 @@
     }
   }
 
-  // Floating shapes for premium look
+  .extra-content {
+    h4 {
+      color: #004080;
+    }
+
+    .feature-box {
+      background: #fff;
+      border-radius: 15px;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
   .shape {
     position: absolute;
     border-radius: 50%;
-    opacity: 0.1;
+    opacity: 0.08;
     animation: float 6s ease-in-out infinite;
 
     &.shape1 {
-      width: 250px;
-      height: 250px;
+      width: 200px; height: 200px;
       background-color: #004080;
-      top: -100px;
-      left: -80px;
+      top: -80px; left: -60px;
     }
-
     &.shape2 {
-      width: 180px;
-      height: 180px;
+      width: 150px; height: 150px;
       background-color: #0066cc;
-      bottom: -90px;
-      right: -60px;
+      bottom: -70px; right: -50px;
       animation-delay: 2s;
     }
-
     &.shape3 {
-      width: 120px;
-      height: 120px;
+      width: 100px; height: 100px;
       background-color: #00aaff;
-      top: 20%;
-      right: 10%;
+      top: 25%; right: 12%;
       animation-delay: 4s;
     }
   }
 
   @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
   }
 
   @media(max-width: 768px) {
     padding: 4rem 1rem;
 
-    .exam-card {
-      padding: 1.8rem;
-
-      .card-title {
-        font-size: 1.3rem;
-      }
-
-      .card-text {
-        font-size: 0.95rem;
-      }
-    }
-
-    .icon-wrapper {
-      width: 70px;
-      height: 70px;
-      font-size: 2.5rem;
-    }
+    .exam-card { padding: 1.2rem; }
+    .image-wrapper { width: 70px; height: 70px; }
+    .card-title { font-size: 1.1rem; }
+    .card-text { font-size: 0.85rem; }
   }
 
   @media(max-width: 480px) {
     padding: 3rem 0.5rem;
 
-    .exam-card {
-      padding: 1.5rem;
-
-      .card-title {
-        font-size: 1.2rem;
-      }
-
-      .card-text {
-        font-size: 0.9rem;
-      }
-    }
-
-    .icon-wrapper {
-      width: 60px;
-      height: 60px;
-      font-size: 2rem;
-    }
+    .exam-card { padding: 1rem; }
+    .image-wrapper { width: 60px; height: 60px; }
+    .card-title { font-size: 1rem; }
+    .card-text { font-size: 0.8rem; }
   }
 }

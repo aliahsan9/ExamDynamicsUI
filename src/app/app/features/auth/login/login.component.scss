@@ -6,7 +6,7 @@
   min-height: 100vh;
   background: linear-gradient(to right, #f7f7fc, #ffffff);
   padding: 2rem;
-  flex-wrap: wrap; // Important for responsiveness
+  flex-wrap: wrap;
 
   .info-section {
     max-width: 500px;
@@ -19,13 +19,23 @@
     }
 
     h2 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
+      background: linear-gradient(45deg, #0d6efd, #6610f2, #20c997);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     p {
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: #5a5a5a;
+    }
+
+    .features li {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      color: #333;
     }
   }
 
@@ -36,12 +46,13 @@
     margin-top: 2rem;
     border-radius: 1rem;
     background: #ffffff;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeInUp 1s ease;
     padding: 2rem;
 
     &:hover {
       transform: translateY(-5px);
+      box-shadow: 0 0.8rem 1.5rem rgba(0, 0, 0, 0.1);
     }
 
     input.form-control {
@@ -90,7 +101,7 @@
 
   @media (max-width: 480px) {
     .info-section h2 {
-      font-size: 1.5rem;
+      font-size: 1.6rem;
     }
 
     .info-section p {

@@ -42,6 +42,7 @@ export class ManageMathComponent implements OnInit {
       examId: [this.MATH_EXAM_ID, Validators.required],
       topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
+      explanation: [''], // ✅ NEW
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
@@ -87,7 +88,10 @@ export class ManageMathComponent implements OnInit {
 
     if (this.isEditing && this.editingQuestionId) {
       // Update
-      this.questionService.update({ ...formValue, id: this.editingQuestionId }).subscribe(() => {
+      this.questionService.update({
+        ...formValue,
+        id: this.editingQuestionId
+      }).subscribe(() => {
         this.resetForm();
         this.loadMathQuestions();
       });
@@ -97,6 +101,7 @@ export class ManageMathComponent implements OnInit {
         examId: this.MATH_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
+        explanation: formValue.explanation, // ✅ NEW
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -127,6 +132,7 @@ export class ManageMathComponent implements OnInit {
       examId: this.MATH_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
+      explanation: question.explanation || '', // ✅ NEW
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -160,6 +166,7 @@ export class ManageMathComponent implements OnInit {
       examId: this.MATH_EXAM_ID,
       topicId: 1,
       text: '',
+      explanation: '', // ✅ NEW
       questionType: 'MCQ',
       correctAnswer: ''
     });

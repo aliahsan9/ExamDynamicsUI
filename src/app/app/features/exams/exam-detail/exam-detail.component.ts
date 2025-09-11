@@ -5,20 +5,63 @@ import * as AOS from 'aos';
 
 @Component({
   selector: 'app-exam-detail',
-  imports:[CommonModule,RouterModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './exam-detail.component.html',
   styleUrls: ['./exam-detail.component.scss']
 })
 export class ExamDetailComponent implements OnInit {
 
   exams = [
-    { title: 'MDCAT', desc: 'Pakistan medical students', link: '/quiz', icon: 'bi-heart-pulse' },
-    { title: 'ECAT', desc: 'Pakistan engineering students', link: '/quiz', icon: 'bi-tools' },
-    { title: 'SAT', desc: 'High school students (US colleges)', link: '/sat-detail', icon: 'bi-mortarboard' },
-    { title: 'GRE', desc: 'Graduate students (Masters/PhD)', link: '/gre', icon: 'bi-book' },
-    { title: 'GMAT', desc: 'MBA aspirants', link: '/gmat', icon: 'bi-graph-up' },
-    { title: 'IELTS', desc: 'Students + Immigrants (UK, Canada, Australia)', link: '/ielts', icon: 'bi-globe' },
-    { title: 'CSS', desc: 'Pakistan civil service aspirants', link: '/css', icon: 'bi-building' }
+    { 
+      title: 'MDCAT', 
+      desc: 'Pakistan medical students preparing for medical colleges', 
+      link: '/mdcat-quiz', 
+      image: 'assets/images/mdcat.png',
+      tip: 'Practice past papers daily for best results!' 
+    },
+    { 
+      title: 'ECAT', 
+      desc: 'Pakistan engineering students aiming for top universities', 
+      link: '/ecat-quiz', 
+      image: 'assets/images/ecat.png',
+      tip: 'Solve math & physics questions consistently!' 
+    },
+    { 
+      title: 'SAT', 
+      desc: 'High school students aiming for US colleges', 
+      link: '/sat-detail', 
+      image: 'assets/images/sat.png',
+      tip: 'Work on vocabulary & problem-solving daily!' 
+    },
+    { 
+      title: 'GRE', 
+      desc: 'Graduate students preparing for Masters/PhD', 
+      link: '/gre', 
+      image: 'assets/images/gre.jpg',
+      tip: 'Focus on verbal & quantitative sections equally!' 
+    },
+    { 
+      title: 'GMAT', 
+      desc: 'MBA aspirants preparing for global business schools', 
+      link: '/gmat', 
+      image: 'assets/images/gmat.jpg',
+      tip: 'Time management is the key for GMAT success!' 
+    },
+    { 
+      title: 'IELTS', 
+      desc: 'Students & immigrants aiming for UK, Canada, Australia', 
+      link: '/ielts', 
+      image: 'assets/images/ilets.jpg',
+      tip: 'Practice listening & speaking daily!' 
+    },
+    { 
+      title: 'CSS', 
+      desc: 'Pakistan civil service aspirants', 
+      link: '/css', 
+      image: 'assets/images/css.jpg',
+      tip: 'Read current affairs and practice essays!' 
+    }
   ];
 
   constructor() { }

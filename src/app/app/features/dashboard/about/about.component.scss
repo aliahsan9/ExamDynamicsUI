@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
 .about-section {
-  background: #f9fbff;
+  background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
   font-family: 'Poppins', sans-serif;
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 1rem;
 
   .section-title {
     font-size: 2rem;
@@ -23,9 +24,18 @@
     margin-bottom: 1rem;
   }
 
-  .about-img {
+  .about-tip {
+    font-size: 1rem;
+  }
+
+  .about-img, .feature-img {
     max-height: 350px;
     object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .hover-scale:hover {
+    transform: scale(1.05) rotate(1deg);
   }
 
   .sub-title {
@@ -34,80 +44,74 @@
     color: #222;
   }
 
-  /* Feature Cards */
   .feature-card {
-    background: linear-gradient(145deg, #ffffff, #eef5ff);
-    border-radius: 15px;
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(12px);
+    border-radius: 25px;
     padding: 2rem;
-    transition: all 0.3s ease-in-out;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.05);
 
     &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 14px 28px rgba(0,0,0,0.12);
     }
 
-    .feature-icon {
-      font-size: 3rem;
-      color: #0047FF;
-      margin-bottom: 1rem;
-      background: #eaf0ff;
+    .feature-img {
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
-      padding: 15px;
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
+      margin-bottom: 1rem;
+      object-fit: cover;
     }
 
-    h5 {
-      font-size: 1.25rem;
-      font-weight: 600;
-      margin-bottom: 0.75rem;
-      color: #222;
-    }
-
-    p {
-      font-size: 0.95rem;
-      color: #555;
-    }
+    h5 { font-size: 1.25rem; font-weight: 600; margin-bottom: 0.75rem; color: #222; }
+    p { font-size: 0.95rem; color: #555; }
   }
 
-  /* Statistics Numbers */
   .stat-number {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
   }
 
-  /* Buttons */
-  .btn-primary {
-    background: #0047FF;
+  .btn-gradient {
+    background: linear-gradient(90deg, #5a73ff, #43d1ff);
     border: none;
+    color: #fff;
     font-weight: 600;
     padding: 0.6rem 1.5rem;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
 
     &:hover {
-      background: #0031cc;
+      background: linear-gradient(90deg, #43d1ff, #5a73ff);
+      transform: translateY(-2px);
     }
   }
-}
 
-/* Responsive */
-@media (max-width: 767px) {
-  .about-section .section-title {
-    font-size: 1.75rem;
+  /* Floating shapes */
+  .shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: float 6s ease-in-out infinite;
+
+    &.shape1 { width: 200px; height: 200px; background-color: #004080; top: -80px; left: -60px; }
+    &.shape2 { width: 150px; height: 150px; background-color: #0066cc; bottom: -60px; right: -40px; animation-delay: 2s; }
+    &.shape3 { width: 100px; height: 100px; background-color: #00aaff; top: 25%; right: 10%; animation-delay: 4s; }
   }
 
-  .about-section .sub-title {
-    font-size: 1.4rem;
-  }
+  @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-  .about-section .about-description {
-    font-size: 0.95rem;
+  @media(max-width: 767px) {
+    padding: 4rem 1rem;
+    .section-title { font-size: 1.75rem; }
+    .sub-title { font-size: 1.4rem; }
+    .about-description { font-size: 0.95rem; }
+    .feature-img { width: 70px; height: 70px; }
   }
 }

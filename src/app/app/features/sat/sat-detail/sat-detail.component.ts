@@ -6,12 +6,13 @@ interface SatTopic {
   title: string;
   description: string;
   icon: string;
-  route: string; // Route to start quiz
+  route: string;
 }
 
 @Component({
   selector: 'app-sat-detail',
-  imports:[CommonModule,RouterModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './sat-detail.component.html',
   styleUrls: ['./sat-detail.component.scss']
 })
@@ -20,40 +21,43 @@ export class SatDetailComponent implements OnInit {
     {
       title: 'Reading Comprehension MCQs',
       description: 'Practice SAT reading passages and comprehension questions.',
-      icon: 'book',
-      route: '/reading-writing'
+      icon: 'assets/images/about3.jpg',
+      route: '/exam/6'
     },
     {
-      title: 'Grammar MCQs',
+      title: 'Grammar MCQs',  
       description: 'Sharpen your grammar and sentence correction skills.',
-      icon: 'pen',
-      route: '/grammer'
+      icon: 'assets/images/about1.jpg',
+      route: '/exam/12'
     },
     {
       title: 'Algebra MCQs',
       description: 'Solve algebraic equations, functions, and word problems.',
-      icon: 'calculator',
-      route: '/algebra'
+      icon: 'assets/images/blog1.jpg',
+      route: '/exam/11'
     },
     {
       title: 'Geometry MCQs',
       description: 'Practice coordinate geometry, shapes, volumes, and angles.',
-      icon: 'triangle',
-      route: '/geometry'
+      icon: 'assets/images/blog2.jpg',
+      route: '/exam/8'
     },
     {
       title: 'Data Analysis MCQs',
       description: 'Work on statistics, charts, ratios, and percentages.',
-      icon: 'bar-chart',
-      route: '/data-analysis'
+      icon: 'assets/images/students.jpg',
+      route: '/exam/10'
     }
   ];
 
   constructor(private router: Router) {}
 
+  // ✅ Required because of OnInit
   ngOnInit(): void {
     // Initialize AOS animations
-    import('aos').then(AOS => AOS.init({ duration: 800, once: true }));
+    import('aos').then(AOS => {
+      AOS.init({ duration: 800, once: true });
+    });
   }
 
   startQuiz(route: string) {

@@ -4,14 +4,22 @@ export interface CreateQuestionDto {
   topicId: number;          // ✅ required
   text: string;
   questionType: string;
+  explanation?: string;
   correctAnswer: string;
 }
 
 // For updating a question
 export interface UpdateQuestionDto {
+  questionId: number;
+  examId: number;
+  topicId: number;
+  subjectId: number;
   text: string;
+  explanation?: string;
   questionType: string;
+  correctAnswer: string;
 }
+
 
 // For returning a full question
 export interface QuestionDto {
@@ -20,6 +28,7 @@ export interface QuestionDto {
   topicId: number;
   subjectId: number;
   text: string;
+  explanation?: string;
   questionType: string;
   correctAnswer: string;
 }
@@ -28,5 +37,6 @@ export interface QuestionDto {
 export interface QuestionReadDto {
   id: number;
   text: string;
+  explanation?: string;
   subjectId: number;
 }

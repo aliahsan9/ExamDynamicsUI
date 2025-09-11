@@ -1,25 +1,89 @@
-<div class="container my-5">
-  <div class="row g-4">
-    <div class="col-md-6 col-lg-4" *ngFor="let blog of blogs">
-      <div class="card shadow-sm border-0 h-100 blog-card d-flex flex-column">
-        <div class="blog-thumbnail-wrapper">
+<div class="blogs-section py-5">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="text-center mb-5" data-aos="fade-up">
+      <h2 class="section-title">Latest Blogs</h2>
+      <p class="section-subtitle">
+        Stay updated with the latest insights, tips, and guides from our expert writers.
+      </p>
+    </div>
+
+    <!-- ✅ Featured Blog -->
+    <div class="featured-blog mb-5" data-aos="zoom-in">
+      <div class="card featured-card shadow-lg border-0 d-flex flex-md-row overflow-hidden">
+        <div class="featured-img-wrapper">
           <img
-            *ngIf="blog.thumbnailUrl"
-            [src]="blog.thumbnailUrl"
-            class="card-img-top blog-thumbnail"
-            alt="Blog Thumbnail"
+            src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=800&h=500&fit=crop"
+            alt="Featured Blog"
+            class="featured-img"
           />
         </div>
-        <div class="card-body d-flex flex-column">
-          <h5 class="card-title">{{ blog.title }}</h5>
-          <p class="card-text text-muted flex-grow-1">
-            {{ truncateText(blog.content, 120) }}
+        <div class="card-body d-flex flex-column p-4">
+          <span class="badge featured-badge">Featured</span>
+          <h3 class="card-title mb-3">Exploring the Future of Artificial Intelligence</h3>
+          <p class="card-text flex-grow-1">
+            Artificial Intelligence is reshaping industries and redefining the future of work.
+            Discover how AI impacts our daily lives and what innovations lie ahead.
           </p>
-          <a [routerLink]="['/blog', blog.blogPostId]" class="btn btn-primary mt-auto">
-            Read More
+          <a
+            [routerLink]="['/blog', blogs[0].blogPostId]"
+            class="btn btn-gradient mt-auto align-self-start"
+          >
+            <i class="bi bi-book me-2"></i> Read Full Blog
           </a>
+          <div class="featured-footer mt-3 text-muted">
+            <small><i class="bi bi-calendar3 me-1"></i> Posted on: Jan 2, 2025</small> |
+            <small><i class="bi bi-person-circle me-1"></i> By Editor</small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Blog Cards -->
+    <div class="row g-4">
+      <div
+        class="col-md-6 col-lg-4"
+        *ngFor="let blog of blogs"
+        data-aos="fade-up"
+        data-aos-delay="150"
+      >
+        <div class="card shadow-sm border-0 h-100 blog-card d-flex flex-column">
+          
+          <!-- ✅ Category Badge -->
+          <span class="badge blog-category">Technology</span>
+          
+          <div class="blog-thumbnail-wrapper">
+            <img
+              *ngIf="blog.thumbnailUrl"
+              [src]="blog.thumbnailUrl"
+              class="card-img-top blog-thumbnail"
+              alt="Blog Thumbnail"
+            />
+          </div>
+          <div class="card-body d-flex flex-column">
+            <h5 class="card-title">{{ blog.title }}</h5>
+            <p class="card-text text-muted flex-grow-1">
+              {{ truncateText(blog.content, 120) }}
+            </p>
+            <a
+              [routerLink]="['/blog', blog.blogPostId]"
+              class="btn btn-gradient mt-auto d-flex align-items-center justify-content-center"
+            >
+              <i class="bi bi-book me-2"></i> Read More
+            </a>
+          </div>
+
+          <!-- ✅ Card Footer -->
+          <div class="card-footer blog-footer text-muted d-flex justify-content-between align-items-center">
+            <small><i class="bi bi-calendar3 me-1"></i> Posted on: Jan 5, 2025</small>
+            <small><i class="bi bi-person-circle me-1"></i> By Admin</small>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Decorative Background Shapes -->
+  <div class="decor-shape shape-1"></div>
+  <div class="decor-shape shape-2"></div>
 </div>

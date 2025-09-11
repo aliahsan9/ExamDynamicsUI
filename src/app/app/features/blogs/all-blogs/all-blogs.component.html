@@ -1,0 +1,115 @@
+<div class="container my-5">
+  <!-- Heading -->
+  <div class="text-center mb-5" data-aos="fade-down">
+    <h2 class="fw-bold text-gradient">
+      <i class="bi bi-journal-text me-2"></i> Explore Our Blogs
+    </h2>
+    <p class="lead">
+      Find expert-written guidance, exam tips, and study hacks with
+      <span class="fw-bold">ExamDynamics</span>.
+    </p>
+
+    <!-- Static Trust Badges -->
+    <div class="d-flex justify-content-center flex-wrap gap-3 mt-4 badges">
+      <span class="badge-item"
+        ><i class="bi bi-check-circle-fill text-success"></i> Verified
+        Resources</span
+      >
+      <span class="badge-item"
+        ><i class="bi bi-award-fill text-primary"></i> Expert Written</span
+      >
+      <span class="badge-item"
+        ><i class="bi bi-people-fill text-warning"></i> 50k+ Readers</span
+      >
+    </div>
+  </div>
+
+  <!-- Search Input -->
+  <div class="row mb-5 justify-content-center" data-aos="fade-up">
+    <div class="col-md-6">
+      <div class="input-group shadow-sm search-box">
+        <span class="input-group-text bg-gradient text-white">
+          <i class="bi bi-search"></i>
+        </span>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="🔎 Search blogs by exam name..."
+          [(ngModel)]="searchTerm"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Blog Cards -->
+  <div class="row g-4">
+    <div
+      class="col-sm-6 col-lg-4"
+      *ngFor="let blog of filteredBlogs()"
+      data-aos="zoom-in"
+      data-aos-delay="200"
+    >
+      <div class="card blog-card shadow-lg h-100">
+        <div class="image-wrapper">
+          <img [src]="blog.image" [alt]="blog.title" />
+          <div class="overlay">
+            <span class="overlay-text">Read More</span>
+          </div>
+        </div>
+
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title fw-bold">{{ blog.title }}</h5>
+          <p class="text-muted small">
+            <i class="bi bi-calendar-event"></i> {{ blog.date }}
+          </p>
+          <p class="card-text flex-grow-1">{{ blog.excerpt }}</p>
+          <a
+            [routerLink]="blog.link"
+            class="btn btn-gradient mt-3 align-self-start"
+          >
+            Continue Reading <i class="bi bi-arrow-right ms-1"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Static Section Below -->
+  <div class="extra-content text-center mt-5" data-aos="fade-up">
+    <h3 class="fw-bold text-gradient mb-3">📚 Stay Ahead with ExamDynamics</h3>
+    <p class="text-muted">
+      Whether it’s MDCAT, ECAT, SAT, or IELTS – we provide the best study
+      strategies, expert guidance, and practice resources.
+    </p>
+
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="feature-box shadow-sm p-4 rounded">
+          <i class="bi bi-lightbulb-fill fs-2 text-warning"></i>
+          <h6 class="mt-2">Smart Learning</h6>
+          <p class="small text-muted">
+            Bite-sized blogs designed to make learning easier.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box shadow-sm p-4 rounded">
+          <i class="bi bi-graph-up-arrow fs-2 text-success"></i>
+          <h6 class="mt-2">Boost Scores</h6>
+          <p class="small text-muted">
+            Tried & tested methods to maximize your results.
+          </p>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="feature-box shadow-sm p-4 rounded">
+          <i class="bi bi-people-fill fs-2 text-primary"></i>
+          <h6 class="mt-2">Expert Community</h6>
+          <p class="small text-muted">
+            Join 50,000+ learners preparing with ExamDynamics.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

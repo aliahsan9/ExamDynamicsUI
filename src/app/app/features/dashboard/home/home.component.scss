@@ -9,7 +9,7 @@
 
     span {
       color: #1e3a8a;
-    }
+    } 
   }
 
   .hero-subtitle {
@@ -90,7 +90,6 @@
     font-weight: 500;
   }
 }
-
 // Extra fine-tuning with media queries
 @media (max-width: 768px) {
   .hero-rating {
@@ -104,6 +103,12 @@
 
   .hero-rating-average {
     justify-content: center;
+  }
+
+  // ✅ Hero button on tablets
+  .hero-btn {
+    font-size: 0.9rem;
+    padding: 0.45rem 1.2rem;
   }
 }
 
@@ -121,9 +126,13 @@
       font-size: 0.8rem;
     }
   }
+
+  // ✅ Hero button on mobile
+  .hero-btn {
+    font-size: 1rem;
+    padding: 0.4rem 2rem;
+  }
 }
-
-
 
   .hero-stats {
     gap: 1rem;

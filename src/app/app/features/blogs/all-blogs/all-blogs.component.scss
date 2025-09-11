@@ -1,0 +1,146 @@
+.text-gradient {
+  background: linear-gradient(45deg, #0d6efd, #6610f2, #20c997);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Search Box */
+.search-box {
+  border-radius: 30px;
+  overflow: hidden;
+
+  .input-group-text {
+    border: none;
+    font-size: 1.2rem;
+  }
+
+  input {
+    border: none;
+    padding: 0.8rem;
+    font-size: 1rem;
+
+    &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+  }
+}
+
+/* Blog Card */
+.blog-card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+
+  &:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 1.5rem 2.5rem rgba(0, 0, 0, 0.2);
+  }
+
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease;
+    }
+
+    .overlay-text {
+      color: #fff;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    &:hover img {
+      transform: scale(1.15);
+    }
+
+    &:hover .overlay {
+      opacity: 1;
+    }
+  }
+
+  .card-body {
+    padding: 1.5rem;
+  }
+
+  .card-title {
+    color: #004080;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-text {
+    font-size: 0.95rem;
+    color: #555;
+  }
+
+  .btn-gradient {
+    background: linear-gradient(90deg, #5a73ff, #43d1ff);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 25px;
+    padding: 0.4rem 1rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: linear-gradient(90deg, #43d1ff, #5a73ff);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* Trust Badges */
+.badges {
+  .badge-item {
+    background: #fff;
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.08);
+    }
+  }
+}
+
+/* Features Section */
+.feature-box {
+  background: #fff;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  }
+
+  h6 {
+    font-weight: 700;
+    color: #004080;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}

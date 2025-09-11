@@ -14,4 +14,5 @@ export interface OptionCreate {
 export interface OptionUpdate {
   text: string;
   isCorrect: boolean;
-}   
+  questionId: number;
+} 

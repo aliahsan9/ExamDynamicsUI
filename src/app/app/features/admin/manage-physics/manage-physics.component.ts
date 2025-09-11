@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { QuestionDto, CreateQuestionDto } from '../../../../models/question.moel';
+import { QuestionDto, CreateQuestionDto, UpdateQuestionDto } from '../../../../models/question.moel';
 import { OptionDto, OptionCreate } from '../../../../models/option.model';
 import { QuestionService } from '../../../core/services/question.service';
 import { OptionService } from '../../../core/services/option.service';
@@ -36,12 +36,13 @@ export class ManagePhysicsComponent implements OnInit {
     this.addOption(); // start with one option
   }
 
-  // ✅ initialize form
+  // ✅ initialize form (added explanation)
   initForm() {
     this.questionForm = this.fb.group({
       examId: [this.PHYSICS_EXAM_ID, Validators.required],
       topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
+      explanation: ['', Validators.required], // ✅ new explanation field
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
@@ -87,7 +88,18 @@ export class ManagePhysicsComponent implements OnInit {
 
     if (this.isEditing && this.editingQuestionId) {
       // Update
-      this.questionService.update({ ...formValue, id: this.editingQuestionId }).subscribe(() => {
+      const updateDto: UpdateQuestionDto = {
+        questionId: this.editingQuestionId,
+        examId: this.PHYSICS_EXAM_ID,
+        topicId: formValue.topicId,
+        subjectId: 0, // set properly if needed
+        text: formValue.text,
+        explanation: formValue.explanation,
+        questionType: formValue.questionType,
+        correctAnswer: formValue.correctAnswer
+      };
+
+      this.questionService.update(updateDto).subscribe(() => {
         this.resetForm();
         this.loadPhysicsQuestions();
       });
@@ -97,6 +109,7 @@ export class ManagePhysicsComponent implements OnInit {
         examId: this.PHYSICS_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
+        explanation: formValue.explanation, // ✅ added
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -118,7 +131,7 @@ export class ManagePhysicsComponent implements OnInit {
     }
   }
 
-  // ✅ edit Physics question
+  // ✅ edit Physics question (added explanation)
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
@@ -127,6 +140,7 @@ export class ManagePhysicsComponent implements OnInit {
       examId: this.PHYSICS_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
+      explanation: question.explanation, // ✅ added
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -160,10 +174,11 @@ export class ManagePhysicsComponent implements OnInit {
       examId: this.PHYSICS_EXAM_ID,
       topicId: 1,
       text: '',
+      explanation: '', // ✅ added
       questionType: 'MCQ',
       correctAnswer: ''
     });
     this.options.clear();
-    this.addOption();
+    this.addOption(); 
   }
 }

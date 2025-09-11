@@ -1,69 +1,76 @@
 <div class="container mt-4">
-  <h2 class="mb-3">Manage Grammar Questions (Exam ID: {{ GRAMMAR_EXAM_ID }})</h2>
+  <h2>Manage Grammer MCQs</h2>
 
-  <!-- ✅ Question Form -->
-  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="card p-3 mb-4 shadow-sm">
-
-    <!-- Question Text -->
-    <div class="mb-3">
-      <label class="form-label">Question Text</label>
-      <input type="text" class="form-control" formControlName="text" placeholder="Enter grammar question" />
+  <!-- Form -->
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="card p-3 shadow-sm">
+    <!-- Question text -->
+    <div class="mb-2">
+      <label class="form-label fw-bold">Question Text</label>
+      <input type="text" formControlName="text" class="form-control" placeholder="Enter question" />
     </div>
-
-    <!-- Correct Answer -->
-    <div class="mb-3">
-      <label class="form-label">Correct Answer</label>
-      <input type="text" class="form-control" formControlName="correctAnswer" placeholder="Enter correct answer" />
-    </div>
-
-    <!-- Options Section -->
-    <div formArrayName="options" class="mb-3">
-      <label class="form-label">Options</label>
-
-      <div *ngFor="let option of options.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center mb-2">
-        <input type="text" class="form-control me-2" formControlName="text" placeholder="Option text" />
-
-        <div class="form-check me-2">
-          <input type="checkbox" class="form-check-input" formControlName="isCorrect" />
-          <label class="form-check-label">Correct</label>
+ 
+    <!-- Options -->
+    <div formArrayName="options" class="mb-2">
+      <label class="form-label fw-bold">Options</label>
+      <div *ngFor="let opt of options.controls; let i = index" [formGroupName]="i" class="row mb-2">
+        <div class="col-8">
+          <input type="text" formControlName="text" class="form-control" placeholder="Option text" />
         </div>
-
-        <button type="button" class="btn btn-danger btn-sm" (click)="removeOption(i)" *ngIf="options.length > 1">
-          Remove
-        </button>
+        <div class="col-2 d-flex align-items-center">
+          <input type="checkbox" formControlName="isCorrect" class="form-check-input me-2" />
+          Correct
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeOption(i)">Remove</button>
+        </div>
       </div>
-
       <button type="button" class="btn btn-secondary btn-sm mt-2" (click)="addOption()">+ Add Option</button>
     </div>
 
-    <!-- Save / Reset Buttons -->
-    <div class="d-flex justify-content-between">
-      <button type="submit" class="btn btn-primary">
+    <!-- Explanation -->
+    <div class="mb-2">
+      <label class="form-label fw-bold">Explanation</label>
+      <textarea formControlName="explanation" class="form-control" rows="3" placeholder="Add explanation for this question"></textarea>
+    </div>
+
+    <!-- Correct Answer -->
+    <div class="mb-2">
+      <label class="form-label fw-bold">Correct Answer (text)</label>
+      <input type="text" formControlName="correctAnswer" class="form-control" placeholder="Correct answer" />
+    </div>
+
+    <!-- Buttons -->
+    <div class="mt-3">
+      <button type="submit" class="btn btn-success me-2">
         {{ isEditing ? 'Update Question' : 'Add Question' }}
       </button>
-      <button type="button" class="btn btn-warning" (click)="resetForm()">Reset</button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
     </div>
   </form>
 
-  <!-- ✅ List of Questions -->
-  <h4>Existing Grammar Questions</h4>
-  <div *ngFor="let q of GrammarQuestions" class="card mb-3 shadow-sm">
-    <div class="card-body">
-      <h5 class="card-title">{{ q.text }}</h5>
-      <p><strong>Correct Answer:</strong> {{ q.correctAnswer }}</p>
+  <!-- Questions List -->
+  <div class="mt-4">
+    <h4>Grammer Questions</h4>
+    <div *ngFor="let q of grammerQuestions" class="card p-3 mb-3 shadow-sm">
+      <h5>{{ q.text }}</h5>
 
-      <ul class="list-group mb-2">
-        <li *ngFor="let opt of optionsMap[q.questionId]" 
-            class="list-group-item d-flex justify-content-between align-items-center">
+      <ul class="list-group">
+        <li *ngFor="let opt of optionsMap[q.questionId]"
+            class="list-group-item"
+            [ngClass]="{'list-group-item-success': opt.isCorrect}">
           {{ opt.text }}
-          <span *ngIf="opt.isCorrect" class="badge bg-success">Correct</span>
         </li>
       </ul>
 
-      <!-- Action Buttons -->
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-sm btn-info me-2" (click)="editQuestion(q)">Edit</button>
-        <button class="btn btn-sm btn-danger" (click)="deleteQuestion(q.questionId)">Delete</button>
+      <!-- Show explanation -->
+      <div class="mt-2">
+        <strong>Explanation:</strong>
+        <p class="mb-0">{{ q.explanation }}</p>
+      </div>
+
+      <div class="mt-3">
+        <button class="btn btn-primary btn-sm me-2" (click)="editQuestion(q)">Edit</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteQuestion(q.questionId)">Delete</button>
       </div>
     </div>
   </div>

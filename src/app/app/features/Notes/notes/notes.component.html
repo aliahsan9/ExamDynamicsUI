@@ -1,0 +1,23 @@
+<section class="notes-section py-5">
+  <div class="container">
+    <div class="text-center mb-5" data-aos="fade-down">
+      <h2 class="fw-bold text-gradient">📘 Exam Notes</h2>
+      <p class="lead text-muted">Download professional and exam-focused notes to accelerate your preparation.</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4" *ngFor="let exam of exams" data-aos="zoom-in">
+        <div class="card h-100 shadow-lg rounded-4 notes-card">
+          <div class="card-body text-center">
+            <i [class]="exam.icon + ' exam-icon mb-3'"></i>
+            <h5 class="card-title fw-bold">{{ exam.title }}</h5>
+            <p class="card-text">{{ exam.description }}</p>
+            <a [href]="exam.link" class="btn btn-primary notes-btn">
+              <i class="bi bi-download"></i> Get Notes
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+.quiz-section {
+  background: linear-gradient(135deg, #f9fbff 0%, #eaf5ff 100%);
+
+  h2 {
+    color: #1f2d3d;
+    font-size: 2.2rem;
+  }
+
+  p.lead {
+    font-size: 1.1rem;
+  }
+
+  .quiz-card {
+    background: #fff;
+    border-radius: 1.2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+      padding: 2rem 1.5rem;
+    }
+
+    .btn {
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: scale(1.08);
+      }
+    }
+  }
+
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.8rem;
+    }
+    p.lead {
+      font-size: 1rem;
+    }
+  }
+}

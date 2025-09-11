@@ -1,61 +1,77 @@
-<div class="container py-4">
-  <h2 class="mb-4 text-primary">Manage Chemistry MCQs</h2>
+<div class="container mt-4">
+  <h2>Manage Chemistry MCQs</h2>
 
   <!-- Form -->
-  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="mb-4">
-    <div class="mb-3">
-      <label class="form-label">Question Text</label>
-      <input type="text" class="form-control" formControlName="text">
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="card p-3 shadow-sm">
+    <!-- Question text -->
+    <div class="mb-2">
+      <label class="form-label fw-bold">Question Text</label>
+      <input type="text" formControlName="text" class="form-control" placeholder="Enter question" />
     </div>
-
-    <div formArrayName="options" class="mb-3">
-      <label class="form-label">Options</label>
-      <div *ngFor="let opt of options.controls; let i=index" [formGroupName]="i" class="d-flex mb-2">
-        <input type="text" class="form-control me-2" formControlName="text" placeholder="Option text">
-        <div class="form-check me-2">
-          <input type="checkbox" class="form-check-input" formControlName="isCorrect">
-          <label class="form-check-label">Correct</label>
+ 
+    <!-- Options -->
+    <div formArrayName="options" class="mb-2">
+      <label class="form-label fw-bold">Options</label>
+      <div *ngFor="let opt of options.controls; let i = index" [formGroupName]="i" class="row mb-2">
+        <div class="col-8">
+          <input type="text" formControlName="text" class="form-control" placeholder="Option text" />
         </div>
-        <button type="button" class="btn btn-sm btn-danger" (click)="removeOption(i)">✕</button>
+        <div class="col-2 d-flex align-items-center">
+          <input type="checkbox" formControlName="isCorrect" class="form-check-input me-2" />
+          Correct
+        </div>
+        <div class="col-2">
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeOption(i)">Remove</button>
+        </div>
       </div>
-      <button type="button" class="btn btn-sm btn-outline-primary" (click)="addOption()">+ Add Option</button>
+      <button type="button" class="btn btn-secondary btn-sm mt-2" (click)="addOption()">+ Add Option</button>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label">Correct Answer</label>
-      <input type="text" class="form-control" formControlName="correctAnswer">
+    <!-- Explanation -->
+    <div class="mb-2">
+      <label class="form-label fw-bold">Explanation</label>
+      <textarea formControlName="explanation" class="form-control" rows="3" placeholder="Add explanation for this question"></textarea>
     </div>
 
-    <button type="submit" class="btn btn-success me-2">{{ isEditing ? 'Update' : 'Create' }} Question</button>
-    <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+    <!-- Correct Answer -->
+    <div class="mb-2">
+      <label class="form-label fw-bold">Correct Answer (text)</label>
+      <input type="text" formControlName="correctAnswer" class="form-control" placeholder="Correct answer" />
+    </div>
+
+    <!-- Buttons -->
+    <div class="mt-3">
+      <button type="submit" class="btn btn-success me-2">
+        {{ isEditing ? 'Update Question' : 'Add Question' }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">Reset</button>
+    </div>
   </form>
 
-  <!-- Chemistry Questions Table -->
-  <table class="table table-bordered table-striped">
-    <thead>
-      <tr>
-        <th>Question</th>
-        <th>Options</th>
-        <th>Correct Answer</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let q of chemistryQuestions">
-        <td>{{ q.text }}</td>
-        <td>
-          <ul class="mb-0">
-            <li *ngFor="let opt of optionsMap[q.questionId]">
-              {{ opt.text }} <span *ngIf="opt.isCorrect" class="badge bg-success">Correct</span>
-            </li>
-          </ul>
-        </td>
-        <td>{{ q.correctAnswer }}</td>
-        <td>
-          <button class="btn btn-sm btn-primary me-2" (click)="editQuestion(q)">Edit</button>
-          <button class="btn btn-sm btn-danger" (click)="deleteQuestion(q.questionId)">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Questions List -->
+  <div class="mt-4">
+    <h4>Physics Questions</h4>
+    <div *ngFor="let q of chemistryQuestions" class="card p-3 mb-3 shadow-sm">
+      <h5>{{ q.text }}</h5>
+
+      <ul class="list-group">
+        <li *ngFor="let opt of optionsMap[q.questionId]"
+            class="list-group-item"
+            [ngClass]="{'list-group-item-success': opt.isCorrect}">
+          {{ opt.text }}
+        </li>
+      </ul>
+
+      <!-- Show explanation -->
+      <div class="mt-2">
+        <strong>Explanation:</strong>
+        <p class="mb-0">{{ q.explanation }}</p>
+      </div>
+
+      <div class="mt-3">
+        <button class="btn btn-primary btn-sm me-2" (click)="editQuestion(q)">Edit</button>
+        <button class="btn btn-danger btn-sm" (click)="deleteQuestion(q.questionId)">Delete</button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -21,7 +21,7 @@ export class ManageChemistryComponent implements OnInit {
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
 
-  // ✅ chemistry examId (replace with actual examId for Chemistry from DB)
+  // ✅ Chemistry examId (replace with actual ID for Chemistry subject in your DB)
   readonly CHEMISTRY_EXAM_ID = 2;
 
   constructor(
@@ -40,8 +40,9 @@ export class ManageChemistryComponent implements OnInit {
   initForm() {
     this.questionForm = this.fb.group({
       examId: [this.CHEMISTRY_EXAM_ID, Validators.required],
-      topicId: [1, Validators.required], // you can replace with dynamic topic selection
+      topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
+      explanation: [''], // ✅ NEW
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
@@ -87,7 +88,10 @@ export class ManageChemistryComponent implements OnInit {
 
     if (this.isEditing && this.editingQuestionId) {
       // Update
-      this.questionService.update({ ...formValue, id: this.editingQuestionId }).subscribe(() => {
+      this.questionService.update({
+        ...formValue,
+        id: this.editingQuestionId
+      }).subscribe(() => {
         this.resetForm();
         this.loadChemistryQuestions();
       });
@@ -97,6 +101,7 @@ export class ManageChemistryComponent implements OnInit {
         examId: this.CHEMISTRY_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
+        explanation: formValue.explanation, // ✅ NEW
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -127,6 +132,7 @@ export class ManageChemistryComponent implements OnInit {
       examId: this.CHEMISTRY_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
+      explanation: question.explanation || '', // ✅ NEW
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -160,6 +166,7 @@ export class ManageChemistryComponent implements OnInit {
       examId: this.CHEMISTRY_EXAM_ID,
       topicId: 1,
       text: '',
+      explanation: '', // ✅ NEW
       questionType: 'MCQ',
       correctAnswer: ''
     });
@@ -167,4 +174,3 @@ export class ManageChemistryComponent implements OnInit {
     this.addOption();
   }
 }
- 

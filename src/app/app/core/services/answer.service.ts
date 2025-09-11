@@ -10,7 +10,7 @@ import { environment } from '../../../../environments/environment';
 export class AnswerService {
    private apiUrl = `${environment.apiUrl}/answer`; // ✅ change to your backend URL
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {} 
 
   // CREATE
   create(answer: AnswerCreate): Observable<AnswerRead> {

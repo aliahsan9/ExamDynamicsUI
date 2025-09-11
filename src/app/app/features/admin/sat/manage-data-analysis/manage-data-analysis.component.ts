@@ -7,21 +7,21 @@ import { OptionCreate, OptionDto } from '../../../../../models/option.model';
 import { QuestionService } from '../../../../core/services/question.service';
 import { OptionService } from '../../../../core/services/option.service';
 
-@Component({
-  selector: 'app-manage-data-analyasis',
+@Component({ 
+  selector: 'app-manage-data-analysis',
   standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './manage-data-analysis.component.html',
   styleUrls: ['./manage-data-analysis.component.scss']
 })
 export class ManageDataAnalysisComponent implements OnInit {
-  DataQuestions: QuestionDto[] = [];
+  dataQuestions: QuestionDto[] = [];
   optionsMap: { [key: number]: OptionDto[] } = {}; // options per questionId
   questionForm!: FormGroup;
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
 
-  // ✅  examId
+  // ✅Data Analysis  examId (replace with actual ID for Data Analysis subject in your DB)
   readonly DATA_EXAM_ID = 10;
 
   constructor(
@@ -42,6 +42,7 @@ export class ManageDataAnalysisComponent implements OnInit {
       examId: [this.DATA_EXAM_ID, Validators.required],
       topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
+      explanation: [''], // ✅ NEW
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
@@ -66,12 +67,12 @@ export class ManageDataAnalysisComponent implements OnInit {
     this.options.removeAt(index);
   }
 
-  // ✅ load only  questions
+  // ✅ load only data questions
   loadDataQuestions() {
     this.questionService.getAll().subscribe(qs => {
-      this.DataQuestions = qs.filter(q => q.examId === this.DATA_EXAM_ID);
+      this.dataQuestions = qs.filter(q => q.examId === this.DATA_EXAM_ID);
 
-      this.DataQuestions.forEach(q => {
+      this.dataQuestions.forEach(q => {
         this.optionService.getByQuestionId(q.questionId).subscribe(opts => {
           this.optionsMap[q.questionId] = opts;
         });
@@ -87,16 +88,20 @@ export class ManageDataAnalysisComponent implements OnInit {
 
     if (this.isEditing && this.editingQuestionId) {
       // Update
-      this.questionService.update({ ...formValue, id: this.editingQuestionId }).subscribe(() => {
+      this.questionService.update({
+        ...formValue,
+        id: this.editingQuestionId
+      }).subscribe(() => {
         this.resetForm();
         this.loadDataQuestions();
       });
     } else {
-      // Create new  question
+      // Create new DATA question
       const newQuestion: CreateQuestionDto = {
         examId: this.DATA_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
+        explanation: formValue.explanation, // ✅ NEW
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -118,7 +123,7 @@ export class ManageDataAnalysisComponent implements OnInit {
     }
   }
 
-  // ✅ edit  question
+  // ✅ edit DATA question
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
@@ -127,6 +132,7 @@ export class ManageDataAnalysisComponent implements OnInit {
       examId: this.DATA_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
+      explanation: question.explanation || '', // ✅ NEW
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -143,7 +149,7 @@ export class ManageDataAnalysisComponent implements OnInit {
     });
   }
 
-  // ✅ delete question
+  // ✅ delete Data question
   deleteQuestion(id: number) {
     if (confirm('Are you sure you want to delete this Data question?')) {
       this.questionService.delete(id).subscribe(() => {
@@ -160,6 +166,7 @@ export class ManageDataAnalysisComponent implements OnInit {
       examId: this.DATA_EXAM_ID,
       topicId: 1,
       text: '',
+      explanation: '', // ✅ NEW
       questionType: 'MCQ',
       correctAnswer: ''
     });

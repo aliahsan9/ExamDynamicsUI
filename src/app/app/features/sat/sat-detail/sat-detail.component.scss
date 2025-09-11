@@ -1,92 +1,66 @@
-// Card Styling
 .sat-card {
-  background: #ffffff;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
+  border: none;
+  border-radius: 16px;
   overflow: hidden;
-  padding: 1.5rem;
-  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-  // Hover effects
   &:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
   }
 
-  // Title
+  .card-body {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
   .card-title {
-    font-weight: 700;
-    font-size: 1.4rem;
-    color: #003366;
+    font-size: 1.2rem;
     margin-bottom: 0.8rem;
   }
 
-  // Text
   .card-text {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #666;
-    margin-bottom: 1.2rem;
-  }
-
-  // Buttons
-  button {
-    font-weight: 600;
-    border-radius: 0.6rem;
-    padding: 0.6rem 1.5rem;
     font-size: 0.95rem;
-    transition: all 0.3s ease;
-    background: linear-gradient(135deg, #004080, #0066cc);
-    color: #fff;
-    border: none;
-
-    &:hover {
-      background: linear-gradient(135deg, #003366, #005bb5);
-      transform: scale(1.05);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
+    line-height: 1.5;
   }
 }
 
-// Responsive adjustments
-@media (max-width: 992px) {
-  .sat-card {
-    padding: 1.2rem;
-    .card-title {
-      font-size: 1.2rem;
-    }
-    .card-text {
-      font-size: 0.95rem;
-    }
+/* Image styling */
+.sat-img {
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+
+  &:hover {
+    transform: scale(1.05);
   }
 }
 
+/* Button */
+.btn-primary {
+  background: linear-gradient(90deg, #0d6efd, #3b82f6);
+  border: none;
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(90deg, #0b5ed7, #2563eb);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
-  .sat-card {
-    margin-bottom: 1rem;
-    padding: 1rem;
-    .card-title {
-      font-size: 1.1rem;
-    }
-    .card-text {
-      font-size: 0.9rem;
-    }
-    button {
-      width: 100%;
-    }
+  .sat-img {
+    height: 160px;
   }
-}
-
-@media (max-width: 480px) {
-  .sat-card {
-    padding: 0.8rem;
-    .card-title {
-      font-size: 1rem;
-    }
-    .card-text {
-      font-size: 0.85rem;
-    }
+  .card-title {
+    font-size: 1.1rem;
   }
 }

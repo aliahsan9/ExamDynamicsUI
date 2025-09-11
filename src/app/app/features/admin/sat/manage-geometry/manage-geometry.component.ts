@@ -7,7 +7,7 @@ import { OptionCreate, OptionDto } from '../../../../../models/option.model';
 import { QuestionService } from '../../../../core/services/question.service';
 import { OptionService } from '../../../../core/services/option.service';
 
-@Component({
+@Component({ 
   selector: 'app-manage-geometry',
   standalone: true,
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
@@ -15,14 +15,14 @@ import { OptionService } from '../../../../core/services/option.service';
   styleUrls: ['./manage-geometry.component.scss']
 })
 export class ManageGeometryComponent implements OnInit {
-  GeometryQuestions: QuestionDto[] = [];
+  geometryQuestions: QuestionDto[] = [];
   optionsMap: { [key: number]: OptionDto[] } = {}; // options per questionId
   questionForm!: FormGroup;
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
 
-  // ✅  examId
-  readonly GEOMETRY_EXAM_ID = 8;
+  // ✅ Geometry examId (replace with actual ID for Geometry subject in your DB)
+  readonly GEOMETRY_EXAM_ID = 8; 
 
   constructor(
     private fb: FormBuilder,
@@ -42,6 +42,7 @@ export class ManageGeometryComponent implements OnInit {
       examId: [this.GEOMETRY_EXAM_ID, Validators.required],
       topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
+      explanation: [''], // ✅ NEW
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
@@ -66,12 +67,12 @@ export class ManageGeometryComponent implements OnInit {
     this.options.removeAt(index);
   }
 
-  // ✅ load only  questions
+  // ✅ load only geometry questions
   loadGeometryQuestions() {
     this.questionService.getAll().subscribe(qs => {
-      this.GeometryQuestions = qs.filter(q => q.examId === this.GEOMETRY_EXAM_ID);
+      this.geometryQuestions = qs.filter(q => q.examId === this.GEOMETRY_EXAM_ID);
 
-      this.GeometryQuestions.forEach(q => {
+      this.geometryQuestions.forEach(q => {
         this.optionService.getByQuestionId(q.questionId).subscribe(opts => {
           this.optionsMap[q.questionId] = opts;
         });
@@ -87,16 +88,20 @@ export class ManageGeometryComponent implements OnInit {
 
     if (this.isEditing && this.editingQuestionId) {
       // Update
-      this.questionService.update({ ...formValue, id: this.editingQuestionId }).subscribe(() => {
+      this.questionService.update({
+        ...formValue,
+        id: this.editingQuestionId
+      }).subscribe(() => {
         this.resetForm();
         this.loadGeometryQuestions();
       });
     } else {
-      // Create new  question
+      // Create new GEOMETRY question
       const newQuestion: CreateQuestionDto = {
         examId: this.GEOMETRY_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
+        explanation: formValue.explanation, // ✅ NEW
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -118,7 +123,7 @@ export class ManageGeometryComponent implements OnInit {
     }
   }
 
-  // ✅ edit  question
+  // ✅ edit GEOMETRY question
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
@@ -127,6 +132,7 @@ export class ManageGeometryComponent implements OnInit {
       examId: this.GEOMETRY_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
+      explanation: question.explanation || '', // ✅ NEW
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -143,7 +149,7 @@ export class ManageGeometryComponent implements OnInit {
     });
   }
 
-  // ✅ delete question
+  // ✅ delete Geometry question
   deleteQuestion(id: number) {
     if (confirm('Are you sure you want to delete this Geometry question?')) {
       this.questionService.delete(id).subscribe(() => {
@@ -160,6 +166,7 @@ export class ManageGeometryComponent implements OnInit {
       examId: this.GEOMETRY_EXAM_ID,
       topicId: 1,
       text: '',
+      explanation: '', // ✅ NEW
       questionType: 'MCQ',
       correctAnswer: ''
     });
