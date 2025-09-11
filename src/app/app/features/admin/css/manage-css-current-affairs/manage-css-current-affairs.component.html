@@ -1,0 +1,92 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Manage Current Affairs Questions</h2>
+
+  <!-- ====== Question Form ====== -->
+  <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="card p-4 shadow-sm">
+    <div class="mb-3">
+      <label for="topicId" class="form-label fw-bold">Topic ID</label>
+      <input type="number" id="topicId" class="form-control" formControlName="topicId" min="1">
+    </div>
+
+    <div class="mb-3">
+      <label for="text" class="form-label fw-bold">Question Text</label>
+      <textarea id="text" class="form-control" formControlName="text" rows="2"></textarea>
+    </div>
+
+    <!-- ✅ New Explanation field -->
+    <div class="mb-3">
+      <label for="explanation" class="form-label fw-bold">Explanation</label>
+      <textarea id="explanation" class="form-control" formControlName="explanation" rows="2" placeholder="Enter explanation for the correct answer"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="questionType" class="form-label fw-bold">Question Type</label>
+      <select id="questionType" class="form-select" formControlName="questionType">
+        <option value="MCQ">MCQ</option>
+        <option value="Short">Short Answer</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="correctAnswer" class="form-label fw-bold">Correct Answer</label>
+      <input type="text" id="correctAnswer" class="form-control" formControlName="correctAnswer">
+    </div>
+
+    <!-- ====== Options ====== -->
+    <div formArrayName="options" class="mb-3">
+      <label class="form-label fw-bold">Options</label>
+      <div *ngFor="let opt of options.controls; let i = index" [formGroupName]="i" class="mb-2 d-flex align-items-center">
+        <input type="text" class="form-control me-2" placeholder="Option Text" formControlName="text">
+        <div class="form-check me-2">
+          <input type="checkbox" class="form-check-input" formControlName="isCorrect" id="optionCheck{{i}}">
+          <label class="form-check-label" [for]="'optionCheck' + i">Correct</label>
+        </div>
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeOption(i)" [disabled]="options.length === 1">Remove</button>
+      </div>
+    </div>
+
+    <button type="button" class="btn btn-secondary btn-sm mb-3" (click)="addOption()">Add Option</button>
+
+    <div class="text-end">
+      <button type="submit" class="btn btn-success me-2" [disabled]="questionForm.invalid">
+        {{ isEditing ? 'Update Question' : 'Add Question' }}
+      </button>
+      <button type="button" class="btn btn-outline-secondary" (click)="resetForm()">Clear</button>
+    </div>
+  </form>
+
+  <hr>
+
+  <!-- ====== Questions List ====== -->
+  <h4 class="mt-4">Existing Current Affairs Questions</h4>
+  <div *ngIf="chemistryQuestions.length === 0" class="text-muted">No questions found.</div>
+  <div class="list-group">
+    <div *ngFor="let question of chemistryQuestions" class="list-group-item">
+      <div class="d-flex justify-content-between align-items-start">
+        <div>
+          <strong>Q{{ question.questionId }}:</strong> {{ question.text }}
+          <div class="mt-1">
+            <small class="text-muted">Correct Answer: {{ question.correctAnswer }}</small>
+          </div>
+
+          <!-- ✅ Show explanation -->
+          <div class="mt-1">
+            <small><strong>Explanation:</strong> {{ question.explanation || 'No explanation provided.' }}</small>
+          </div>
+
+          <div class="mt-1">
+            <small>Options:</small>
+            <ul class="mb-0">
+              <li *ngFor="let opt of optionsMap[question.questionId]">
+                {{ opt.text }}
+                <span *ngIf="opt.isCorrect" class="badge bg-success">✔</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <button class="btn btn-primary btn-sm me-1" (click)="editQuestion(question)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteQuestion(question.questionId)">Delete</button>
+        </div>
+      </div>
+    </div>

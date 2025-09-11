@@ -3,6 +3,7 @@
   border-radius: 16px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
 
   &:hover {
     transform: translateY(-8px);
@@ -25,17 +26,6 @@
   }
 }
 
-/* Image styling */
-.sat-img {
-  height: 200px;
-  object-fit: cover;
-  transition: transform 0.4s ease;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
 /* Button */
 .btn-primary {
   background: linear-gradient(90deg, #0d6efd, #3b82f6);
@@ -52,15 +42,5 @@
 
   &:active {
     transform: scale(0.95);
-  }
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .sat-img {
-    height: 160px;
-  }
-  .card-title {
-    font-size: 1.1rem;
   }
 }

@@ -1,0 +1,49 @@
+<section class="css-section py-5" data-aos="fade-up">
+  <div class="container">
+    <!-- Header -->
+    <h2 class="text-center mb-4 fw-bold text-gradient" data-aos="fade-down">
+      CSS Available Quizzes
+    </h2>
+    <p class="text-center text-muted mb-5" data-aos="fade-down" data-aos-delay="200">
+      Manage and prepare for CSS exams with subject-wise quizzes.
+    </p>
+
+    <!-- Cards -->
+    <div class="row g-4">
+      <div
+        class="col-lg-4 col-md-6"
+        *ngFor="let exam of exams; let i = index"
+        data-aos="zoom-in"
+        [attr.data-aos-delay]="i * 150"
+      >
+        <div class="card css-card h-100 shadow-sm border-0 rounded-4">
+          <div class="card-body text-center p-4 d-flex flex-column justify-content-between">
+            
+            <!-- Icon -->
+            <i [class]="exam.icon + ' display-5 mb-3 text-gradient'"></i>
+
+            <!-- Title & Description -->
+            <h5 class="fw-bold">{{ exam.title }}</h5>
+            <p class="text-muted small mb-3">{{ exam.description }}</p>
+
+            <!-- Meta Info -->
+            <ul class="list-unstyled small text-secondary mb-3">
+              <li>Questions: <b>{{ exam.questions }}</b></li>
+              <li>Time: <b>{{ exam.time }}</b></li>
+              <li>Created: {{ exam.created }}</li>
+            </ul>
+
+            <!-- Manage Button -->
+            <button
+              class="btn fw-semibold rounded-pill mt-2"
+              [ngClass]="exam.btnClass"
+              (click)="navigateTo(exam.route)"
+            >
+              <i class="bi bi-gear-fill me-1"></i> Manage Quiz
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

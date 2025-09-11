@@ -1,0 +1,30 @@
+.gmat-section {
+  background: #f8fafc;
+
+  .text-gradient {
+  background: linear-gradient(45deg, #0d6efd, #6610f2);
+  background-clip: text;
+  -webkit-background-clip: text; /* Safari/Chrome */
+  color: transparent;
+  -webkit-text-fill-color: transparent; /* Safari/Chrome */
+}
+
+
+  .gmat-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn {
+      border-radius: 50px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        transform: scale(1.08);
+      }
+    }
+  }
+}

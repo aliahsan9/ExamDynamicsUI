@@ -1,0 +1,40 @@
+  .gre-section {
+  background: linear-gradient(180deg, #f9fbff, #eef3ff);
+
+  .text-gradient {
+  background: linear-gradient(45deg, #0dcaf0, #0d6efd);
+  background-clip: text;              // Standard
+  -webkit-background-clip: text;      // For WebKit browsers (Chrome, Safari, Edge)
+  color: transparent;                 // Fallback
+  -webkit-text-fill-color: transparent;
+}
+
+  .exam-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 1.5rem;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-body {
+      padding: 2rem 1.5rem;
+    }
+
+    .btn {
+      font-weight: 600;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  // Custom psychology color
+  .text-purple {
+    color: #6f42c1;
+  }
+}

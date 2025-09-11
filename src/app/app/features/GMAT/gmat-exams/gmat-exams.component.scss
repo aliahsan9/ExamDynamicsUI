@@ -1,0 +1,47 @@
+.gmat-section {
+  background-color: #f4f6ff;
+
+  h2 {
+    color: #1f2d3d;
+    margin-bottom: 3rem;
+  }
+
+  .exam-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .card-body {
+      padding: 2rem 1rem;
+
+      .card-title {
+        font-size: 1.2rem;
+      }
+
+      ul li {
+        font-size: 0.875rem;
+      }
+    }
+
+    .btn {
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  .text-gradient {
+    background: linear-gradient(45deg, #0dcaf0, #0d6efd);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+  }
+}

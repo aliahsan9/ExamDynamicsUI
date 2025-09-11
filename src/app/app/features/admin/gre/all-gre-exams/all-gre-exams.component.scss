@@ -1,0 +1,42 @@
+  .gre-section {
+  background: #f9fbff;
+
+  .text-gradient {
+    background: linear-gradient(45deg, #0dcaf0, #0d6efd);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .gre-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 18px;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    h5 {
+      color: #1f2d3d;
+    }
+
+    .btn {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gre-card {
+    .card-body {
+      padding: 1.2rem;
+    }
+  }
+}

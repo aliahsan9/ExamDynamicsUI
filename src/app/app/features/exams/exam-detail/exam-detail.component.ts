@@ -37,28 +37,28 @@ export class ExamDetailComponent implements OnInit {
     { 
       title: 'GRE', 
       desc: 'Graduate students preparing for Masters/PhD', 
-      link: '/gre', 
+      link: '/gre-exams', 
       image: 'assets/images/gre.jpg',
       tip: 'Focus on verbal & quantitative sections equally!' 
     },
     { 
       title: 'GMAT', 
       desc: 'MBA aspirants preparing for global business schools', 
-      link: '/gmat', 
+      link: '/gmat-exams', 
       image: 'assets/images/gmat.jpg',
       tip: 'Time management is the key for GMAT success!' 
     },
     { 
       title: 'IELTS', 
       desc: 'Students & immigrants aiming for UK, Canada, Australia', 
-      link: '/ielts', 
+      link: '/ielts-exams', 
       image: 'assets/images/ilets.jpg',
       tip: 'Practice listening & speaking daily!' 
     },
     { 
       title: 'CSS', 
       desc: 'Pakistan civil service aspirants', 
-      link: '/css', 
+      link: '/css-exams', 
       image: 'assets/images/css.jpg',
       tip: 'Read current affairs and practice essays!' 
     }
