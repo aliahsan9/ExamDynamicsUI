@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg" data-aos="fade-down" data-aos-duration="1000">
   <div class="container-fluid">
     <!-- Logo -->
-    <a class="navbar-brand" routerLink="/">
+    <a class="navbar-brand" routerLink="/" (click)="closeSidebar()">
       <img src="assets/images/logo1.png" alt="Logo" class="logo" />
     </a>
 
     <!-- Hamburger Toggle -->
-    <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+    <button class="navbar-toggler" type="button" (click)="toggleSidebar()" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
