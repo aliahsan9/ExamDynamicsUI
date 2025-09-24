@@ -22,21 +22,13 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Initialize AOS animations
-    AOS.init({
-      duration: 800,
-      once: true
-    });
+    AOS.init({ duration: 800, once: true });
 
-    // Subscribe to auth status
     this.authService.authStatus$.subscribe((status) => {
       this.isLoggedIn = status;
     });
 
-    // Auto-close sidebar when route changes
-    this.router.events.subscribe(() => {
-      this.closeSidebar();
-    });
+    this.router.events.subscribe(() => this.closeSidebar());
   }
 
   toggleSidebar(): void {
@@ -49,7 +41,7 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.authService.logout();
-    this.closeSidebar(); // close sidebar on logout
-    this.router.navigate(['/']); // redirect to home after logout
+    this.closeSidebar();
+    this.router.navigate(['/']);
   }
 }
