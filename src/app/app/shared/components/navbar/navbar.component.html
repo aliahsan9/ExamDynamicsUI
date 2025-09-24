@@ -44,13 +44,15 @@
 
       <!-- If NOT logged in → show SignUp & Login -->
       <ng-container *ngIf="!isLoggedIn; else profileMenu">
-        <a routerLink="/register" (click)="closeSidebar()" class="btn btn-primary me-2" data-aos="fade-left" data-aos-delay="900">SignUp</a>
-        <a routerLink="/login" (click)="closeSidebar()" class="btn btn-primary" data-aos="fade-left" data-aos-delay="1000">Login</a>
+        <div class="auth-buttons">
+          <a routerLink="/register" (click)="closeSidebar()" class="btn btn-primary me-2" data-aos="fade-left" data-aos-delay="900">SignUp</a>
+          <a routerLink="/login" (click)="closeSidebar()" class="btn btn-primary" data-aos="fade-left" data-aos-delay="1000">Login</a>
+        </div>
       </ng-container>
 
       <!-- If logged in → show Profile Menu -->
       <ng-template #profileMenu>
-        <div class="dropdown" data-aos="fade-left" data-aos-delay="900">
+        <div class="dropdown profile-menu" data-aos="fade-left" data-aos-delay="900">
           <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown"
              data-bs-toggle="dropdown" aria-expanded="false">
             <i class="bi bi-person-circle fs-4"></i>
