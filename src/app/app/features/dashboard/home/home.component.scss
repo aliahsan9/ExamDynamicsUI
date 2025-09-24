@@ -9,7 +9,7 @@
 
     span {
       color: #1e3a8a;
-    } 
+    }
   }
 
   .hero-subtitle {
@@ -37,103 +37,62 @@
     }
   }
 
- .hero-rating {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap; // allow stars + text to wrap on smaller screens
-  gap: 0.6rem;
-  font-family: 'Montserrat', sans-serif;
-
-  .stars {
+  // ⭐ Rating Section
+  .hero-rating {
     display: flex;
-    gap: 0.2rem;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    font-family: 'Montserrat', sans-serif;
 
-    .star {
-      font-size: clamp(1rem, 2vw, 1.6rem); // scales with screen size
-      color: #ccc; // default gray
-      position: relative;
-      display: inline-block;
-      transition: transform 0.3s ease, color 0.3s ease;
+    .stars {
+      display: flex;
+      gap: 0.2rem;
 
-      &.filled {
-        color: #ffb400; // gold for filled stars
-      }
+      .star {
+        font-size: clamp(1rem, 2vw, 1.6rem);
+        color: #ccc;
+        position: relative;
+        display: inline-block;
+        transition: transform 0.3s ease, color 0.3s ease;
 
-      &:hover {
-        transform: scale(1.2);
-        color: #ffca28; // brighter gold on hover
+        &.filled {
+          color: #ffb400;
+        }
+
+        &:hover {
+          transform: scale(1.2);
+          color: #ffca28;
+        }
       }
     }
-  }
-
-  .rating-text {
-    font-size: clamp(0.8rem, 2vw, 0.95rem); // flexible size
-    color: #0d1b2a;
-    font-weight: 500;
-  }
-}
-
-.hero-rating-average {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  .a-icon {
-    color: #ffb400;
-    font-size: clamp(1rem, 2vw, 1.2rem); // responsive star
-    margin-right: 0.4rem;
-  }
-
-  .a-icon-alt {
-    font-size: clamp(0.8rem, 2vw, 0.95rem); // responsive text
-    color: #0d1b2a;
-    font-weight: 500;
-  }
-}
-// Extra fine-tuning with media queries
-@media (max-width: 768px) {
-  .hero-rating {
-    justify-content: center; // center align on tablets
-    gap: 0.4rem;
 
     .rating-text {
-      font-size: 0.85rem;
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
+      color: #0d1b2a;
+      font-weight: 500;
     }
   }
 
   .hero-rating-average {
-    justify-content: center;
-  }
-
-  // ✅ Hero button on tablets
-  .hero-btn {
-    font-size: 0.9rem;
-    padding: 0.45rem 1.2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero-rating {
-    flex-direction: column; // stack stars + text on small screens
+    display: flex;
     align-items: center;
-    gap: 0.3rem;
+    flex-wrap: wrap;
 
-    .stars {
-      justify-content: center;
+    .a-icon {
+      color: #ffb400;
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      margin-right: 0.4rem;
     }
 
-    .rating-text {
-      font-size: 0.8rem;
+    .a-icon-alt {
+      font-size: clamp(0.8rem, 2vw, 0.95rem);
+      color: #0d1b2a;
+      font-weight: 500;
     }
   }
 
-  // ✅ Hero button on mobile
-  .hero-btn {
-    font-size: 1rem;
-    padding: 0.4rem 2rem;
-  }
-}
-
+  // ⭐ Stats Section
   .hero-stats {
     gap: 1rem;
 
@@ -170,7 +129,7 @@
     box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   }
 
-  // ✅ Responsive adjustments
+  // 📱 Responsive adjustments
   @media (max-width: 992px) {
     .hero-title {
       font-size: 2.3rem;
@@ -191,9 +150,127 @@
     }
     .hero-btn {
       width: 100%;
+      font-size: 0.9rem;
+      padding: 0.45rem 1.2rem;
     }
     .hero-stats {
       justify-content: center;
     }
+
+    .hero-rating {
+      justify-content: center;
+      gap: 0.4rem;
+
+      .rating-text {
+        font-size: 0.85rem;
+      }
+    }
+
+    .hero-rating-average {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-rating {
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+
+      .stars {
+        justify-content: center;
+      }
+
+      .rating-text {
+        font-size: 0.8rem;
+      }
+    }
+
+    .hero-btn {
+      font-size: 1rem;
+      padding: 0.4rem 2rem;
+    }
+  }
+}
+
+/* ========================
+   ✅ Sidebar Styling
+   ======================== */
+.sidebar {
+  background: #06174e;
+  width: 260px;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  position: fixed;
+  left: 0;
+  top: 0;
+  transition: all 0.3s ease-in-out;
+  z-index: 1050;
+
+  .nav-links {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin: 1rem 0;
+
+      a {
+        color: #fff;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #1e90ff;
+        }
+      }
+    }
+  }
+
+  .auth-buttons {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .btn {
+      border-radius: 50px;
+      font-weight: 600;
+    }
+
+    .btn-login {
+      background: #1e3a8a;
+      color: #fff;
+
+      &:hover {
+        background: #172554;
+      }
+    }
+
+    .btn-signup {
+      background: #2563eb;
+      color: #fff;
+
+      &:hover {
+        background: #1e40af;
+      }
+    }
+  }
+}
+
+// 📱 Hide Login & Signup buttons on small screens
+@media (max-width: 768px) {
+  .sidebar {
+    width: 220px;
+  }
+
+  .sidebar .auth-buttons {
+    display: none; // ✅ hides login/signup on Android/small screens
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 200px;
   }
 }
