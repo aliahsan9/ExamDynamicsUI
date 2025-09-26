@@ -1,17 +1,17 @@
 <div class="chat-container container py-5" aos-init aos-animate data-aos="fade-up">
-  <div class="chat-card card shadow-lg mx-auto">
+  <div class="chat-card card shadow-lg mx-auto" data-aos="zoom-in" data-aos-duration="1000">
     <h2 class="text-center mb-4">🤖 AI Chatbot</h2>
 
     <div class="chat-history mb-3" #chatHistory>
       <div *ngFor="let msg of messages" [ngClass]="msg.type">
-        <div class="message p-2 rounded">
+        <div class="message p-3 rounded">
           {{ msg.text }}
         </div>
       </div>
 
       <!-- Typing indicator -->
       <div *ngIf="isTyping" class="ai typing">
-        <div class="message p-2 rounded">
+        <div class="message p-3 rounded">
           AI is typing <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         </div>
       </div>
@@ -22,7 +22,7 @@
         type="text" 
         [(ngModel)]="question" 
         class="form-control form-control-lg" 
-        placeholder="Ask any question..." 
+        placeholder="Ask anything..." 
         (keydown.enter)="sendQuestion()"
       />
       <button class="btn btn-primary btn-lg" (click)="sendQuestion()">Ask</button>

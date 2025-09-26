@@ -1,15 +1,18 @@
+/* ========================
+   🌟 Hero Section
+   ======================== */
 .hero-section {
-  background: #e6f2fb; // keep the same bg
+  background: #e6f2fb;
   padding: 4rem 0;
+  overflow-x: hidden; // ✅ prevents horizontal scroll
+  width: 100%;
+  box-sizing: border-box;
 
   .hero-title {
     font-size: 2.8rem;
     font-weight: 800;
     color: #06174e;
-
-    span {
-      color: #1e3a8a;
-    }
+    span { color: #1e3a8a; }
   }
 
   .hero-subtitle {
@@ -29,6 +32,8 @@
     font-size: 1.1rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     transition: all 0.3s ease;
+    display: inline-block;
+    max-width: 100%;
 
     &:hover {
       background: linear-gradient(45deg, #1e40af, #172554);
@@ -37,13 +42,13 @@
     }
   }
 
-  // ⭐ Rating Section
   .hero-rating {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: 0.6rem;
     font-family: 'Montserrat', sans-serif;
+    max-width: 100%;
 
     .stars {
       display: flex;
@@ -52,18 +57,9 @@
       .star {
         font-size: clamp(1rem, 2vw, 1.6rem);
         color: #ccc;
-        position: relative;
-        display: inline-block;
         transition: transform 0.3s ease, color 0.3s ease;
-
-        &.filled {
-          color: #ffb400;
-        }
-
-        &:hover {
-          transform: scale(1.2);
-          color: #ffca28;
-        }
+        &.filled { color: #ffb400; }
+        &:hover { transform: scale(1.2); color: #ffca28; }
       }
     }
 
@@ -74,27 +70,12 @@
     }
   }
 
-  .hero-rating-average {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-
-    .a-icon {
-      color: #ffb400;
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      margin-right: 0.4rem;
-    }
-
-    .a-icon-alt {
-      font-size: clamp(0.8rem, 2vw, 0.95rem);
-      color: #0d1b2a;
-      font-weight: 500;
-    }
-  }
-
-  // ⭐ Stats Section
   .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
+    justify-content: center;
+    width: 100%;
 
     .stat-card {
       background: #fff;
@@ -104,173 +85,55 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       min-width: 150px;
       transition: all 0.3s ease-in-out;
+      flex: 1 1 150px;
 
       &:hover {
         transform: translateY(-6px);
         box-shadow: 0 8px 20px rgba(0,0,0,0.15);
       }
 
-      h5 {
-        font-weight: 700;
-        color: #1e3a8a;
-      }
-
-      p {
-        margin: 0;
-        font-size: 0.9rem;
-        color: #555;
-      }
+      h5 { font-weight: 700; color: #1e3a8a; }
+      p { margin: 0; font-size: 0.9rem; color: #555; }
     }
   }
 
   .hero-img {
-    max-width: 95%;
+    max-width: 100%;
+    height: auto;
     border-radius: 16px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    display: block;
+    margin: 0 auto;
   }
 
-  // 📱 Responsive adjustments
+  /* 📱 Responsive */
   @media (max-width: 992px) {
-    .hero-title {
-      font-size: 2.3rem;
-    }
-    .hero-subtitle {
-      font-size: 1rem;
-    }
+    .hero-title { font-size: 2.3rem; }
+    .hero-subtitle { font-size: 1rem; }
   }
 
   @media (max-width: 768px) {
     text-align: center;
-
-    .hero-title {
-      font-size: 2rem;
-    }
-    .hero-subtitle {
-      font-size: 0.95rem;
-    }
-    .hero-btn {
-      width: 100%;
-      font-size: 0.9rem;
-      padding: 0.45rem 1.2rem;
-    }
-    .hero-stats {
-      justify-content: center;
-    }
-
-    .hero-rating {
-      justify-content: center;
-      gap: 0.4rem;
-
-      .rating-text {
-        font-size: 0.85rem;
-      }
-    }
-
-    .hero-rating-average {
-      justify-content: center;
-    }
+    .hero-title { font-size: 2rem; }
+    .hero-subtitle { font-size: 0.95rem; }
+    .hero-btn { width: 100%; font-size: 0.9rem; padding: 0.45rem 1.2rem; }
+    .hero-stats { justify-content: center; }
+    .hero-rating { justify-content: center; gap: 0.4rem; }
+    .hero-rating-average { justify-content: center; }
   }
 
   @media (max-width: 480px) {
-    .hero-rating {
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-
-      .stars {
-        justify-content: center;
-      }
-
-      .rating-text {
-        font-size: 0.8rem;
-      }
-    }
-
-    .hero-btn {
-      font-size: 1rem;
-      padding: 0.4rem 2rem;
-    }
+    .hero-rating { flex-direction: column; gap: 0.3rem; }
+    .stars { justify-content: center; }
+    .rating-text { font-size: 0.8rem; }
+    .hero-btn { font-size: 1rem; padding: 0.4rem 2rem; }
   }
 }
 
 /* ========================
-   ✅ Sidebar Styling
+   ✅ Global Fix
    ======================== */
-.sidebar {
-  background: #06174e;
-  width: 260px;
-  min-height: 100vh;
-  padding: 2rem 1rem;
-  position: fixed;
-  left: 0;
-  top: 0;
-  transition: all 0.3s ease-in-out;
-  z-index: 1050;
-
-  .nav-links {
-    list-style: none;
-    padding: 0;
-
-    li {
-      margin: 1rem 0;
-
-      a {
-        color: #fff;
-        font-weight: 500;
-        text-decoration: none;
-        transition: color 0.3s ease;
-
-        &:hover {
-          color: #1e90ff;
-        }
-      }
-    }
-  }
-
-  .auth-buttons {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    .btn {
-      border-radius: 50px;
-      font-weight: 600;
-    }
-
-    .btn-login {
-      background: #1e3a8a;
-      color: #fff;
-
-      &:hover {
-        background: #172554;
-      }
-    }
-
-    .btn-signup {
-      background: #2563eb;
-      color: #fff;
-
-      &:hover {
-        background: #1e40af;
-      }
-    }
-  }
-}
-
-// 📱 Hide Login & Signup buttons on small screens
-@media (max-width: 768px) {
-  .sidebar {
-    width: 220px;
-  }
-
-  .sidebar .auth-buttons {
-    display: none; // ✅ hides login/signup on Android/small screens
-  }
-}
-
-@media (max-width: 480px) {
-  .sidebar {
-    width: 200px;
-  }
+body, html {
+  overflow-x: hidden;
+  width: 100%;
 }
