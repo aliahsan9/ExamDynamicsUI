@@ -71,6 +71,7 @@ import { ManageCssPoliticalScienceComponent } from './app/features/admin/css/man
 import { ManageCssIslamicStudiesComponent } from './app/features/admin/css/manage-css-islamic-studies/manage-css-islamic-studies.component';
 import { ProgressComponent } from './app/features/dashboard/progress/progress.component';
 import { ScholarshipsComponent } from './app/features/dashboard/scholarships/scholarships.component';
+import { ChatComponent } from './app/features/chat/chat.component';
 
 export const routes: Routes = [
   // ✅ Public routes
@@ -78,6 +79,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },
+  { path: 'chat', component: ChatComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'profile-setting', component: ProfileSettingComponent },
   { path: 'contact', component: ContactComponent },
