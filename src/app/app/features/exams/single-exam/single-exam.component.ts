@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { QuestionDto } from '../../../../models/question.moel';
@@ -10,7 +10,7 @@ import { OptionService } from '../../../core/services/option.service';
 @Component({
   selector: 'app-single-exam',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './single-exam.component.html',
   styleUrls: ['./single-exam.component.scss']
 })

@@ -1,15 +1,5 @@
 <div class="container my-5" *ngIf="!loading && blog">
 
-  <!-- Rotating Quotes Hero -->
-  <div class="motivation-box text-center mb-5 p-4 shadow-lg rounded" data-aos="fade-down">
-    <h3 class="fw-bold text-gradient">🌟 Stay Inspired & Keep Learning!</h3>
-    <p class="lead fst-italic rotating-quotes">
-      <span *ngFor="let quote of quotes; let i = index" [style.display]="i === 0 ? 'inline' : 'none'">
-        "{{ quote }}"
-      </span>
-    </p>
-  </div>
-
   <!-- Blog Card -->
   <div class="card shadow-lg border-0 blog-single" data-aos="fade-up" data-aos-delay="200">
     <img *ngIf="blog.thumbnailUrl" [src]="blog.thumbnailUrl" class="card-img-top blog-thumbnail" alt="Blog Thumbnail" />
@@ -20,77 +10,41 @@
         <i class="bi bi-calendar3"></i>
         Published: {{ blog.publishedAt | date:'longDate' }}
       </p>
-      <p class="blog-content">{{ blog.content }}</p>
 
-      <!-- About Section -->
-      <div class="about-box mt-5 p-4 rounded shadow-sm" data-aos="fade-right">
-        <h4 class="fw-bold mb-3"><i class="bi bi-globe2"></i> About ExamDynamics</h4>
-        <p>
-          ExamDynamics is designed to help students prepare for MDCAT, ECAT, SAT, IELTS, GRE and more. 
-          Our mission is simple: <b>empower students with the tools they need to succeed</b>.
-        </p>
-        <ul class="list-unstyled mt-3">
-          <li><i class="bi bi-check-circle-fill text-primary"></i> Free practice questions for every exam.</li>
-          <li><i class="bi bi-check-circle-fill text-primary"></i> Daily motivational resources.</li>
-          <li><i class="bi bi-check-circle-fill text-primary"></i> Updated study material for smarter learning.</li>
-        </ul>
+      <!-- ✅ Blog Content -->
+      <div class="blog-content" [innerHTML]="blog.content"></div>
+    </div>
+  </div>
+
+  <!-- ✨ Motivational Quote -->
+  <div class="quote-box text-center mt-5 p-4 rounded shadow-sm" data-aos="fade-up" data-aos-delay="300">
+    <blockquote class="blockquote">
+      <p class="mb-3 fst-italic">"Success is not final, failure is not fatal: it is the courage to continue that counts."</p>
+      <footer class="blockquote-footer">Winston Churchill</footer>
+    </blockquote>
+  </div>
+
+  <!-- 🚀 Benefits Section -->
+  <div class="row text-center my-5 g-4">
+    <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+      <div class="benefit-card p-4 shadow-sm h-100 rounded">
+        <i class="bi bi-lightbulb display-4 text-primary mb-3"></i>
+        <h5 class="fw-bold">Learn Smarter</h5>
+        <p class="text-muted">Access curated resources designed to simplify complex topics.</p>
       </div>
-
-      <!-- Study Hacks -->
-      <div class="extra-content mt-5 p-4 rounded shadow-sm" data-aos="fade-left">
-        <h4 class="fw-bold mb-3"><i class="bi bi-lightbulb"></i> Study Hacks for Students</h4>
-        <ul class="list-unstyled">
-          <li><i class="bi bi-star-fill text-warning"></i> Use Pomodoro technique (25 mins study, 5 mins break).</li>
-          <li><i class="bi bi-star-fill text-warning"></i> Write short notes & revise daily.</li>
-          <li><i class="bi bi-star-fill text-warning"></i> Focus on weak topics first.</li>
-          <li><i class="bi bi-star-fill text-warning"></i> Teach others – it’s the best way to learn.</li>
-        </ul>
+    </div>
+    <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
+      <div class="benefit-card p-4 shadow-sm h-100 rounded">
+        <i class="bi bi-graph-up display-4 text-success mb-3"></i>
+        <h5 class="fw-bold">Track Progress</h5>
+        <p class="text-muted">Stay motivated with insights and track your daily improvements.</p>
       </div>
-
-      <!-- Motivation Timeline -->
-      <div class="timeline mt-5" data-aos="fade-up">
-        <h4 class="fw-bold mb-4 text-center"><i class="bi bi-flag"></i> Journey to Success</h4>
-        <ul class="timeline-list">
-          <li *ngFor="let step of timeline; let i = index">
-            <b>Step {{ i + 1 }}:</b> {{ step }}
-          </li>
-        </ul>
-      </div>
-
-      <!-- Static Motivational Image -->
-      <div class="static-img text-center mt-5" data-aos="zoom-in">
-        <img src="assets/images/about3.jpg" alt="Stay Inspired" class="img-fluid rounded shadow-lg" />
-        <p class="text-muted mt-2 fst-italic">
-          "Every day is a chance to get better. Stay consistent, stay focused."
-        </p>
-      </div>
-
-      <!-- Testimonials -->
-      <div class="testimonials mt-5 p-4 rounded shadow-sm" data-aos="fade-up">
-        <h4 class="fw-bold mb-4 text-center"><i class="bi bi-chat-quote"></i> What Students Say</h4>
-        <div class="row g-4">
-          <div class="col-md-4" *ngFor="let t of testimonials">
-            <div class="testimonial-card p-3 shadow-sm rounded text-center">
-              <p class="fst-italic">"{{ t.feedback }}"</p>
-              <h6 class="fw-bold text-primary mt-2">— {{ t.name }} <small class="text-muted">({{ t.role }})</small></h6>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Daily Challenge -->
-      <div class="daily-challenge mt-5 p-4 rounded shadow-sm text-center" data-aos="flip-left">
-        <h4 class="fw-bold"><i class="bi bi-fire"></i> Daily Challenge</h4>
-        <p class="mt-2"> {{ dailyChallenge }}</p>
-      </div>
-
-      <!-- FAQ -->
-      <div class="faq-section mt-5 p-4 rounded shadow-sm" data-aos="fade-up">
-        <h4 class="fw-bold mb-3"><i class="bi bi-question-circle"></i> FAQs</h4>
-        <div *ngFor="let f of faqs" class="mb-3">
-          <p><b>Q:</b> {{ f.question }}</p>
-          <p><b>A:</b> {{ f.answer }}</p>
-        </div>
+    </div>
+    <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
+      <div class="benefit-card p-4 shadow-sm h-100 rounded">
+        <i class="bi bi-people-fill display-4 text-danger mb-3"></i>
+        <h5 class="fw-bold">Join the Community</h5>
+        <p class="text-muted">Connect with thousands of learners sharing the same journey.</p>
       </div>
     </div>
   </div>
@@ -98,25 +52,9 @@
   <!-- Call to Action -->
   <div class="cta-box text-center mt-5 p-5 shadow-lg rounded" data-aos="zoom-in">
     <h3 class="fw-bold text-gradient">🎯 Start Your Success Journey Today!</h3>
-    <p class="lead mb-3">Join thousands of students preparing with ExamDynamics every day.</p>
+    <p class="lead mb-3">Join thousands of students preparing with <span class="fw-bold">ExamDynamics</span> every day.</p>
     <a routerLink="/exams" class="btn btn-primary btn-lg rounded-pill shadow">
       Explore Exams <i class="bi bi-arrow-right-circle"></i>
     </a>
-  </div>  
-
-  <!-- Footer Motivation -->
-  <div class="motivation-box text-center mt-5 p-4 shadow-sm rounded" data-aos="fade-up" data-aos-delay="300">
-    <h4 class="fw-semibold"><i class="bi bi-rocket-takeoff"></i> Keep Going!</h4>
-    <p class="fst-italic">"Your limitation—it’s only your imagination."</p>
   </div>
 </div>
-
-<!-- Sticky Widget -->
-<div class="sticky-widget shadow rounded p-3">
-  <h6 class="fw-bold"><i class="bi bi-lightning"></i> Quick Tip</h6>
-  <p class="small fst-italic">"Read 15 minutes daily — knowledge compounds over time."</p>
-</div>
-
-<button class="scroll-top" id="scrollTopBtn">
-  <i class="bi bi-arrow-up"></i>
-</button>

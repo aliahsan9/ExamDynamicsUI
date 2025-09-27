@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { BlogService, BlogPostDto, CreateBlogPostDto, UpdateBlogPostDto } from '../../../core/services/blog.service';
 import { RouterModule } from '@angular/router';
+import { QuillModule } from 'ngx-quill';
+import { BlogService, BlogPostDto, CreateBlogPostDto, UpdateBlogPostDto } from '../../../core/services/blog.service';
 
 @Component({
   selector: 'app-manage-blogs',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, QuillModule],
   templateUrl: './manage-blogs.component.html',
   styleUrls: ['./manage-blogs.component.scss']
 })
@@ -17,9 +18,22 @@ export class ManageBlogsComponent implements OnInit {
   editingBlogId: number | null = null;
   showForm: boolean = false;
 
-  // ✅ Instead of storing File, store base64 string for thumbnailUrl
   thumbnailPreview: string | ArrayBuffer | null = null;
   thumbnailUrl: string = '';
+
+  // Quill toolbar config with image option
+  quillModules = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ header: [1, 2, 3, false] }],
+      [{ color: [] }, { background: [] }],
+      [{ align: [] }],
+      ['blockquote', 'code-block'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+      ['link', 'image'],
+      ['clean']
+    ]
+  };
 
   constructor(private blogService: BlogService, private fb: FormBuilder) {}
 
@@ -28,7 +42,6 @@ export class ManageBlogsComponent implements OnInit {
     this.initForm();
   }
 
-  // ================== Initialize form ==================
   initForm(): void {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
@@ -36,7 +49,6 @@ export class ManageBlogsComponent implements OnInit {
     });
   }
 
-  // ================== Fetch all blogs ==================
   loadBlogs(): void {
     this.blogService.getAll().subscribe({
       next: data => (this.blogs = data),
@@ -44,7 +56,6 @@ export class ManageBlogsComponent implements OnInit {
     });
   }
 
-  // ================== Open form for create or edit ==================
   openForm(blog?: BlogPostDto): void {
     if (blog) {
       this.editingBlogId = blog.blogPostId;
@@ -63,7 +74,6 @@ export class ManageBlogsComponent implements OnInit {
     this.showForm = true;
   }
 
-  // ================== Close form ==================
   closeForm(): void {
     this.showForm = false;
     this.blogForm.reset();
@@ -71,23 +81,19 @@ export class ManageBlogsComponent implements OnInit {
     this.thumbnailUrl = '';
   }
 
-  // ================== Handle file selection ==================
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
-
-      // Convert to base64
       const reader = new FileReader();
       reader.onload = () => {
         this.thumbnailPreview = reader.result;
-        this.thumbnailUrl = reader.result as string; // ✅ assign base64 as string
+        this.thumbnailUrl = reader.result as string;
       };
       reader.readAsDataURL(file);
     }
   }
 
-  // ================== Save blog (create or update) ==================
   saveBlog(): void {
     if (this.blogForm.invalid) return;
 
@@ -97,7 +103,7 @@ export class ManageBlogsComponent implements OnInit {
       const updateDto: UpdateBlogPostDto = {
         title,
         content,
-        thumbnailUrl: this.thumbnailUrl // ✅ send string
+        thumbnailUrl: this.thumbnailUrl
       };
       this.blogService.update(this.editingBlogId, updateDto).subscribe({
         next: () => {
@@ -110,7 +116,7 @@ export class ManageBlogsComponent implements OnInit {
       const createDto: CreateBlogPostDto = {
         title,
         content,
-        thumbnailUrl: this.thumbnailUrl // ✅ send string
+        thumbnailUrl: this.thumbnailUrl
       };
       this.blogService.create(createDto).subscribe({
         next: () => {
@@ -122,7 +128,6 @@ export class ManageBlogsComponent implements OnInit {
     }
   }
 
-  // ================== Delete blog ==================
   deleteBlog(id: number): void {
     if (confirm('Are you sure you want to delete this blog?')) {
       this.blogService.delete(id).subscribe({

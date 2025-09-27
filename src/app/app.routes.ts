@@ -8,7 +8,6 @@ import { adminGuard } from './app/core/guards/admin.guard';
 import { AboutComponent } from './app/features/dashboard/about/about.component';
 import { ManageExamsComponent } from './app/features/admin/manage-exams/manage-exams.component';
 import { ManageBlogsComponent } from './app/features/admin/manage-blogs/manage-blogs.component';
-import { SingleBlogComponent } from './app/features/blogs/single-blog/single-blog.component';
 import { ExamDetailComponent } from './app/features/exams/exam-detail/exam-detail.component';
 import { ManageQuestionsComponent } from './app/features/admin/manage-questions/manage-questions.component';
 import { ManageChemistryComponent } from './app/features/admin/manage-chemistry/manage-chemistry.component';
@@ -28,13 +27,6 @@ import { PrivacyPolicyComponent } from './app/features/dashboard/privacy-policy/
 import { FaqComponent } from './app/features/dashboard/faq/faq.component';
 import { SubscriptionListComponent } from './app/features/subscriptions/subscription-list/subscription-list.component';
 import { SingleExamComponent } from './app/features/exams/single-exam/single-exam.component';
-import { MdcatComponent } from './app/features/blogs/mdcat/mdcat.component';
-import { EcatComponent } from './app/features/blogs/ecat/ecat.component';
-import { SatComponent } from './app/features/blogs/sat/sat.component';
-import { IletsComponent } from './app/features/blogs/ilets/ilets.component';
-import { GreComponent } from './app/features/blogs/gre/gre.component';
-import { GmatComponent } from './app/features/blogs/gmat/gmat.component';
-import { CssComponent } from './app/features/blogs/css/css.component';
 import { AllBlogsComponent } from './app/features/blogs/all-blogs/all-blogs.component';
 import { EcatQuizComponent } from './app/features/Quiz/ecat-quiz/ecat-quiz.component';
 import { MdcatQuizComponent } from './app/features/Quiz/mdcat-quiz/mdcat-quiz.component';
@@ -72,6 +64,8 @@ import { ManageCssIslamicStudiesComponent } from './app/features/admin/css/manag
 import { ProgressComponent } from './app/features/dashboard/progress/progress.component';
 import { ScholarshipsComponent } from './app/features/dashboard/scholarships/scholarships.component';
 import { ChatComponent } from './app/features/chat/chat.component';
+import { SingleBlogComponent } from './app/features/blogs/single-blog/single-blog.component';
+import { LoaderComponent } from './app/shared/components/loader/loader.component';
 
 export const routes: Routes = [
   // ✅ Public routes
@@ -80,6 +74,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'about', component: AboutComponent },
   { path: 'chat', component: ChatComponent },
+  { path: 'loader', component: LoaderComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'profile-setting', component: ProfileSettingComponent },
   { path: 'contact', component: ContactComponent },
@@ -90,13 +85,6 @@ export const routes: Routes = [
   { path: 'faq', component: FaqComponent },
   { path: 'blogs', component: AllBlogsComponent },
   { path: 'notes', component: NotesComponent },
-  { path: 'mdcat-blog', component: MdcatComponent },
-  { path: 'ecat-blog', component: EcatComponent },
-  { path: 'sat-blog', component: SatComponent },
-  { path: 'ilets-blog', component: IletsComponent },
-  { path: 'gre-blog', component: GreComponent },
-  { path: 'gmat-blog', component: GmatComponent },
-  { path: 'css-blog', component: CssComponent },
     { path: 'blog/:id', component: SingleBlogComponent },
     { path: 'exams', component: ExamDetailComponent },
     { path: 'exam/:id', component: SingleExamComponent },
