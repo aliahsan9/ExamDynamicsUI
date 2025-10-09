@@ -56,13 +56,6 @@ export class AllBlogsComponent {
       image: 'assets/images/students.jpg',
       link: '/blog/6',
     }, 
-    {
-      title: 'Master the CSS Exam',
-      date: 'Sep 1, 2025',
-      excerpt: 'Guidelines and study hacks for cracking CSS...',
-      image: 'assets/images/about3.jpg',
-      link: '/blog/7',
-    },
   ];
 
   // ✅ Filter blogs dynamically based on search
