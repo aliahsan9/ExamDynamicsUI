@@ -22,7 +22,7 @@ export class ManageCssIslamicStudiesComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ CHEMISTRY examId
-  readonly CHEMISTRY_EXAM_ID = 35;
+  readonly CHEMISTRY_EXAM_ID = 10;
 
   constructor(
     private fb: FormBuilder,

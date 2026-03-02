@@ -28,6 +28,20 @@ export class ExamDetailComponent implements OnInit {
       tip: 'Solve math & physics questions consistently!' 
     },
     { 
+      title: 'CSS', 
+      desc: 'Pakistan civil service aspirants', 
+      link: '/css-exams', 
+      image: 'assets/images/css.jpg',
+      tip: 'Read current affairs and practice essays!' 
+    },
+     { 
+      title: 'IELTS', 
+      desc: 'Students & immigrants aiming for UK, Canada, Australia', 
+      link: '/ielts-exams', 
+      image: 'assets/images/ilets.jpg',
+      tip: 'Practice listening & speaking daily!' 
+    },
+    { 
       title: 'SAT', 
       desc: 'High school students aiming for US colleges', 
       link: '/sat-detail', 
@@ -47,20 +61,6 @@ export class ExamDetailComponent implements OnInit {
       link: '/gmat-exams', 
       image: 'assets/images/gmat.jpg',
       tip: 'Time management is the key for GMAT success!' 
-    },
-    { 
-      title: 'IELTS', 
-      desc: 'Students & immigrants aiming for UK, Canada, Australia', 
-      link: '/ielts-exams', 
-      image: 'assets/images/ilets.jpg',
-      tip: 'Practice listening & speaking daily!' 
-    },
-    { 
-      title: 'CSS', 
-      desc: 'Pakistan civil service aspirants', 
-      link: '/css-exams', 
-      image: 'assets/images/css.jpg',
-      tip: 'Read current affairs and practice essays!' 
     }
   ];
 

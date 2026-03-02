@@ -22,7 +22,7 @@ export class ManageCssEnglishPrecisAndCompositionComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ CHEMISTRY examId
-  readonly CHEMISTRY_EXAM_ID = 32;
+  readonly CHEMISTRY_EXAM_ID = 6;
 
   constructor(
     private fb: FormBuilder,

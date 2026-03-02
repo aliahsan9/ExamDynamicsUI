@@ -22,7 +22,7 @@ export class ManageCssGeneralScienceComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ CHEMISTRY examId
-  readonly CHEMISTRY_EXAM_ID = 33;
+  readonly CHEMISTRY_EXAM_ID = 7;
 
   constructor(
     private fb: FormBuilder,

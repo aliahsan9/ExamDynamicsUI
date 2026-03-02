@@ -14,14 +14,14 @@ export class AllCssExamsComponent {
 
   exams = [
     {
-      title: 'Current Affairs',
-      description: 'Stay updated with global & national developments',
-      questions: '50–100',
+      title: 'English Essay',
+      description: 'Evaluate critical writing & argument structure',
+      questions: '10–20',
       time: 'Unlimited',
       created: 'Sep 10, 2025',
-      icon: 'bi bi-globe',
-      btnClass: 'btn-outline-primary',
-      route: '/manage-css-current-affairs'
+      icon: 'bi bi-journal-text',
+      btnClass: 'btn-outline-danger',
+      route: '/manage-css-english-essay'
     },
     {
       title: 'English Precis & Composition',
@@ -34,16 +34,6 @@ export class AllCssExamsComponent {
       route: '/manage-css-english-composition'
     },
     {
-      title: 'English Essay',
-      description: 'Evaluate critical writing & argument structure',
-      questions: '10–20',
-      time: 'Unlimited',
-      created: 'Sep 10, 2025',
-      icon: 'bi bi-journal-text',
-      btnClass: 'btn-outline-danger',
-      route: '/manage-css-english-essay'
-    },
-    {
       title: 'General Science & Ability',
       description: 'Science, reasoning & quantitative ability',
       questions: '60–80',
@@ -52,6 +42,36 @@ export class AllCssExamsComponent {
       icon: 'bi bi-lightbulb',
       btnClass: 'btn-outline-warning',
       route: '/manage-css-general-science'
+    },
+    {
+      title: 'Current Affairs',
+      description: 'Stay updated with global & national developments',
+      questions: '50–100',
+      time: 'Unlimited',
+      created: 'Sep 10, 2025',
+      icon: 'bi bi-globe',
+      btnClass: 'btn-outline-primary',
+      route: '/manage-css-current-affairs'
+    },
+     {
+      title: 'Pakistan Affairs',
+      description: 'History, politics & current situation of Pakistan',
+      questions: '40–70',
+      time: 'Unlimited',
+      created: 'Sep 10, 2025',
+      icon: 'bi bi-flag',
+      btnClass: 'btn-outline-secondary',
+      route: '/manage-css-pakistan-affairs'
+    },
+    {
+      title: 'Islamic Studies',
+      description: 'Teachings of Islam & their application in modern life',
+      questions: '40–70',
+      time: 'Unlimited',
+      created: 'Sep 10, 2025',
+      icon: 'bi bi-moon-stars',
+      btnClass: 'btn-outline-primary',
+      route: '/manage-css-islamic-studies'
     },
     {
       title: 'International Relations',
@@ -63,16 +83,7 @@ export class AllCssExamsComponent {
       btnClass: 'btn-outline-info',
       route: '/manage-css-international-relations'
     },
-    {
-      title: 'Pakistan Affairs',
-      description: 'History, politics & current situation of Pakistan',
-      questions: '40–70',
-      time: 'Unlimited',
-      created: 'Sep 10, 2025',
-      icon: 'bi bi-flag',
-      btnClass: 'btn-outline-secondary',
-      route: '/manage-css-pakistan-affairs'
-    },
+   
     {
       title: 'Political Science',
       description: 'Political systems, governance & ideologies',
@@ -82,17 +93,8 @@ export class AllCssExamsComponent {
       icon: 'bi bi-bank',
       btnClass: 'btn-outline-dark',
       route: '/manage-css-political-science'
-    },
-    {
-      title: 'Islamic Studies',
-      description: 'Teachings of Islam & their application in modern life',
-      questions: '40–70',
-      time: 'Unlimited',
-      created: 'Sep 10, 2025',
-      icon: 'bi bi-moon-stars',
-      btnClass: 'btn-outline-primary',
-      route: '/manage-css-islamic-studies'
     }
+    
   ];
 
   navigateTo(route: string) {
