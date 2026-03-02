@@ -21,8 +21,6 @@ import { ManageAlgebraComponent } from './app/features/admin/sat/manage-algebra/
 import { ManageGeometryComponent } from './app/features/admin/sat/manage-geometry/manage-geometry.component';
 import { ManageReadingWritingComponent } from './app/features/admin/sat/manage-reading-writing/manage-reading-writing.component';
 import { SatDetailComponent } from './app/features/sat/sat-detail/sat-detail.component';
-import { ProfileComponent } from './app/features/dashboard/profile/profile.component';
-import { ProfileSettingComponent } from './app/features/dashboard/profile-setting/profile-setting.component';
 import { PrivacyPolicyComponent } from './app/features/dashboard/privacy-policy/privacy-policy.component';
 import { FaqComponent } from './app/features/dashboard/faq/faq.component';
 import { SubscriptionListComponent } from './app/features/subscriptions/subscription-list/subscription-list.component';
@@ -61,7 +59,6 @@ import { ManageCssInternationalRelationsComponent } from './app/features/admin/c
 import { ManageCssPakistanAffairsComponent } from './app/features/admin/css/manage-css-pakistan-affairs/manage-css-pakistan-affairs.component';
 import { ManageCssPoliticalScienceComponent } from './app/features/admin/css/manage-css-political-science/manage-css-political-science.component';
 import { ManageCssIslamicStudiesComponent } from './app/features/admin/css/manage-css-islamic-studies/manage-css-islamic-studies.component';
-import { ProgressComponent } from './app/features/dashboard/progress/progress.component';
 import { ScholarshipsComponent } from './app/features/dashboard/scholarships/scholarships.component';
 import { ChatComponent } from './app/features/chat/chat.component';
 import { SingleBlogComponent } from './app/features/blogs/single-blog/single-blog.component';
@@ -75,12 +72,9 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'loader', component: LoaderComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'profile-setting', component: ProfileSettingComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'scholarships', component: ScholarshipsComponent },
   { path: 'privacy', component: PrivacyPolicyComponent },
-  { path: 'progress', component: ProgressComponent },
   { path: 'subscribe', component: SubscriptionListComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'blogs', component: AllBlogsComponent },
