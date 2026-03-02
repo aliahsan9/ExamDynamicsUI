@@ -105,7 +105,46 @@
     display: block;
     margin: 0 auto;
   }
+/* Floating Hero Shapes */
+.hero-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  z-index: 0;
+  animation: float 8s ease-in-out infinite;
+}
 
+/* Individual Shapes */
+.shape1 { width: 180px; height: 180px; background: #4facfe; top: -50px; left: -40px; animation-delay: 0s; }
+.shape2 { width: 120px; height: 120px; background: #00f2fe; bottom: 50px; right: 60px; animation-delay: 2s; }
+.shape3 { width: 220px; height: 220px; background: #9f5fff; top: 30%; right: -70px; animation-delay: 4s; }
+.shape4 { width: 100px; height: 100px; background: #ff6b81; bottom: 150px; left: 20px; animation-delay: 1s; }
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(15deg); }
+}
+
+/* Make sure the hero section content stays above shapes */
+.hero-section .container > .row { position: relative; z-index: 2; }
+
+/* Hero Image Shadow */
+.hero-img {
+  border-radius: 16px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 2;
+}
+
+/* Responsive Floating Shapes */
+@media (max-width: 992px) {
+  .shape1, .shape2, .shape3, .shape4 { opacity: 0.1; }
+}
+
+@media (max-width: 768px) {
+  .shape1, .shape2, .shape3, .shape4 { display: none; }
+}
   /* 📱 Responsive */
   @media (max-width: 992px) {
     .hero-title { font-size: 2.3rem; }
@@ -130,9 +169,6 @@
   }
 }
 
-/* ========================
-   ✅ Global Fix
-   ======================== */
 body, html {
   overflow-x: hidden;
   width: 100%;
