@@ -22,7 +22,7 @@ export class ManagePhysicsComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ Physics examId
-  readonly PHYSICS_EXAM_ID = 4;
+  readonly PHYSICS_EXAM_ID = 3;
 
   constructor(
     private fb: FormBuilder,

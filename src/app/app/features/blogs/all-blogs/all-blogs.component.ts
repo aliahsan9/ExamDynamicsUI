@@ -25,14 +25,14 @@ export class AllBlogsComponent {
       date: 'Aug 20, 2025',
       excerpt: 'Learn how to tackle ECAT with smart strategies...',
       image: 'assets/images/ecat.jpg',
-      link: '/blog/2',
+      link: '/blog/3',
     },
     {
       title: 'SAT Preparation Strategies',
       date: 'Aug 25, 2025',
       excerpt: 'Boost your SAT score with proven methods...',
       image: 'assets/images/about1.jpg',
-      link: '/blog/3',
+      link: '/blog/4',
     },
    
     {
@@ -40,21 +40,21 @@ export class AllBlogsComponent {
       date: 'Sep 5, 2025',
       excerpt: 'Step-by-step preparation plan for IELTS...',
       image: 'assets/images/blog1.jpg',
-      link: '/blog/4',
+      link: '/blog/5',
     },
     {
       title: 'GMAT Made Easy',
       date: 'Sep 10, 2025',
       excerpt: 'Everything you need to know about GMAT prep...',
       image: 'assets/images/blog2.jpg',
-      link: '/blog/5',
+      link: '/blog/6',
     },
     {
       title: 'GRE Preparation Guide',
       date: 'Sep 15, 2025',
       excerpt: 'Crack GRE with expert strategies...',
       image: 'assets/images/students.jpg',
-      link: '/blog/6',
+      link: '/blog/7',
     }, 
   ];
 

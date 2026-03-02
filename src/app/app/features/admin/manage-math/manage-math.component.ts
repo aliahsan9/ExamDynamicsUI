@@ -22,7 +22,7 @@ export class ManageMathComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ Math examId (replace with actual ID for Math subject in your DB)
-  readonly MATH_EXAM_ID = 3;
+  readonly MATH_EXAM_ID = 4;
 
   constructor(
     private fb: FormBuilder,

@@ -22,7 +22,7 @@ export class ManageBiologyComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ Biology examId
-  readonly BIOLOGY_EXAM_ID = 5;
+  readonly BIOLOGY_EXAM_ID = 1;
 
   constructor(
     private fb: FormBuilder,
