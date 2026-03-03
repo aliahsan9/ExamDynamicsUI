@@ -22,7 +22,7 @@ export class ManageAlgebraComponent implements OnInit {
   editingQuestionId: number | null = null; 
 
   // ✅ Algebra examId (replace with actual ID for Algebra subject in your DB)
-  readonly ALGEBRA_EXAM_ID = 11;
+  readonly ALGEBRA_EXAM_ID = 19;
 
   constructor(
     private fb: FormBuilder,

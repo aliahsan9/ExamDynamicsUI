@@ -22,7 +22,7 @@ export class ManageGreChemistryComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ CHEMISTRY examId
-  readonly CHEMISTRY_EXAM_ID = 16;
+  readonly CHEMISTRY_EXAM_ID = 24;
 
   constructor(
     private fb: FormBuilder,

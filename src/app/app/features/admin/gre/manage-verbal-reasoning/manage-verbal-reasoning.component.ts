@@ -22,7 +22,7 @@ export class ManageVerbalReasoningComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ Verbal Reasoning examId
-  readonly VERBAL_EXAM_ID = 17;
+  readonly VERBAL_EXAM_ID = 22;
 
   constructor(
     private fb: FormBuilder,

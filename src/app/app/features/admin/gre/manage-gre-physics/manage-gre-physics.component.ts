@@ -22,7 +22,7 @@ export class ManageGrePhysicsComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ Quantitative Reasoning examId
-  readonly QUANTITATIVE_EXAM_ID = 20; 
+  readonly QUANTITATIVE_EXAM_ID = 26; 
 
   constructor(
     private fb: FormBuilder,

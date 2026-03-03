@@ -22,7 +22,7 @@ export class ManageGmatAwaConceptsComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ CHEMISTRY examId
-  readonly CHEMISTRY_EXAM_ID = 22;
+  readonly CHEMISTRY_EXAM_ID = 31;
 
   constructor(
     private fb: FormBuilder,

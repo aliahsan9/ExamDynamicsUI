@@ -22,7 +22,7 @@ export class ManageQuantitativeReasoningComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ Quantitative Reasoning examId
-  readonly QUANTITATIVE_EXAM_ID = 18;
+  readonly QUANTITATIVE_EXAM_ID = 23;
 
   constructor(
     private fb: FormBuilder,

@@ -22,7 +22,7 @@ export class ManageGrammerComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ Grammer examId (replace with actual ID for Grammer subject in your DB)
-  readonly GRAMMER_EXAM_ID = 12;
+  readonly GRAMMER_EXAM_ID = 18;
 
   constructor(
     private fb: FormBuilder,

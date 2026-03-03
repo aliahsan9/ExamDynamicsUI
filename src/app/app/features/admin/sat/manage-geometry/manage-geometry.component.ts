@@ -22,7 +22,7 @@ export class ManageGeometryComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ Geometry examId (replace with actual ID for Geometry subject in your DB)
-  readonly GEOMETRY_EXAM_ID = 8; 
+  readonly GEOMETRY_EXAM_ID = 20; 
 
   constructor(
     private fb: FormBuilder,

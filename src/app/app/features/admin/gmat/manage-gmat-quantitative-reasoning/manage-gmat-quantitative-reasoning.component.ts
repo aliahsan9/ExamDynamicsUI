@@ -22,7 +22,7 @@ export class ManageGmatQuantitativeReasoningComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ CHEMISTRY examId
-  readonly CHEMISTRY_EXAM_ID = 23;
+  readonly CHEMISTRY_EXAM_ID = 28;
 
   constructor(
     private fb: FormBuilder,

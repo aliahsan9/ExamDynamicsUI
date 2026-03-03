@@ -22,7 +22,7 @@ export class ManageIeltsReadingComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅ CHEMISTRY examId
-  readonly CHEMISTRY_EXAM_ID = 27;
+  readonly CHEMISTRY_EXAM_ID = 14;
 
   constructor(
     private fb: FormBuilder,

@@ -22,7 +22,7 @@ export class ManageDataAnalysisComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅Data Analysis  examId (replace with actual ID for Data Analysis subject in your DB)
-  readonly DATA_EXAM_ID = 10;
+  readonly DATA_EXAM_ID = 21;
 
   constructor(
     private fb: FormBuilder,

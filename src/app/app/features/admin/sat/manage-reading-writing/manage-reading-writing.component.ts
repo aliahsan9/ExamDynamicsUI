@@ -22,7 +22,7 @@ export class ManageReadingWritingComponent implements OnInit {
   editingQuestionId: number | null = null;
 
   // ✅  examId
-  readonly READING_EXAM_ID = 6;
+  readonly READING_EXAM_ID = 17;
 
   constructor(
     private fb: FormBuilder,

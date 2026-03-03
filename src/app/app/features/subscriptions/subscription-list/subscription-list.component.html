@@ -1,34 +1,63 @@
-<div class="subscription-wrapper py-5">
-  <div class="subscription-card" data-aos="fade-up">
-    <div class="card-header">
-      <h5><i class="bi bi-envelope-paper-heart me-2"></i> Subscribe to Our Newsletter</h5>
-      <p>Stay updated with the latest blogs, tips, and exclusive offers.</p>
+<div class="subscription-hero d-flex align-items-center justify-content-center">
+
+  <div class="subscription-card p-5 shadow-lg" data-aos="zoom-in">
+
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Subscribe to Our Newsletter</h2>
+      <p class="text-muted">
+        Stay updated with the latest blogs, exam tips, and exclusive offers.
+      </p>
     </div>
 
-    <form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()" class="subscription-form">
-      <div class="input-group">
+    <form
+      [formGroup]="subscriptionForm"
+      (ngSubmit)="onSubmit()"
+      novalidate
+    >
+
+      <!-- Email -->
+      <div class="form-floating mb-3 position-relative">
         <input
           type="email"
-          class="form-control"
-          placeholder="Enter your email"
+          class="form-control form-control-lg"
+          id="email"
+          placeholder="Your Email"
           formControlName="email"
           [class.is-invalid]="subscriptionForm.get('email')?.invalid && subscriptionForm.get('email')?.touched"
         />
-        <button class="btn btn-primary" type="submit" [disabled]="isSubmitting">
-          <i class="bi bi-send me-1"></i> {{ isSubmitting ? 'Subscribing...' : 'Subscribe' }}
-        </button>
+        <label for="email">Your Email</label>
+        <i class="bi bi-envelope-fill input-icon"></i>
       </div>
 
-      <div *ngIf="successMessage" class="alert alert-success mt-2">
-        {{ successMessage }}
-      </div>
-      <div *ngIf="errorMessage" class="alert alert-danger mt-2">
-        {{ errorMessage }}
-      </div>
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="btn btn-gradient btn-lg w-100 fw-bold"
+        [disabled]="subscriptionForm.invalid || isSubmitting"
+      >
+        <span *ngIf="!isSubmitting">
+          <i class="bi bi-send-fill me-2"></i>Subscribe
+        </span>
+        <span *ngIf="isSubmitting">
+          <i class="bi bi-arrow-repeat me-2 spinner-border spinner-border-sm"></i>Subscribing...
+        </span>
+      </button>
+
     </form>
 
-    <div class="card-footer">
-      <i class="bi bi-shield-check me-1"></i> We respect your privacy. Unsubscribe anytime.
+    <!-- Feedback -->
+    <div *ngIf="successMessage" class="alert alert-success mt-4 d-flex align-items-center">
+      <i class="bi bi-check-circle-fill me-2"></i>{{ successMessage }}
     </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger mt-4 d-flex align-items-center">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ errorMessage }}
+    </div>
+
+    <div class="text-center mt-4 small text-muted">
+      <i class="bi bi-shield-check me-1"></i>
+      We respect your privacy. Unsubscribe anytime.
+    </div>
+
   </div>
 </div>

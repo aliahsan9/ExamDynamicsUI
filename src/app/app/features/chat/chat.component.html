@@ -1,34 +1,49 @@
-<div class="chat-container">
-  <div class="chat-card">
-    <h2 class="chat-title">🤖 AI Chatbot</h2>
+<div class="chat-hero d-flex align-items-center justify-content-center">
 
-    <div class="chat-history" #chatHistory>
-      <div *ngFor="let msg of messages" [ngClass]="msg.type">
-        <div class="message">{{ msg.text }}</div>
+  <div class="chat-card p-4 shadow-lg" data-aos="zoom-in">
+
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">AI Chat Assistant</h2>
+      <p class="text-muted">
+        Ask your questions and get instant help.
+      </p>
+    </div>
+
+    <!-- Chat History -->
+    <div class="chat-history mb-3" #chatHistory>
+      <div *ngFor="let msg of messages" [ngClass]="msg.type" class="chat-row">
+        <div class="chat-bubble">
+          {{ msg.text }}
+        </div>
       </div>
 
       <!-- Typing indicator -->
-      <div *ngIf="isTyping" class="ai typing">
-        <div class="message">
+      <div *ngIf="isTyping" class="chat-row ai">
+        <div class="chat-bubble typing">
           AI is typing
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
         </div>
       </div>
     </div>
 
+    <!-- Input -->
     <div class="chat-input">
       <input
         type="text"
         [(ngModel)]="question"
         placeholder="Ask your question..."
         (keydown.enter)="sendQuestion()"
+        class="form-control"
       />
-      <button (click)="sendQuestion()">Ask</button>
+      <button
+        class="btn btn-gradient"
+        (click)="sendQuestion()"
+      >
+        <i class="bi bi-send-fill me-1"></i>Ask
+      </button>
     </div>
-  </div>
 
-  <!-- Floating shapes for premium effect -->
-  <div class="shape shape1"></div>
-  <div class="shape shape2"></div>
-  <div class="shape shape3"></div>
+  </div>
 </div>
