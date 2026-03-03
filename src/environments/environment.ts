@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5179/api' // 👈 adjust port if needed
+  apiUrl: 'https://exam-dynamics-dvahdcdzfpbjctgf.centralindia-01.azurewebsites.net/api'
 };
