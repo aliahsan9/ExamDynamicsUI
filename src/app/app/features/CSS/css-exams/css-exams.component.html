@@ -1,20 +1,28 @@
 <section class="css-section py-5" data-aos="fade-up">
   <div class="container">
-    <h2 class="text-center mb-5 fw-bold text-dark text-gradient">CSS Exam Subjects</h2>
-    <p class="text-center text-secondary mb-5 lead">
-      Prepare for Pakistan's CSS Exam with high-quality MCQs for both compulsory and optional subjects.
-    </p>
 
-    <div class="row g-4"> 
+    <!-- Section Header -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-dark text-gradient">CSS Exam Subjects</h2>
+      <p class="lead text-muted">
+        Prepare for Pakistan's CSS Exam with high-quality MCQs for both compulsory and optional subjects.
+      </p>
+      <p class="small text-secondary">
+        Sharpen your skills, track your progress, and get exam-ready with confidence!
+      </p>
+    </div>
+
+    <!-- Subjects Row -->
+    <div class="row g-4">
 
       <!-- English Essay -->
       <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-        <div class="exam-card card h-100 shadow-lg border-0 rounded-4">
+        <div class="css-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-journal-text text-primary display-5 mb-3"></i>
             <h5 class="fw-bold">English Essay</h5>
             <p class="text-muted small">Essay writing strategies and MCQs.</p>
-            <button class="btn btn-primary mt-3 px-4 rounded-pill" [routerLink]="['/exam', 5]">
+            <button class="btn btn-primary mt-2 px-4 rounded-pill" [routerLink]="['/exam', 5]">
               <i class="bi bi-play-circle me-1"></i> Start Quiz
             </button>
           </div>
@@ -23,12 +31,12 @@
 
       <!-- English Precis -->
       <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-        <div class="exam-card card h-100 shadow-lg border-0 rounded-4">
+        <div class="css-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-pen text-success display-5 mb-3"></i>
             <h5 class="fw-bold">English Precis & Composition</h5>
             <p class="text-muted small">Grammar, vocabulary, and precis practice.</p>
-            <button class="btn btn-success mt-3 px-4 rounded-pill" [routerLink]="['/exam', 6]">
+            <button class="btn btn-success mt-2 px-4 rounded-pill" [routerLink]="['/exam', 6]">
               <i class="bi bi-play-circle me-1"></i> Start Quiz
             </button>
           </div>
@@ -37,12 +45,12 @@
 
       <!-- General Science -->
       <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-        <div class="exam-card card h-100 shadow-lg border-0 rounded-4">
+        <div class="css-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-lightbulb text-warning display-5 mb-3"></i>
             <h5 class="fw-bold">General Science & Ability</h5>
             <p class="text-muted small">Science, reasoning, and quantitative MCQs.</p>
-            <button class="btn btn-warning mt-3 px-4 rounded-pill text-white" [routerLink]="['/exam', 7]">
+            <button class="btn btn-warning mt-2 px-4 rounded-pill text-white" [routerLink]="['/exam', 7]">
               <i class="bi bi-play-circle me-1"></i> Start Quiz
             </button>
           </div>
@@ -51,12 +59,12 @@
 
       <!-- Current Affairs -->
       <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-        <div class="exam-card card h-100 shadow-lg border-0 rounded-4">
+        <div class="css-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-globe text-danger display-5 mb-3"></i>
             <h5 class="fw-bold">Current Affairs</h5>
             <p class="text-muted small">National & international issues.</p>
-            <button class="btn btn-danger mt-3 px-4 rounded-pill" [routerLink]="['/exam', 8]">
+            <button class="btn btn-danger mt-2 px-4 rounded-pill" [routerLink]="['/exam', 8]">
               <i class="bi bi-play-circle me-1"></i> Start Quiz
             </button>
           </div>
@@ -65,12 +73,12 @@
 
       <!-- Pakistan Affairs -->
       <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="500">
-        <div class="exam-card card h-100 shadow-lg border-0 rounded-4">
+        <div class="css-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-flag text-info display-5 mb-3"></i>
             <h5 class="fw-bold">Pakistan Affairs</h5>
             <p class="text-muted small">History, politics, and Pakistan issues.</p>
-            <button class="btn btn-info mt-3 px-4 rounded-pill" [routerLink]="['/exam', 9]">
+            <button class="btn btn-info mt-2 px-4 rounded-pill" [routerLink]="['/exam', 9]">
               <i class="bi bi-play-circle me-1"></i> Start Quiz
             </button>
           </div>
@@ -79,39 +87,40 @@
 
       <!-- Islamic Studies -->
       <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="600">
-        <div class="exam-card card h-100 shadow-lg border-0 rounded-4">
+        <div class="css-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-moon-stars text-secondary display-5 mb-3"></i>
             <h5 class="fw-bold">Islamic Studies</h5>
             <p class="text-muted small">MCQs on Islam & comparative religions.</p>
-            <button class="btn btn-secondary mt-3 px-4 rounded-pill" [routerLink]="['/exam', 10]">
+            <button class="btn btn-secondary mt-2 px-4 rounded-pill" [routerLink]="['/exam', 10]">
               <i class="bi bi-play-circle me-1"></i> Start Quiz
             </button>
           </div>
         </div>
       </div>
 
-      <!-- Optional Subjects Example -->
+      <!-- Optional Subject: International Relations -->
       <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="700">
-        <div class="exam-card card h-100 shadow-lg border-0 rounded-4">
+        <div class="css-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-people text-dark display-5 mb-3"></i>
             <h5 class="fw-bold">International Relations</h5>
             <p class="text-muted small">Foreign policy, theories & global issues.</p>
-            <button class="btn btn-dark mt-3 px-4 rounded-pill" [routerLink]="['/exam', 11]">
+            <button class="btn btn-dark mt-2 px-4 rounded-pill" [routerLink]="['/exam', 11]">
               <i class="bi bi-play-circle me-1"></i> Start Quiz
             </button>
           </div>
         </div>
       </div>
 
+      <!-- Optional Subject: Political Science -->
       <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="800">
-        <div class="exam-card card h-100 shadow-lg border-0 rounded-4">
+        <div class="css-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-bank text-success display-5 mb-3"></i>
             <h5 class="fw-bold">Political Science</h5>
             <p class="text-muted small">Political theories, governance & policies.</p>
-            <button class="btn btn-success mt-3 px-4 rounded-pill" [routerLink]="['/exam', 12]">
+            <button class="btn btn-success mt-2 px-4 rounded-pill" [routerLink]="['/exam', 12]">
               <i class="bi bi-play-circle me-1"></i> Start Quiz
             </button>
           </div>
@@ -119,5 +128,16 @@
       </div>
 
     </div>
+
+    <!-- Extra Static Content -->
+    <div class="mt-5 text-center" data-aos="fade-up">
+      <h4 class="fw-bold">💡 Why Practice with Us?</h4>
+      <p class="text-muted small w-75 mx-auto">
+        Our CSS MCQs are crafted by subject experts to match the <b>CSS exam pattern</b>.
+        Each question sharpens your concepts and boosts your confidence.
+        Regular practice is your secret to cracking CSS successfully!
+      </p>
+    </div>
+
   </div>
 </section>

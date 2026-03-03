@@ -1,14 +1,19 @@
 <section class="gmat-section py-5" data-aos="fade-up">
   <div class="container">
-    <h2 class="text-center mb-5 fw-bold text-gradient">GMAT Available Quizzes</h2>
+
+    <!-- Section Title -->
+    <div class="text-center mb-5">
+      <h2 class="fw-bold text-dark text-gradient">GMAT Available Quizzes</h2>
+    </div>
+
     <div class="row g-4">
 
       <!-- Quantitative Reasoning -->
       <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
-        <div class="exam-card card h-100 shadow-sm border-0 rounded-4">
+        <div class="gmat-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-calculator text-success display-5 mb-3"></i>
-            <h5 class="card-title fw-bold">Quantitative Reasoning</h5>
+            <h5 class="fw-bold">Quantitative Reasoning</h5>
             <p class="text-muted small">Problem Solving & Data Sufficiency</p>
             <ul class="list-unstyled small text-secondary">
               <li>Questions: <b>50–100</b></li>
@@ -23,16 +28,16 @@
 
       <!-- Verbal Reasoning -->
       <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
-        <div class="exam-card card h-100 shadow-sm border-0 rounded-4">
+        <div class="gmat-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-book text-primary display-5 mb-3"></i>
-            <h5 class="card-title fw-bold">Verbal Reasoning</h5>
+            <h5 class="fw-bold">Verbal Reasoning</h5>
             <p class="text-muted small">Reading Comp, Critical Reasoning, Sentence Correction</p>
             <ul class="list-unstyled small text-secondary">
               <li>Questions: <b>50–100</b></li>
               <li>Time: <b>Unlimited</b></li>
             </ul>
-            <button class="btn btn-primary mt-2 px-4 rounded-pill"  [routerLink]="['/exam', 23]">
+            <button class="btn btn-primary mt-2 px-4 rounded-pill" [routerLink]="['/exam', 23]">
               <i class="bi bi-play-circle me-1"></i> Start Quiz
             </button>
           </div>
@@ -41,10 +46,10 @@
 
       <!-- Integrated Reasoning -->
       <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
-        <div class="exam-card card h-100 shadow-sm border-0 rounded-4">
+        <div class="gmat-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-bar-chart-line-fill text-warning display-5 mb-3"></i>
-            <h5 class="card-title fw-bold">Integrated Reasoning</h5>
+            <h5 class="fw-bold">Integrated Reasoning</h5>
             <p class="text-muted small">Graphs, Tables & Multi-source Reasoning</p>
             <ul class="list-unstyled small text-secondary">
               <li>Questions: <b>30–50</b></li>
@@ -57,12 +62,12 @@
         </div>
       </div>
 
-      <!-- Analytical Writing Assessment (optional mini MCQs) -->
+      <!-- Analytical Writing Assessment -->
       <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="400">
-        <div class="exam-card card h-100 shadow-sm border-0 rounded-4">
+        <div class="gmat-card card h-100 shadow-sm border-0 rounded-4">
           <div class="card-body text-center">
             <i class="bi bi-pencil-square text-info display-5 mb-3"></i>
-            <h5 class="card-title fw-bold">AWA Concepts</h5>
+            <h5 class="fw-bold">AWA Concepts</h5>
             <p class="text-muted small">Essay analysis & Argument evaluation</p>
             <ul class="list-unstyled small text-secondary">
               <li>Questions: <b>20–30</b></li>
@@ -74,6 +79,8 @@
           </div>
         </div>
       </div>
+
     </div>
+
   </div>
 </section>

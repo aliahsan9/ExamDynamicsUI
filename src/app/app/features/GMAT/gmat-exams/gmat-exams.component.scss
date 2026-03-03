@@ -1,47 +1,70 @@
+$gmat-breakpoint-md: 768px;
+
 .gmat-section {
-  background-color: #f4f6ff;
+  background: linear-gradient(135deg, #f4f6ff 0%, #e9efff 100%);
 
   h2 {
     color: #1f2d3d;
-    margin-bottom: 3rem;
-  }
-
-  .exam-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    }
-
-    .card-body {
-      padding: 2rem 1rem;
-
-      .card-title {
-        font-size: 1.2rem;
-      }
-
-      ul li {
-        font-size: 0.875rem;
-      }
-    }
-
-    .btn {
-      font-weight: 600;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      transition: all 0.2s ease;
-
-      &:hover {
-        transform: scale(1.05);
-      }
-    }
+    font-size: 2.2rem;
   }
 
   .text-gradient {
     background: linear-gradient(45deg, #0dcaf0, #0d6efd);
     background-clip: text;
     -webkit-background-clip: text;
-    color: transparent;
     -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  .gmat-card {
+    background: #fff;
+    border-radius: 1.2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+      padding: 2rem 1.5rem;
+    }
+
+    h5 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    p, ul {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .btn {
+      font-weight: 600;
+      border-radius: 50px;
+      padding: 0.5rem 1.2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: all 0.2s ease;
+
+      &:hover {
+        transform: scale(1.08);
+      }
+
+      i {
+        margin-right: 0.4rem;
+      }
+    }
+  }
+
+  @media (max-width: $gmat-breakpoint-md) {
+    h2 {
+      font-size: 1.8rem;
+    }
+
+    .btn {
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+    }
   }
 }

@@ -1,10 +1,9 @@
-$breakpoint-md: 768px;
-
 .css-section {
-  background-color: #f9fbff;
+  background: linear-gradient(135deg, #f9fbff 0%, #eef5ff 100%);
 
   h2 {
     color: #1f2d3d;
+    font-size: 2.2rem;
   }
 
   .text-gradient {
@@ -15,45 +14,45 @@ $breakpoint-md: 768px;
   }
 
   p.lead {
-    max-width: 700px;
-    margin: 0 auto 2rem auto;
+    font-size: 1.1rem;
   }
 
-  .exam-card {
+  .css-card {
+    background: #fff;
+    border-radius: 1.2rem;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0px 12px 28px rgba(0, 0, 0, 0.15);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0px 15px 35px rgba(0, 0, 0, 0.1);
     }
 
     .card-body {
-      padding: 2rem 1rem;
+      padding: 2rem 1.5rem;
     }
 
     .btn {
       font-weight: 600;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
 
       &:hover {
         transform: scale(1.08);
       }
     }
   }
-}
 
-@media (max-width: $breakpoint-md) {
-  .exam-card .card-body {
-    padding: 1.5rem 0.5rem;
-  }
-
-  h2 {
-    font-size: 1.7rem;
-  }
-
-  .btn {
-    padding: 0.4rem 1.2rem;
-    font-size: 0.9rem;
+  /* Responsive tweaks */
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 1.8rem;
+    }
+    p.lead {
+      font-size: 1rem;
+    }
+    .btn {
+      padding: 0.4rem 1.2rem;
+      font-size: 0.9rem;
+    }
   }
 }
