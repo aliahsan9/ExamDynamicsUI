@@ -12,56 +12,22 @@ import * as AOS from 'aos';
 })
 export class ExamDetailComponent implements OnInit {
 
+  // Exam Cards
   exams = [
-    { 
-      title: 'MDCAT', 
-      desc: 'Pakistan medical students preparing for medical colleges', 
-      link: '/mdcat-quiz', 
-      image: 'assets/images/mdcat.png',
-      tip: 'Practice past papers daily for best results!' 
-    },
-    { 
-      title: 'ECAT', 
-      desc: 'Pakistan engineering students aiming for top universities', 
-      link: '/ecat-quiz', 
-      image: 'assets/images/ecat.png',
-      tip: 'Solve math & physics questions consistently!' 
-    },
-    { 
-      title: 'CSS', 
-      desc: 'Pakistan civil service aspirants', 
-      link: '/css-exams', 
-      image: 'assets/images/css.jpg',
-      tip: 'Read current affairs and practice essays!' 
-    },
-     { 
-      title: 'IELTS', 
-      desc: 'Students & immigrants aiming for UK, Canada, Australia', 
-      link: '/ielts-exams', 
-      image: 'assets/images/ilets.jpg',
-      tip: 'Practice listening & speaking daily!' 
-    },
-    { 
-      title: 'SAT', 
-      desc: 'High school students aiming for US colleges', 
-      link: '/sat-detail', 
-      image: 'assets/images/sat.png',
-      tip: 'Work on vocabulary & problem-solving daily!' 
-    },
-    { 
-      title: 'GRE', 
-      desc: 'Graduate students preparing for Masters/PhD', 
-      link: '/gre-exams', 
-      image: 'assets/images/gre.jpg',
-      tip: 'Focus on verbal & quantitative sections equally!' 
-    },
-    { 
-      title: 'GMAT', 
-      desc: 'MBA aspirants preparing for global business schools', 
-      link: '/gmat-exams', 
-      image: 'assets/images/gmat.jpg',
-      tip: 'Time management is the key for GMAT success!' 
-    }
+    { title: 'MDCAT', desc: 'Pakistan medical students preparing for medical colleges', link: '/mdcat-quiz', image: 'assets/images/mdcat.png', tip: 'Practice past papers daily for best results!' },
+    { title: 'ECAT', desc: 'Pakistan engineering students aiming for top universities', link: '/ecat-quiz', image: 'assets/images/ecat.png', tip: 'Solve math & physics questions consistently!' },
+    { title: 'CSS', desc: 'Pakistan civil service aspirants', link: '/css-exams', image: 'assets/images/css.jpg', tip: 'Read current affairs and practice essays!' },
+    { title: 'IELTS', desc: 'Students & immigrants aiming for UK, Canada, Australia', link: '/ielts-exams', image: 'assets/images/ilets.jpg', tip: 'Practice listening & speaking daily!' },
+    { title: 'SAT', desc: 'High school students aiming for US colleges', link: '/sat-detail', image: 'assets/images/sat.png', tip: 'Work on vocabulary & problem-solving daily!' },
+    { title: 'GRE', desc: 'Graduate students preparing for Masters/PhD', link: '/gre-exams', image: 'assets/images/gre.jpg', tip: 'Focus on verbal & quantitative sections equally!' },
+    { title: 'GMAT', desc: 'MBA aspirants preparing for global business schools', link: '/gmat-exams', image: 'assets/images/gmat.jpg', tip: 'Time management is the key for GMAT success!' }
+  ];
+
+  // Floating shapes
+  shapes = [
+    { class: 'shape1', width: 200, height: 200, color: '#004080', top: '-80px', left: '-60px', delay: 0 },
+    { class: 'shape2', width: 150, height: 150, color: '#0066cc', bottom: '-70px', right: '-50px', delay: 2 },
+    { class: 'shape3', width: 100, height: 100, color: '#00aaff', top: '25%', right: '12%', delay: 4 }
   ];
 
   constructor() { }
@@ -69,5 +35,4 @@ export class ExamDetailComponent implements OnInit {
   ngOnInit(): void {
     AOS.init({ duration: 800, once: true });
   }
-
 }

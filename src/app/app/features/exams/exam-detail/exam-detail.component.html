@@ -1,13 +1,13 @@
 <div class="exam-detail-hero py-5 position-relative">
 
-  <!-- Hero section with motivation -->
+  <!-- Hero section -->
   <div class="container text-center mb-5">
     <h1 class="hero-title fw-bold mb-3" data-aos="fade-down">🎓 Boost Your Knowledge & Achieve Success!</h1>
     <p class="hero-subtitle mb-4" data-aos="fade-up">
       Explore our curated exams, learn smarter, and prepare to shine. Your success journey starts here!
     </p>
 
-    <!-- Static trust badges -->
+    <!-- Badges -->
     <div class="badges d-flex justify-content-center flex-wrap gap-3 mt-4">
       <span class="badge-item"><i class="bi bi-check-circle-fill text-success"></i> Trusted by 10,000+ Students</span>
       <span class="badge-item"><i class="bi bi-lightning-charge-fill text-warning"></i> Fast Learning Resources</span>
@@ -15,15 +15,14 @@
     </div>
   </div>
 
-  <!-- Exam cards -->
+  <!-- Exam Cards -->
   <div class="container">
     <div class="row g-4 justify-content-center">
       <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let exam of exams" [attr.data-aos]="'zoom-in'">
         <div class="card exam-card shadow-lg text-center h-100">
 
-          <!-- Rounded Exam Image -->
           <div class="image-wrapper mb-2">
-            <img [src]="exam.image" alt="{{exam.title}}" class="rounded-circle exam-image">
+            <img [src]="exam.image" [alt]="exam.title" class="rounded-circle exam-image">
           </div>
 
           <div class="card-body d-flex flex-column justify-content-between">
@@ -36,40 +35,41 @@
       </div>
     </div>
 
-    <!-- Static content below cards -->
+    <!-- Why Choose Us Section -->
     <div class="extra-content text-center mt-5" data-aos="fade-up">
       <h4 class="fw-bold">📘 Why Choose Us?</h4>
       <p class="text-muted">
         We provide updated study materials, expert-designed quizzes, and performance tips to help you succeed in every exam.
       </p>
       <div class="row mt-4">
-        <div class="col-md-4">
+        <div class="col-md-4" *ngFor="let feature of [
+          { icon: 'bi-journal-check text-primary', title: 'Updated Syllabus', desc: 'Stay aligned with the latest curriculum trends.' },
+          { icon: 'bi-graph-up-arrow text-success', title: 'Track Progress', desc: 'Measure performance with smart analytics.' },
+          { icon: 'bi-people-fill text-warning', title: 'Community Support', desc: 'Learn & grow with thousands of learners.' }
+        ]">
           <div class="feature-box shadow-sm p-3 rounded">
-            <i class="bi bi-journal-check text-primary fs-3"></i>
-            <h6 class="mt-2">Updated Syllabus</h6>
-            <p class="small text-muted">Stay aligned with the latest curriculum trends.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="feature-box shadow-sm p-3 rounded">
-            <i class="bi bi-graph-up-arrow text-success fs-3"></i>
-            <h6 class="mt-2">Track Progress</h6>
-            <p class="small text-muted">Measure performance with smart analytics.</p>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="feature-box shadow-sm p-3 rounded">
-            <i class="bi bi-people-fill text-warning fs-3"></i>
-            <h6 class="mt-2">Community Support</h6>
-            <p class="small text-muted">Learn & grow with thousands of learners.</p>
+            <i class="bi fs-3" [ngClass]="feature.icon"></i>
+            <h6 class="mt-2">{{ feature.title }}</h6>
+            <p class="small text-muted">{{ feature.desc }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Floating shapes for premium look -->
-  <div class="shape shape1"></div>
-  <div class="shape shape2"></div>
-  <div class="shape shape3"></div>
+  <!-- Floating shapes -->
+  <div *ngFor="let shape of shapes"
+       class="shape"
+       [ngClass]="shape.class"
+       [ngStyle]="{
+         width: shape.width + 'px',
+         height: shape.height + 'px',
+         backgroundColor: shape.color,
+         top: shape.top,
+         left: shape.left,
+         bottom: shape.bottom,
+         right: shape.right,
+         animationDelay: shape.delay + 's'
+       }">
+  </div>
 </div>
