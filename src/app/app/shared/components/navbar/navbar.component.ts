@@ -1,20 +1,31 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import * as AOS from 'aos';
-import { AiAssistantRoutingModule } from "../../../features/ai-assistant/ai-assistant/ai-assistant-routing.module";
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, AiAssistantRoutingModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  sidebarOpen = false;
+
+  menuOpen = false;
   isLoggedIn = false;
+
+  navLinks = [
+    { label: 'Home', path: '/' },
+    { label: 'About', path: '/about' },
+    { label: 'Exams', path: '/exams' },
+    { label: 'AI Chatbot', path: '/chat' },
+    { label: 'News', path: '/subscribe' },
+    { label: 'Blogs', path: '/blogs' },
+    { label: 'FAQs', path: '/faq' },
+    { label: 'Privacy', path: '/privacy' },
+    { label: 'Contact', path: '/contact' },
+  ];
 
   constructor(
     private authService: AuthService,
@@ -22,26 +33,22 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    AOS.init({ duration: 800, once: true });
+    this.authService.authStatus$
+      .subscribe(status => this.isLoggedIn = status);
 
-    this.authService.authStatus$.subscribe((status) => {
-      this.isLoggedIn = status;
-    });
-
-    this.router.events.subscribe(() => this.closeSidebar());
+    this.router.events.subscribe(() => this.closeMenu());
   }
 
-  toggleSidebar(): void {
-    this.sidebarOpen = !this.sidebarOpen;
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
   }
 
-  closeSidebar(): void {
-    this.sidebarOpen = false;
+  closeMenu(): void {
+    this.menuOpen = false;
   }
 
   logout(): void {
     this.authService.logout();
-    this.closeSidebar();
     this.router.navigate(['/']);
   }
 }

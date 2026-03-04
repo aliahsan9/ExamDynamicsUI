@@ -1,71 +1,44 @@
-<nav class="navbar navbar-expand-lg" data-aos="fade-down" data-aos-duration="1000">
-  <div class="container-fluid">
+<nav class="navbar">
+  <div class="nav-container">
+
     <!-- Logo -->
-    <a class="navbar-brand" routerLink="/" (click)="closeSidebar()">
-      <img src="assets/images/logo1.png" alt="Logo" class="logo" />
+    <a class="logo" routerLink="/" (click)="closeMenu()">
+      <img src="assets/images/logo1.png" alt="Logo">
     </a>
 
-    <!-- Hamburger Toggle -->
-    <button class="navbar-toggler" type="button" (click)="toggleSidebar()" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <!-- Hamburger -->
+    <button class="hamburger" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
 
-    <!-- Sidebar / Navbar Links -->
-    <div class="navbar-collapse" [ngClass]="{ 'show-sidebar': sidebarOpen }">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="100">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/about" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="200">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/exams" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="300">Exams</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/chat" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="500">AI Chatbot</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/subscribe" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="400">News</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/blogs" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="500">Blogs</a>
-        </li>
-        
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLink="/scholarships" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="500">Scholarships</a>
-        </li> -->
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/faq" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="600">Faqs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/privacy" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="700">Privacy</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/contact" (click)="closeSidebar()" data-aos="fade-right" data-aos-delay="800">Contact Us</a>
+    <!-- Overlay -->
+    <div class="overlay" *ngIf="menuOpen" (click)="closeMenu()"></div>
+
+    <!-- Nav Links -->
+    <div class="nav-menu" [class.open]="menuOpen">
+
+      <ul class="nav-links">
+        <li *ngFor="let link of navLinks">
+          <a routerLink="{{link.path}}" (click)="closeMenu()">
+            {{ link.label }}
+          </a>
         </li>
       </ul>
 
-      <!-- If NOT logged in → show SignUp & Login -->
-      <ng-container *ngIf="!isLoggedIn; else profileMenu">
-        <div class="auth-buttons">
-          <a routerLink="/register" (click)="closeSidebar()" class="btn btn-primary me-2" data-aos="fade-left" data-aos-delay="900">SignUp</a>
-          <a routerLink="/login" (click)="closeSidebar()" class="btn btn-primary" data-aos="fade-left" data-aos-delay="1000">Login</a>
-        </div>
-      </ng-container>
+      <!-- Auth Section -->
+      <div class="auth-section" *ngIf="!isLoggedIn; else profileBlock">
+        <a routerLink="/register" class="btn" (click)="closeMenu()">Sign Up</a>
+        <a routerLink="/login" class="btn outline" (click)="closeMenu()">Login</a>
+      </div>
 
-      <!-- If logged in → show Profile Menu -->
-      <ng-template #profileMenu>
-        <div class="dropdown profile-menu" data-aos="fade-left" data-aos-delay="900">
-          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" role="button" id="profileDropdown"
-             data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person-circle fs-4"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-            <li><a class="dropdown-item" (click)="logout(); closeSidebar()">Logout</a></li>
-          </ul>
+      <ng-template #profileBlock>
+        <div class="profile-section">
+          <button class="btn logout" (click)="logout()">Logout</button>
         </div>
       </ng-template>
+
     </div>
   </div>
 </nav>
