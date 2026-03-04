@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://exam-dynamics-dvahdcdzfpbjctgf.centralindia-01.azurewebsites.net/api'
+  apiUrl: 'examdynamics-api-g6cghsfgeberaug7.centralindia-01.azurewebsites.net/api'
 };
