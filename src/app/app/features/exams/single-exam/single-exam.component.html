@@ -1,32 +1,24 @@
-<div class="exam-container position-relative mt-4">
+<div class="exam-container mt-4">
 
-  <!-- Floating Background Shapes -->
-  <div class="floating-shape shape1"></div>
-  <div class="floating-shape shape2"></div>
-  <div class="floating-shape shape3"></div>
-
-  <h2 class="mb-4 text-primary text-center">Exam MCQs</h2>
+  <h2 class="text-primary text-center mb-4">Exam MCQs</h2>
 
   <!-- Progress Bar -->
-  <div class="progress-wrapper mb-4">
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" [style.width.%]="progress">
-        {{ progress | number: '1.0-0' }}%
-      </div>
+  <div class="progress mb-4">
+    <div class="progress-bar" role="progressbar" [style.width.%]="progress">
+      {{ progress | number:'1.0-0' }}%
     </div>
   </div>
 
   <!-- Exam Completed Screen -->
-  <div *ngIf="submitted; else quizContent" class="card exam-card p-4 shadow-lg">
+  <div *ngIf="submitted; else quizContent" class="card exam-card p-4">
     <h4 class="text-success text-center">🎉 Exam Completed!</h4>
     <p class="text-center fs-5 mt-2">
       Score: <strong>{{ score }}</strong> / {{ questions.length }}
       ({{ (score / questions.length * 100) | number:'1.0-0' }}%)
     </p>
-
     <hr>
 
-    <div *ngFor="let q of questions; let i = index" class="question-wrapper mb-4">
+    <div *ngFor="let q of questions; let i = index" class="mb-4">
       <h6>Q{{ i + 1 }}. {{ q.text }}</h6>
       <p>
         Your Answer:
@@ -38,7 +30,7 @@
         </span>
       </p>
 
-      <div class="d-flex flex-wrap gap-2 mb-2">
+      <div class="d-flex gap-2 mb-2">
         <button class="btn btn-outline-success btn-sm" (click)="toggleAnswer(q.questionId)">
           {{ showAnswer[q.questionId] ? 'Hide Answer' : 'Show Answer' }}
         </button>
@@ -53,21 +45,20 @@
       <div *ngIf="showExplanation[q.questionId]" class="alert alert-info">
         💡 Explanation: {{ q.explanation }}
       </div>
-
       <hr>
     </div>
   </div>
 
   <!-- Quiz Content -->
   <ng-template #quizContent>
-    <div *ngIf="questions.length; else noQuestions" class="card exam-card p-4 shadow-lg">
-      <h5 class="mb-3">Q{{ currentIndex + 1 }}. {{ questions[currentIndex].text }}</h5>
+    <div *ngIf="questions.length; else noQuestions" class="card exam-card p-4">
+      <h5>Q{{ currentIndex + 1 }}. {{ questions[currentIndex].text }}</h5>
 
-      <ul class="list-group options-list">
+      <ul class="list-group mt-3">
         <li *ngFor="let opt of optionsMap[questions[currentIndex].questionId]" class="list-group-item">
           <label class="d-flex align-items-center gap-2">
-            <input type="radio" class="form-check-input" 
-                   name="q{{ questions[currentIndex].questionId }}" 
+            <input type="radio"
+                   name="q{{ questions[currentIndex].questionId }}"
                    [value]="opt.text"
                    [(ngModel)]="selectedAnswers[questions[currentIndex].questionId]" />
             {{ opt.text }}
@@ -75,7 +66,7 @@
         </li>
       </ul>
 
-      <div class="d-flex flex-wrap gap-2 mt-3">
+      <div class="d-flex gap-2 mt-3 flex-wrap">
         <button class="btn btn-outline-success btn-sm" 
                 (click)="toggleAnswer(questions[currentIndex].questionId)">
           {{ showAnswer[questions[currentIndex].questionId] ? 'Hide Answer' : 'Show Answer' }}
@@ -93,13 +84,11 @@
         💡 Explanation: {{ questions[currentIndex].explanation }}
       </div>
 
-      <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-2">
+      <div class="d-flex justify-content-between mt-4 flex-wrap gap-2">
         <button class="btn btn-secondary" [disabled]="currentIndex===0" (click)="prevQuestion()">
           Previous
         </button>
-
         <a routerLink="/chat" class="chatbot-icon">🤖</a>
-
         <button class="btn btn-primary" [disabled]="currentIndex===questions.length-1" (click)="nextQuestion()">
           Next
         </button>
