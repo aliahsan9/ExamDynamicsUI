@@ -18,10 +18,8 @@ export class ManageBlogsComponent implements OnInit {
   editingBlogId: number | null = null;
   showForm: boolean = false;
 
-  thumbnailPreview: string | ArrayBuffer | null = null;
   thumbnailUrl: string = '';
 
-  // Quill toolbar config with image option
   quillModules = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
@@ -45,7 +43,8 @@ export class ManageBlogsComponent implements OnInit {
   initForm(): void {
     this.blogForm = this.fb.group({
       title: ['', Validators.required],
-      content: ['', Validators.required]
+      content: ['', Validators.required],
+      thumbnailUrl: ['', Validators.required] // Add URL field
     });
   }
 
@@ -61,14 +60,13 @@ export class ManageBlogsComponent implements OnInit {
       this.editingBlogId = blog.blogPostId;
       this.blogForm.patchValue({
         title: blog.title,
-        content: blog.content
+        content: blog.content,
+        thumbnailUrl: blog.thumbnailUrl || ''
       });
-      this.thumbnailPreview = blog.thumbnailUrl || null;
       this.thumbnailUrl = blog.thumbnailUrl || '';
     } else {
       this.editingBlogId = null;
       this.blogForm.reset();
-      this.thumbnailPreview = null;
       this.thumbnailUrl = '';
     }
     this.showForm = true;
@@ -77,34 +75,16 @@ export class ManageBlogsComponent implements OnInit {
   closeForm(): void {
     this.showForm = false;
     this.blogForm.reset();
-    this.thumbnailPreview = null;
     this.thumbnailUrl = '';
-  }
-
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.thumbnailPreview = reader.result;
-        this.thumbnailUrl = reader.result as string;
-      };
-      reader.readAsDataURL(file);
-    }
   }
 
   saveBlog(): void {
     if (this.blogForm.invalid) return;
 
-    const { title, content } = this.blogForm.value;
+    const { title, content, thumbnailUrl } = this.blogForm.value;
 
     if (this.editingBlogId) {
-      const updateDto: UpdateBlogPostDto = {
-        title,
-        content,
-        thumbnailUrl: this.thumbnailUrl
-      };
+      const updateDto: UpdateBlogPostDto = { title, content, thumbnailUrl };
       this.blogService.update(this.editingBlogId, updateDto).subscribe({
         next: () => {
           this.loadBlogs();
@@ -113,11 +93,7 @@ export class ManageBlogsComponent implements OnInit {
         error: err => console.error(err)
       });
     } else {
-      const createDto: CreateBlogPostDto = {
-        title,
-        content,
-        thumbnailUrl: this.thumbnailUrl
-      };
+      const createDto: CreateBlogPostDto = { title, content, thumbnailUrl };
       this.blogService.create(createDto).subscribe({
         next: () => {
           this.loadBlogs();
