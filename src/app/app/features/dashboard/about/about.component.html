@@ -9,11 +9,11 @@
 
     <!-- WHO WE ARE -->
     <div class="row align-items-center mb-5">
-      <div class="col-lg-6 mb-4 mb-lg-0 text-center" data-aos="fade-right">
+      <div class="col-lg-6 mb-4 mb-lg-0 text-center">
         <img src="assets/images/about1.jpg" alt="Team" 
              class="img-fluid rounded shadow-lg about-img hover-scale">
       </div>
-      <div class="col-lg-6" data-aos="fade-left">
+      <div class="col-lg-6">
         <h2 class="section-title mb-3"> 
           Who We Are <span class="highlight">?</span>
         </h2>
@@ -30,7 +30,7 @@
     </div>
 
     <!-- WHY EXAMDYNAMICS -->
-    <div class="text-center mb-5" data-aos="fade-up">
+    <div class="text-center mb-5">
       <h3 class="sub-title">
         Why <span class="text-primary fw-bold">ExamDynamics?</span>
       </h3>
@@ -44,39 +44,17 @@
 
     <!-- FEATURE CARDS -->
     <div class="row g-4 justify-content-center mb-5">
-      <div class="col-md-6 col-lg-4 d-flex" data-aos="zoom-in" data-aos-delay="100">
+      <div class="col-md-6 col-lg-4 d-flex" *ngFor="let feature of features">
         <div class="feature-card w-100">
-          <img src="assets/images/ai.jpg" alt="Adaptive Learning" class="rounded-circle feature-img">
-          <h5>Adaptive Learning Algorithm</h5>
-          <p>
-            Questions adapt to your performance, focusing on weak areas while reinforcing strengths.
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4 d-flex" data-aos="zoom-in" data-aos-delay="200">
-        <div class="feature-card w-100">
-          <img src="assets/images/self-study.jpg" alt="Personalized Plans" class="rounded-circle feature-img">
-          <h5>Personalized Study Plans</h5>
-          <p>
-            Get study schedules and recommendations tailored to your goals, whether MDCAT, SAT, GRE, or CSS.
-          </p>
-        </div>
-      </div>
-
-      <div class="col-md-6 col-lg-4 d-flex" data-aos="zoom-in" data-aos-delay="300">
-        <div class="feature-card w-100">
-          <img src="assets/images/mcqs.jpg" alt="Instant Results" class="rounded-circle feature-img">
-          <h5>Instant MCQ Results</h5>
-          <p>
-            Solve subject-wise MCQs and instantly check results to monitor your progress in real-time.
-          </p>
+          <img [src]="feature.img" [alt]="feature.title" class="rounded-circle feature-img">
+          <h5>{{ feature.title }}</h5>
+          <p>{{ feature.desc }}</p>
         </div>
       </div>
     </div>
 
     <!-- INTERACTIVE LEARNING -->
-    <div class="row align-items-center mb-5" data-aos="fade-up">
+    <div class="row align-items-center mb-5">
       <div class="col-md-6 order-md-2 mb-4 mb-md-0 text-center">
         <img src="assets/images/about3.jpg" alt="Interactive Learning" class="img-fluid rounded shadow-lg hover-scale">
       </div>
@@ -95,7 +73,7 @@
     </div>
 
     <!-- STATISTICS / NUMBERS SECTION -->
-    <div class="row text-center" data-aos="fade-up">
+    <div class="row text-center">
       <div class="col-md-4 mb-4">
         <h2 class="stat-number text-primary">50K+</h2>
         <p>Practice Questions</p>

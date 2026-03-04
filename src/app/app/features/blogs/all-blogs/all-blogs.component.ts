@@ -53,7 +53,7 @@ export class AllBlogsComponent {
       title: 'GRE Preparation Guide',
       date: 'Sep 15, 2025',
       excerpt: 'Crack GRE with expert strategies...',
-      image: 'assets/images/students.jpg',
+      image: 'assets/images/hero-section_img.webp',
       link: '/blog/7',
     }, 
   ];

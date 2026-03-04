@@ -1,162 +1,21 @@
-<div class="admin-dashboard container py-5" data-aos="fade-up">
+<div class="admin-dashboard container py-5" data-aos="fade-up" data-aos-duration="400">
   <h2 class="text-center mb-5">
     <i class="bi bi-speedometer2 me-2"></i> Admin Dashboard
   </h2>
 
   <div class="row g-4">
-    <!-- Manage Blogs -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-journal-text admin-icon"></i>
-        <h5 class="mt-3">Manage Blogs</h5>
-        <p class="text-muted small">Create, edit and delete blogs</p>
-        <a routerLink="/manage-blogs" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
+    <!-- Cards Array -->
+    <ng-container *ngFor="let card of adminCards">
+      <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-duration="400">
+        <div class="admin-card card shadow-sm text-center p-4">
+          <i [class]="card.icon + ' admin-icon'"></i>
+          <h5 class="mt-3">{{ card.title }}</h5>
+          <p class="text-muted small">{{ card.desc }}</p>
+          <a [routerLink]="card.link" class="btn btn-primary btn-sm mt-2">
+            Go <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
       </div>
-    </div>
-
-    <!-- Manage Questions -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-question-circle admin-icon"></i>
-        <h5 class="mt-3">Manage Biology</h5>
-        <p class="text-muted small">Create and manage quizzes</p>
-        <a routerLink="/manage-biology" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage Questions -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-question-circle admin-icon"></i>
-        <h5 class="mt-3">Manage Chemistry</h5>
-        <p class="text-muted small">Create and manage quizzes</p>
-        <a routerLink="/manage-chemistry" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage Questions -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-question-circle admin-icon"></i>
-        <h5 class="mt-3">Manage Physics</h5>
-        <p class="text-muted small">Create and manage quizzes</p>
-        <a routerLink="/manage-physics" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage Questions -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-question-circle admin-icon"></i>
-        <h5 class="mt-3">Manage Math</h5>
-        <p class="text-muted small">Create and manage quizzes</p>
-        <a routerLink="/manage-math" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-   
-    <!-- Manage Exams -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-file-earmark-text admin-icon"></i>
-        <h5 class="mt-3">Manage Data Analysis</h5>
-        <p class="text-muted small">Add and organize exam content</p>
-        <a routerLink="/manage-data-analysis" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage Exams -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-file-earmark-text admin-icon"></i>
-        <h5 class="mt-3">Manage Algebra</h5>
-        <p class="text-muted small">Add and organize exam content</p>
-        <a routerLink="/manage-algebra" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage Exams -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-file-earmark-text admin-icon"></i>
-        <h5 class="mt-3">Manage Geometry</h5>
-        <p class="text-muted small">Add and organize exam content</p>
-        <a routerLink="/manage-geometry" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage Exams -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-file-earmark-text admin-icon"></i>
-        <h5 class="mt-3">Manage Grammer</h5>
-        <p class="text-muted small">Add and organize exam content</p>
-        <a routerLink="/manage-grammer" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage Exams -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-file-earmark-text admin-icon"></i>
-        <h5 class="mt-3">Manage Reading & Writing Exam</h5>
-        <p class="text-muted small">Add and organize exam content</p>
-        <a routerLink="/manage-reading-writing" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage GRE Exams -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-file-earmark-text admin-icon"></i>
-        <h5 class="mt-3">Manage All GRE Exams</h5>
-        <p class="text-muted small">Add and organize exam content</p>
-        <a routerLink="/all-gre-exams" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage GMAT Exams -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-file-earmark-text admin-icon"></i>
-        <h5 class="mt-3">Manage All GMAT Exams</h5>
-        <p class="text-muted small">Add and organize exam content</p>
-        <a routerLink="/all-gmat-exams" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage IELTS Exams -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-file-earmark-text admin-icon"></i>
-        <h5 class="mt-3">Manage All IELTS Exams</h5>
-        <p class="text-muted small">Add and organize exam content</p>
-        <a routerLink="/all-ielts-exams" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
-    <!-- Manage CSS Exams -->
-    <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
-      <div class="admin-card card shadow-sm text-center p-4">
-        <i class="bi bi-file-earmark-text admin-icon"></i>
-        <h5 class="mt-3">Manage All CSS Exams</h5>
-        <p class="text-muted small">Add and organize exam content</p>
-        <a routerLink="/all-css-exams" class="btn btn-primary btn-sm mt-2">
-          Go <i class="bi bi-arrow-right"></i>
-        </a>
-      </div>
-    </div>
+    </ng-container>
+  </div>
+</div>
