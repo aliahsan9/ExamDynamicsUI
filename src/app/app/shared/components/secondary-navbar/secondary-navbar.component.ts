@@ -1,12 +1,11 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import * as AOS from 'aos';
-import { AiAssistantRoutingModule } from "../../../features/ai-assistant/ai-assistant/ai-assistant-routing.module";
 
 @Component({
   selector: 'app-secondary-navbar',
   templateUrl: './secondary-navbar.component.html',
   styleUrls: ['./secondary-navbar.component.scss'],
-  imports: [AiAssistantRoutingModule]
+  imports: []
 })
 export class SecondaryNavbarComponent implements OnInit, AfterViewInit {
   @ViewChild('examLinks') examLinks!: ElementRef;

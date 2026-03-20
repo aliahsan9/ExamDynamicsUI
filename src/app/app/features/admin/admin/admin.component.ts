@@ -9,7 +9,6 @@ import { RouterModule } from '@angular/router';
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
-// In your component.ts
 adminCards = [
   { icon: 'bi bi-question-circle', title: 'Manage Biology', desc: 'Create and manage quizzes', link: '/manage-biology' },
   { icon: 'bi bi-question-circle', title: 'Manage Chemistry', desc: 'Create and manage quizzes', link: '/manage-chemistry' },
