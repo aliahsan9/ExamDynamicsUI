@@ -62,7 +62,7 @@ import { ChatComponent } from './app/features/chat/chat.component';
 import { LoaderComponent } from './app/shared/components/loader/loader.component';
 
 export const routes: Routes = [
-  // ✅ Public routes
+  //  Public routes
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },

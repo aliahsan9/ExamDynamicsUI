@@ -21,7 +21,7 @@ export class ManageBiologyComponent implements OnInit {
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
 
-  // ✅ Biology examId
+  // Biology examId
   readonly BIOLOGY_EXAM_ID = 1;
 
   constructor(
@@ -36,20 +36,20 @@ export class ManageBiologyComponent implements OnInit {
     this.addOption();
   }
 
-  // ✅ initialize form (added explanation)
+  // initialize form (added explanation)
   initForm() {
     this.questionForm = this.fb.group({
       examId: [this.BIOLOGY_EXAM_ID, Validators.required],
       topicId: [1, Validators.required],
       text: ['', Validators.required],
-      explanation: ['', Validators.required], // ✅ added explanation
+      explanation: ['', Validators.required], 
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
     });
   }
 
-  // ✅ getter for options array
+  // getter for options array
   get options(): FormArray {
     return this.questionForm.get('options') as FormArray;
   }
@@ -65,7 +65,7 @@ export class ManageBiologyComponent implements OnInit {
     this.options.removeAt(index);
   }
 
-  // ✅ load only Biology questions
+  // load only Biology questions
   loadBiologyQuestions() {
     this.questionService.getAll().subscribe(qs => {
       this.biologyQuestions = qs.filter(q => q.examId === this.BIOLOGY_EXAM_ID);
@@ -78,7 +78,7 @@ export class ManageBiologyComponent implements OnInit {
     });
   }
 
-  // ✅ submit question (added explanation in create/update)
+  // submit question (added explanation in create/update)
   onSubmit() {
     if (this.questionForm.invalid) return;
 
@@ -91,7 +91,7 @@ export class ManageBiologyComponent implements OnInit {
         topicId: formValue.topicId,
         subjectId: 0, // adjust if subjectId is needed
         text: formValue.text,
-        explanation: formValue.explanation, // ✅ include explanation
+        explanation: formValue.explanation, // include explanation
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -105,7 +105,7 @@ export class ManageBiologyComponent implements OnInit {
         examId: this.BIOLOGY_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
-        explanation: formValue.explanation, // ✅ include explanation
+        explanation: formValue.explanation, // include explanation
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -126,7 +126,7 @@ export class ManageBiologyComponent implements OnInit {
     }
   }
 
-  // ✅ edit Biology question (added explanation)
+  // edit Biology question (added explanation)
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
@@ -135,7 +135,7 @@ export class ManageBiologyComponent implements OnInit {
       examId: this.BIOLOGY_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
-      explanation: question.explanation, // ✅ include explanation
+      explanation: question.explanation, // include explanation
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -166,7 +166,7 @@ export class ManageBiologyComponent implements OnInit {
       examId: this.BIOLOGY_EXAM_ID,
       topicId: 1,
       text: '',
-      explanation: '', // ✅ reset explanation
+      explanation: '', // reset explanation
       questionType: 'MCQ',
       correctAnswer: ''
     });

@@ -24,7 +24,7 @@
     </div>
         <button type="button" class="btn btn-secondary btn-sm mb-3" (click)="addOption()">+Add Option</button>
 
-        <!-- ✅ New Explanation field -->
+        <!-- New Explanation field -->
     <div class="mb-3">
       <label for="explanation" class="form-label fw-bold">Explanation</label>
       <textarea id="explanation" class="form-control" formControlName="explanation" rows="2" placeholder="Enter explanation for the correct answer"></textarea>
@@ -56,7 +56,7 @@
             <small class="text-muted">Correct Answer: {{ question.correctAnswer }}</small>
           </div>
 
-          <!-- ✅ Show explanation -->
+          <!--  Show explanation -->
           <div class="mt-1">
             <small><strong>Explanation:</strong> {{ question.explanation || 'No explanation provided.' }}</small>
           </div>

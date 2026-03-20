@@ -31,11 +31,11 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.authService.register(this.registerForm.value).subscribe({
         next: (response) => {
-          // ✅ Show success message from backend
+          // Show success message from backend
           this.successMessage = response.message || 'Registration successful!';
           this.errorMessage = '';
 
-          // ⏳ Redirect after short delay
+          // Redirect after short delay
           setTimeout(() => {
             this.router.navigate(['/']);
           }, 1500);
