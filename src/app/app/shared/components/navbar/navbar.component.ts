@@ -15,17 +15,17 @@ export class NavbarComponent implements OnInit {
   menuOpen = false;
   isLoggedIn = false;
 
-  navLinks = [
-    { label: 'Home', path: '/' },
-    { label: 'About', path: '/about' },
-    { label: 'Exams', path: '/exams' },
-    { label: 'AI Chatbot', path: '/chat' },
-    { label: 'News', path: '/subscribe' },
-    { label: 'Blogs', path: '/blogs' },
-    { label: 'FAQs', path: '/faq' },
-    { label: 'Privacy', path: '/privacy' },
-    { label: 'Contact', path: '/contact' },
-  ];
+ navLinks = [
+  { label: 'Home', path: '/' },
+  { label: 'About', path: '/about' },
+  { label: 'Exams', path: '/exams' },
+  { label: 'AI Chatbot', path: '/chat' },
+  { label: 'News', path: '/subscribe' },
+  { label: 'Blogs', href: 'https://examdynamicsdocs.netlify.app/articles/my-first-blog' },
+  { label: 'FAQs', path: '/faq' },
+  { label: 'Privacy', path: '/privacy' },
+  { label: 'Contact', path: '/contact' },
+];
 
   constructor(
     private authService: AuthService,
