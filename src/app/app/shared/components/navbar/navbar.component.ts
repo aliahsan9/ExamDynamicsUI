@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   { label: 'Exams', path: '/exams' },
   { label: 'AI Chatbot', path: '/chat' },
   { label: 'News', path: '/subscribe' },
-  { label: 'Blogs', href: 'https://examdynamicsdocs.netlify.app/articles/my-first-blog' },
+  { label: 'Blogs', href: 'https://examdynamicsdocs.netlify.app/articles/introduction' },
   { label: 'FAQs', path: '/faq' },
   { label: 'Privacy', path: '/privacy' },
   { label: 'Contact', path: '/contact' },
