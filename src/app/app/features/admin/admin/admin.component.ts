@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
 export class AdminComponent {
 // In your component.ts
 adminCards = [
-  { icon: 'bi bi-journal-text', title: 'Manage Blogs', desc: 'Create, edit and delete blogs', link: '/manage-blogs' },
   { icon: 'bi bi-question-circle', title: 'Manage Biology', desc: 'Create and manage quizzes', link: '/manage-biology' },
   { icon: 'bi bi-question-circle', title: 'Manage Chemistry', desc: 'Create and manage quizzes', link: '/manage-chemistry' },
   { icon: 'bi bi-question-circle', title: 'Manage Physics', desc: 'Create and manage quizzes', link: '/manage-physics' },
