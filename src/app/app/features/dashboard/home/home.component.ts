@@ -5,13 +5,12 @@ import { AiAssistantRoutingModule } from '../../ai-assistant/ai-assistant/ai-ass
 import { SubscriptionListComponent } from '../../subscriptions/subscription-list/subscription-list.component';
 import { AboutComponent } from '../about/about.component';
 import { ExamDetailComponent } from '../../exams/exam-detail/exam-detail.component';
-import { AllBlogsComponent } from '../../blogs/all-blogs/all-blogs.component';
 import { ContactComponent } from '../contact/contact.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, ExamDetailComponent, AboutComponent, SubscriptionListComponent, AiAssistantRoutingModule,ContactComponent, AllBlogsComponent],
+  imports: [CommonModule, RouterModule, ExamDetailComponent, AboutComponent, SubscriptionListComponent, AiAssistantRoutingModule,ContactComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
