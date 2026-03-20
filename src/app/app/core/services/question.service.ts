@@ -14,27 +14,27 @@ export class QuestionService {
 
   constructor(private http: HttpClient) {} 
 
-  // ✅ Get all questions
+  // Get all questions
   getAll(): Observable<QuestionDto[]> {
     return this.http.get<QuestionDto[]>(this.apiUrl);
   }
 
-  // ✅ Get question by Id
+  // Get question by Id
   getById(id: number): Observable<QuestionDto> {
     return this.http.get<QuestionDto>(`${this.apiUrl}/${id}`);
   }
 
-  // ✅ Create a new question
+  // Create a new question
   create(question: CreateQuestionDto): Observable<QuestionDto> {
     return this.http.post<QuestionDto>(this.apiUrl, question);
   }
 
-  // ✅ Update a question
+  // Update a question
   update(question: QuestionDto | UpdateQuestionDto & { id: number }): Observable<QuestionDto> {
     return this.http.put<QuestionDto>(this.apiUrl, question);
   }
 
-  // ✅ Delete a question
+  // Delete a question
   delete(id: number): Observable<{ message: string }> {
     return this.http.delete<{ message: string }>(`${this.apiUrl}/${id}`);
   }

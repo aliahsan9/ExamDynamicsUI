@@ -1,5 +1,3 @@
-// src/app/models/quiz.model.ts
-
 // For Create Quiz
 export interface QuizCreateDto {
   title: string;

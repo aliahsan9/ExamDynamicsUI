@@ -12,7 +12,7 @@ export interface ContactMessageDto {
   providedIn: 'root'
 })
 export class ContactService {
-   private apiUrl = `${environment.apiUrl}/contact/send`; // ✅ Change this to your backend URL
+   private apiUrl = `${environment.apiUrl}/contact/send`; 
 
   constructor(private http: HttpClient) {}
 

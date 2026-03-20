@@ -135,13 +135,13 @@ export const routes: Routes = [
   //Users SAT router
   {path: 'sat-detail', component:SatDetailComponent},
 
-  // ✅ Normal user dashboard (any logged-in user)
+  // Normal user dashboard (any logged-in user)
   { path: 'dashboard', component: HomeComponent, canActivate: [authGuard] },
 
-  // ✅ Admin-only dashboard
+  // Admin-only dashboard
   // { path: 'admin', component: AdminComponent, canActivate: [authGuard, adminGuard] },
   { path: 'admin', component: AdminComponent},
 
-  // ✅ Wildcard redirect for unknown routes
+  // Wildcard redirect for unknown routes
   { path: '**', redirectTo: '' }
 ];

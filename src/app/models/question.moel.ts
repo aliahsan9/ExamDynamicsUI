@@ -1,7 +1,7 @@
 // For creating a question
 export interface CreateQuestionDto {
   examId: number;
-  topicId: number;          // ✅ required
+  topicId: number;         
   text: string;
   questionType: string;
   explanation?: string;

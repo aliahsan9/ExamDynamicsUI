@@ -1,5 +1,3 @@
-// models/contact-message.model.ts
-
 // For reading messages (GET responses)
 export interface ContactMessageDto {
   contactMessageId: number;

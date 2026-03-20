@@ -1,4 +1,3 @@
-// src/app/core/services/ai.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -20,7 +19,7 @@ export class AiService {
 
   constructor(private http: HttpClient) {}
 
-  // ✅ This method MUST exist
+  //  This method MUST exist
   askQuestion(request: ChatRequestDto): Observable<ChatResponseDto> {
     return this.http.post<ChatResponseDto>(`${this.apiUrl}/ask`, request);
   }

@@ -7,7 +7,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class MathService {
-  private apiUrl = `${environment.apiUrl}/math`; // Adjust to your backend API
+  private apiUrl = `${environment.apiUrl}/math`; 
 
   constructor(private http: HttpClient) {}
 
