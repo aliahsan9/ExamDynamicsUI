@@ -8,7 +8,7 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class AnswerService {
-   private apiUrl = `${environment.apiUrl}/answer`; // ✅ change to your backend URL
+   private apiUrl = `${environment.apiUrl}/answer`;
 
   constructor(private http: HttpClient) {} 
 

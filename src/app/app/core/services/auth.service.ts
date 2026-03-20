@@ -49,7 +49,7 @@ export class AuthService {
     );
   }
 
-  // ✅ Get userId from token
+  // Get userId from token
   getUserId(): number | null {
     const token = localStorage.getItem('token');
     if (!token) return null;
@@ -57,24 +57,24 @@ export class AuthService {
     try {
       const payload = JSON.parse(atob(token.split('.')[1])); // decode JWT
       return payload?.nameid ? Number(payload.nameid) : null; 
-      // ⚠️ Use 'sub' or 'userId' if your backend sets a different claim
+      // Use 'sub' or 'userId' if your backend sets a different claim
     } catch (e) {
       return null;
     }
   }
 
-  // ✅ Check if logged in
+  // Check if logged in
   isLoggedIn(): boolean {
     return this.hasToken();
   }
 
-  // ✅ Get roles as array
+  // Get roles as array
   getRoles(): string[] {
     const roles = localStorage.getItem('role');
     return roles ? roles.split(',') : [];
   }
 
-  // ✅ Logout
+  // Logout
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
