@@ -19,13 +19,19 @@
     <!-- Nav Links -->
     <div class="nav-menu" [class.open]="menuOpen">
 
-      <ul class="nav-links">
-        <li *ngFor="let link of navLinks">
-          <a routerLink="{{link.path}}" (click)="closeMenu()">
-            {{ link.label }}
-          </a>
-        </li>
-      </ul>
+     <ul class="nav-links">
+  <li *ngFor="let link of navLinks">
+    <!-- Internal route -->
+    <a *ngIf="link.path" [routerLink]="link.path" (click)="closeMenu()">
+      {{ link.label }}
+    </a>
+
+    <!-- External URL -->
+    <a *ngIf="link.href" [href]="link.href" target="_blank" rel="noopener noreferrer" (click)="closeMenu()">
+      {{ link.label }}
+    </a>
+  </li>
+</ul>
 
       <!-- Auth Section -->
       <div class="auth-section" *ngIf="!isLoggedIn; else profileBlock">
