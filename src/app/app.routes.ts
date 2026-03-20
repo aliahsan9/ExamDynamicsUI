@@ -7,7 +7,6 @@ import { authGuard } from './app/core/guards/auth.guard';
 import { adminGuard } from './app/core/guards/admin.guard';
 import { AboutComponent } from './app/features/dashboard/about/about.component';
 import { ManageExamsComponent } from './app/features/admin/manage-exams/manage-exams.component';
-import { ManageBlogsComponent } from './app/features/admin/manage-blogs/manage-blogs.component';
 import { ExamDetailComponent } from './app/features/exams/exam-detail/exam-detail.component';
 import { ManageQuestionsComponent } from './app/features/admin/manage-questions/manage-questions.component';
 import { ManageChemistryComponent } from './app/features/admin/manage-chemistry/manage-chemistry.component';
@@ -25,7 +24,6 @@ import { PrivacyPolicyComponent } from './app/features/dashboard/privacy-policy/
 import { FaqComponent } from './app/features/dashboard/faq/faq.component';
 import { SubscriptionListComponent } from './app/features/subscriptions/subscription-list/subscription-list.component';
 import { SingleExamComponent } from './app/features/exams/single-exam/single-exam.component';
-import { AllBlogsComponent } from './app/features/blogs/all-blogs/all-blogs.component';
 import { EcatQuizComponent } from './app/features/Quiz/ecat-quiz/ecat-quiz.component';
 import { MdcatQuizComponent } from './app/features/Quiz/mdcat-quiz/mdcat-quiz.component';
 import { NotesComponent } from './app/features/Notes/notes/notes.component';
@@ -61,7 +59,6 @@ import { ManageCssPoliticalScienceComponent } from './app/features/admin/css/man
 import { ManageCssIslamicStudiesComponent } from './app/features/admin/css/manage-css-islamic-studies/manage-css-islamic-studies.component';
 import { ScholarshipsComponent } from './app/features/dashboard/scholarships/scholarships.component';
 import { ChatComponent } from './app/features/chat/chat.component';
-import { SingleBlogComponent } from './app/features/blogs/single-blog/single-blog.component';
 import { LoaderComponent } from './app/shared/components/loader/loader.component';
 
 export const routes: Routes = [
@@ -77,9 +74,7 @@ export const routes: Routes = [
   { path: 'privacy', component: PrivacyPolicyComponent },
   { path: 'subscribe', component: SubscriptionListComponent },
   { path: 'faq', component: FaqComponent },
-  { path: 'blogs', component: AllBlogsComponent },
   { path: 'notes', component: NotesComponent },
-    { path: 'blog/:id', component: SingleBlogComponent },
     { path: 'exams', component: ExamDetailComponent },
     { path: 'exam/:id', component: SingleExamComponent },
     { path: 'ecat-quiz', component: EcatQuizComponent },
@@ -91,7 +86,6 @@ export const routes: Routes = [
 
   //Admin paths
   {path: 'manage-exams', component: ManageExamsComponent},
-  {path: 'manage-blogs', component: ManageBlogsComponent},
   {path: 'manage-questions', component: ManageQuestionsComponent},
   {path: 'manage-biology', component: ManageBiologyComponent},
   {path: 'manage-chemistry', component: ManageChemistryComponent},
