@@ -21,7 +21,7 @@ export class ManagePhysicsComponent implements OnInit {
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
 
-  // ✅ Physics examId
+  // Physics examId
   readonly PHYSICS_EXAM_ID = 3;
 
   constructor(
@@ -36,25 +36,25 @@ export class ManagePhysicsComponent implements OnInit {
     this.addOption(); // start with one option
   }
 
-  // ✅ initialize form (added explanation)
+  // initialize form (added explanation)
   initForm() {
     this.questionForm = this.fb.group({
       examId: [this.PHYSICS_EXAM_ID, Validators.required],
       topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
-      explanation: ['', Validators.required], // ✅ new explanation field
+      explanation: ['', Validators.required], // new explanation field
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
     });
   }
 
-  // ✅ getter for options array
+  // getter for options array
   get options(): FormArray {
     return this.questionForm.get('options') as FormArray;
   }
 
-  // ✅ add option
+  // add option
   addOption() {
     this.options.push(this.fb.group({
       text: ['', Validators.required],
@@ -62,12 +62,12 @@ export class ManagePhysicsComponent implements OnInit {
     }));
   }
 
-  // ✅ remove option
+  // remove option
   removeOption(index: number) {
     this.options.removeAt(index);
   }
 
-  // ✅ load only Physics questions
+  // load only Physics questions
   loadPhysicsQuestions() {
     this.questionService.getAll().subscribe(qs => {
       this.physicsQuestions = qs.filter(q => q.examId === this.PHYSICS_EXAM_ID);
@@ -80,7 +80,7 @@ export class ManagePhysicsComponent implements OnInit {
     });
   }
 
-  // ✅ submit question
+  // submit question
   onSubmit() {
     if (this.questionForm.invalid) return;
 
@@ -109,7 +109,7 @@ export class ManagePhysicsComponent implements OnInit {
         examId: this.PHYSICS_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
-        explanation: formValue.explanation, // ✅ added
+        explanation: formValue.explanation, // added
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -131,7 +131,7 @@ export class ManagePhysicsComponent implements OnInit {
     }
   }
 
-  // ✅ edit Physics question (added explanation)
+  // edit Physics question (added explanation)
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
@@ -140,7 +140,7 @@ export class ManagePhysicsComponent implements OnInit {
       examId: this.PHYSICS_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
-      explanation: question.explanation, // ✅ added
+      explanation: question.explanation, // added
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -157,7 +157,7 @@ export class ManagePhysicsComponent implements OnInit {
     });
   }
 
-  // ✅ delete Physics question
+  // delete Physics question
   deleteQuestion(id: number) {
     if (confirm('Are you sure you want to delete this Physics question?')) {
       this.questionService.delete(id).subscribe(() => {
@@ -166,7 +166,7 @@ export class ManagePhysicsComponent implements OnInit {
     }
   }
 
-  // ✅ reset form
+  // reset form
   resetForm() {
     this.isEditing = false;
     this.editingQuestionId = null;
@@ -174,11 +174,11 @@ export class ManagePhysicsComponent implements OnInit {
       examId: this.PHYSICS_EXAM_ID,
       topicId: 1,
       text: '',
-      explanation: '', // ✅ added
+      explanation: '', // added
       questionType: 'MCQ',
       correctAnswer: ''
     });
     this.options.clear();
     this.addOption(); 
-  }
+  } 
 }
