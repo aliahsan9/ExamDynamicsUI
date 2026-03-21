@@ -1,7 +1,7 @@
 <div class="container py-4">
   <h2 class="mb-3 text-primary">Manage Questions</h2>
 
-  <!-- ✅ Question Form -->
+  <!-- Question Form -->
   <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" class="card p-3 shadow-sm">
     <div class="mb-3">
       <label>Question Text</label>
@@ -31,7 +31,7 @@
 
   <hr class="my-4" />
 
-  <!-- ✅ Questions List -->
+  <!-- Questions List -->
   <h3 class="mb-3">All Questions</h3>
   <div *ngFor="let q of questions" class="card mb-3 shadow-sm">
     <div class="card-body">

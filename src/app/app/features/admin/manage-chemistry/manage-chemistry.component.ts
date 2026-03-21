@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-manage-chemistry',
-  standalone: true,
+  standalone: true, 
   imports: [CommonModule, RouterModule, ReactiveFormsModule],
   templateUrl: './manage-chemistry.component.html',
   styleUrls: ['./manage-chemistry.component.scss']
@@ -21,7 +21,7 @@ export class ManageChemistryComponent implements OnInit {
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
 
-  // ✅ Chemistry examId (replace with actual ID for Chemistry subject in your DB)
+  // Chemistry examId (replace with actual ID for Chemistry subject in your DB)
   readonly CHEMISTRY_EXAM_ID = 2;
 
   constructor(
@@ -36,25 +36,25 @@ export class ManageChemistryComponent implements OnInit {
     this.addOption(); // start with one option
   }
 
-  // ✅ initialize form
+  // initialize form
   initForm() {
     this.questionForm = this.fb.group({
       examId: [this.CHEMISTRY_EXAM_ID, Validators.required],
       topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
-      explanation: [''], // ✅ NEW
+      explanation: [''], // NEW
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
     });
   }
 
-  // ✅ getter for options array
+  // getter for options array
   get options(): FormArray {
     return this.questionForm.get('options') as FormArray;
   }
 
-  // ✅ add option
+  // add option
   addOption() {
     this.options.push(this.fb.group({
       text: ['', Validators.required],
@@ -62,12 +62,12 @@ export class ManageChemistryComponent implements OnInit {
     }));
   }
 
-  // ✅ remove option
+  // remove option
   removeOption(index: number) {
     this.options.removeAt(index);
   }
 
-  // ✅ load only Chemistry questions
+  // load only Chemistry questions
   loadChemistryQuestions() {
     this.questionService.getAll().subscribe(qs => {
       this.chemistryQuestions = qs.filter(q => q.examId === this.CHEMISTRY_EXAM_ID);
@@ -80,7 +80,7 @@ export class ManageChemistryComponent implements OnInit {
     });
   }
 
-  // ✅ submit question
+  // submit question
   onSubmit() {
     if (this.questionForm.invalid) return;
 
@@ -101,7 +101,7 @@ export class ManageChemistryComponent implements OnInit {
         examId: this.CHEMISTRY_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
-        explanation: formValue.explanation, // ✅ NEW
+        explanation: formValue.explanation, // NEW
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -123,7 +123,7 @@ export class ManageChemistryComponent implements OnInit {
     }
   }
 
-  // ✅ edit Chemistry question
+  // edit Chemistry question
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
@@ -132,7 +132,7 @@ export class ManageChemistryComponent implements OnInit {
       examId: this.CHEMISTRY_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
-      explanation: question.explanation || '', // ✅ NEW
+      explanation: question.explanation || '', // NEW
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -149,7 +149,7 @@ export class ManageChemistryComponent implements OnInit {
     });
   }
 
-  // ✅ delete Chemistry question
+  // delete Chemistry question
   deleteQuestion(id: number) {
     if (confirm('Are you sure you want to delete this Chemistry question?')) {
       this.questionService.delete(id).subscribe(() => {
@@ -158,7 +158,7 @@ export class ManageChemistryComponent implements OnInit {
     }
   }
 
-  // ✅ reset form
+  // reset form
   resetForm() {
     this.isEditing = false;
     this.editingQuestionId = null;
@@ -166,7 +166,7 @@ export class ManageChemistryComponent implements OnInit {
       examId: this.CHEMISTRY_EXAM_ID,
       topicId: 1,
       text: '',
-      explanation: '', // ✅ NEW
+      explanation: '', // NEW
       questionType: 'MCQ',
       correctAnswer: ''
     });

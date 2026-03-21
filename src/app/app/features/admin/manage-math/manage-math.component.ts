@@ -21,7 +21,7 @@ export class ManageMathComponent implements OnInit {
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
 
-  // ✅ Math examId (replace with actual ID for Math subject in your DB)
+  // Math examId (replace with actual ID for Math subject in your DB)
   readonly MATH_EXAM_ID = 4;
 
   constructor(
@@ -36,25 +36,25 @@ export class ManageMathComponent implements OnInit {
     this.addOption(); // start with one option
   }
 
-  // ✅ initialize form
+  // initialize form
   initForm() {
     this.questionForm = this.fb.group({
       examId: [this.MATH_EXAM_ID, Validators.required],
       topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
-      explanation: [''], // ✅ NEW
+      explanation: [''], // NEW
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
     });
   }
 
-  // ✅ getter for options array
+  // getter for options array
   get options(): FormArray {
     return this.questionForm.get('options') as FormArray;
   }
 
-  // ✅ add option
+  // add option
   addOption() {
     this.options.push(this.fb.group({
       text: ['', Validators.required],
@@ -62,12 +62,12 @@ export class ManageMathComponent implements OnInit {
     }));
   }
 
-  // ✅ remove option
+  // remove option
   removeOption(index: number) {
     this.options.removeAt(index);
   }
 
-  // ✅ load only Math questions
+  // load only Math questions
   loadMathQuestions() {
     this.questionService.getAll().subscribe(qs => {
       this.mathQuestions = qs.filter(q => q.examId === this.MATH_EXAM_ID);
@@ -80,7 +80,7 @@ export class ManageMathComponent implements OnInit {
     });
   }
 
-  // ✅ submit question
+  // submit question
   onSubmit() {
     if (this.questionForm.invalid) return;
 
@@ -101,7 +101,7 @@ export class ManageMathComponent implements OnInit {
         examId: this.MATH_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
-        explanation: formValue.explanation, // ✅ NEW
+        explanation: formValue.explanation, // NEW
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -123,7 +123,7 @@ export class ManageMathComponent implements OnInit {
     }
   }
 
-  // ✅ edit Math question
+  // edit Math question
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
@@ -132,7 +132,7 @@ export class ManageMathComponent implements OnInit {
       examId: this.MATH_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
-      explanation: question.explanation || '', // ✅ NEW
+      explanation: question.explanation || '', // NEW
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -149,7 +149,7 @@ export class ManageMathComponent implements OnInit {
     });
   }
 
-  // ✅ delete Math question
+  // delete Math question
   deleteQuestion(id: number) {
     if (confirm('Are you sure you want to delete this Math question?')) {
       this.questionService.delete(id).subscribe(() => {
@@ -158,7 +158,7 @@ export class ManageMathComponent implements OnInit {
     }
   }
 
-  // ✅ reset form
+  // reset form
   resetForm() {
     this.isEditing = false;
     this.editingQuestionId = null;
@@ -166,7 +166,7 @@ export class ManageMathComponent implements OnInit {
       examId: this.MATH_EXAM_ID,
       topicId: 1,
       text: '',
-      explanation: '', // ✅ NEW
+      explanation: '', // NEW
       questionType: 'MCQ',
       correctAnswer: ''
     });
