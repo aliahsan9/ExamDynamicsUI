@@ -15,7 +15,7 @@ import { OptionService } from '../../../core/services/option.service';
   styleUrls: ['./single-exam.component.scss']
 })
 export class SingleExamComponent implements OnInit {
-  examId!: number;
+  examId!: number; // Set id to integer
   questions: QuestionDto[] = [];
   optionsMap: { [key: number]: OptionDto[] } = {};
   currentIndex: number = 0;
