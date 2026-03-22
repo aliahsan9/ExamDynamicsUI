@@ -56,7 +56,6 @@ import { ManageCssInternationalRelationsComponent } from './app/features/admin/c
 import { ManageCssPakistanAffairsComponent } from './app/features/admin/css/manage-css-pakistan-affairs/manage-css-pakistan-affairs.component';
 import { ManageCssPoliticalScienceComponent } from './app/features/admin/css/manage-css-political-science/manage-css-political-science.component';
 import { ManageCssIslamicStudiesComponent } from './app/features/admin/css/manage-css-islamic-studies/manage-css-islamic-studies.component';
-import { ScholarshipsComponent } from './app/features/dashboard/scholarships/scholarships.component';
 import { ChatComponent } from './app/features/chat/chat.component';
 import { LoaderComponent } from './app/shared/components/loader/loader.component';
 
@@ -69,7 +68,6 @@ export const routes: Routes = [
   { path: 'chat', component: ChatComponent },
   { path: 'loader', component: LoaderComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'scholarships', component: ScholarshipsComponent },
   { path: 'privacy', component: PrivacyPolicyComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'notes', component: NotesComponent },
