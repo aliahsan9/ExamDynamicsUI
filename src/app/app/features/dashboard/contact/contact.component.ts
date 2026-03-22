@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 })
 export class ContactComponent {
   contact: ContactMessageDto = {
-    email: '',
+    userEmail: '',
     message: ''
   };
 
@@ -30,7 +30,7 @@ export class ContactComponent {
     this.contactService.sendMessage(this.contact).subscribe({
       next: () => {
         this.successMessage = 'Your message has been sent successfully!';
-        this.contact = { email: '', message: '' }; // reset form
+        this.contact = { userEmail: '', message: '' }; // reset form
         this.isSubmitting = false;
       },
       error: () => {
