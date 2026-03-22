@@ -1,62 +1,250 @@
-.notes-section {
-  background: linear-gradient(135deg, #f8f9fa, #eef2f7);
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=DM+Sans:wght@400;500&display=swap');
 
-  .text-gradient {
-    background: linear-gradient(45deg, #0dcaf0, #0d6efd);
+// ── Variables ──────────────────────────────────────────────
+:root {
+  --bg:         #07080f;
+  --surface:    #0f1120;
+  --border:     rgba(255,255,255,0.07);
+  --accent-1:   #5b8dee;
+  --accent-2:   #a78bfa;
+  --accent-glow:rgba(91,141,238,0.25);
+  --text-h:     #f0f2ff;
+  --text-b:     #8b93b4;
+  --radius:     20px;
+  --card-bg:    rgba(15,17,32,0.85);
+}
+
+// ── Section ────────────────────────────────────────────────
+.notes-section {
+  font-family: 'DM Sans', sans-serif;
+  position: relative;
+  background: var(--bg);
+  padding: 96px 0 110px;
+  overflow: hidden;
+}
+
+// Animated mesh background
+.notes-bg-mesh {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 20%, rgba(91,141,238,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 75%, rgba(167,139,250,0.10) 0%, transparent 60%);
+  pointer-events: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+
+// ── Header ─────────────────────────────────────────────────
+.notes-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.header-tag {
+  display: inline-block;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-1);
+  background: rgba(91,141,238,0.1);
+  border: 1px solid rgba(91,141,238,0.25);
+  border-radius: 100px;
+  padding: 6px 16px;
+  margin-bottom: 20px;
+}
+
+.notes-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 800;
+  color: var(--text-h);
+  line-height: 1.15;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+
+  .title-accent {
+    background: linear-gradient(120deg, var(--accent-1), var(--accent-2));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-
-  .notes-card {
-    border: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-    }
-
-    .exam-icon {
-      font-size: 2.5rem;
-      color: #0d6efd;
-    }
-
-    .notes-btn {
-      margin-top: 1rem;
-      border-radius: 30px;
-      padding: 0.5rem 1.5rem;
-      transition: 0.3s;
-
-      &:hover {
-        background: #0dcaf0;
-        border-color: #0dcaf0;
-      }
-    }
   }
 }
 
-// Responsive Adjustments
+.notes-subtitle {
+  font-size: 1rem;
+  color: var(--text-b);
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+// ── Grid ───────────────────────────────────────────────────
+.notes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+// ── Card ───────────────────────────────────────────────────
+.note-card {
+  position: relative;
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  transition: transform 0.32s cubic-bezier(.22,.68,0,1.2), border-color 0.3s, box-shadow 0.3s;
+  animation: cardReveal 0.55s ease both;
+  animation-delay: var(--delay, 0ms);
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-6px) scale(1.01);
+    border-color: rgba(91,141,238,0.35);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.35), 0 0 0 1px rgba(91,141,238,0.15);
+
+    .card-glow { opacity: 1; }
+    .icon-wrap { background: linear-gradient(135deg, var(--accent-1), var(--accent-2)); box-shadow: 0 8px 28px var(--accent-glow); }
+    .icon-wrap i { color: #fff; }
+    .btn-arrow { transform: translateX(4px); }
+    .card-btn { background: linear-gradient(90deg, var(--accent-1), var(--accent-2)); color: #fff; border-color: transparent; }
+  }
+}
+
+// Radial glow on hover
+.card-glow {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.card-inner {
+  padding: 28px 26px 24px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+// Icon
+.icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: rgba(91,141,238,0.1);
+  border: 1px solid rgba(91,141,238,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, box-shadow 0.3s;
+
+  i {
+    font-size: 1.4rem;
+    color: var(--accent-1);
+    transition: color 0.3s;
+  }
+}
+
+// Badge
+.exam-badge {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  background: rgba(167,139,250,0.1);
+  border: 1px solid rgba(167,139,250,0.2);
+  border-radius: 100px;
+  padding: 4px 10px;
+  align-self: flex-start;
+}
+
+// Title
+.card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+// Description
+.card-desc {
+  font-size: 0.875rem;
+  color: var(--text-b);
+  line-height: 1.65;
+  margin-bottom: 22px;
+  flex: 1;
+}
+
+// Button
+.card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--accent-1);
+  background: rgba(91,141,238,0.08);
+  border: 1px solid rgba(91,141,238,0.22);
+  border-radius: 100px;
+  padding: 9px 18px;
+  text-decoration: none;
+  transition: background 0.25s, color 0.25s, border-color 0.25s;
+  align-self: flex-start;
+
+  .btn-arrow {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+}
+
+// ── Animation ──────────────────────────────────────────────
+@keyframes cardReveal {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ── Responsive ─────────────────────────────────────────────
 @media (max-width: 768px) {
-  .notes-section {
-    .card-title {
-      font-size: 1rem;
-    }
-    .exam-icon {
-      font-size: 2rem;
-    }
-    .notes-btn {
-      padding: 0.4rem 1rem;
-      font-size: 0.9rem;
-    }
-  }
+  .notes-section { padding: 64px 0 80px; }
+  .notes-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .card-inner { padding: 22px 18px 20px; }
+  .notes-title { font-size: 1.9rem; }
 }
 
-@media (max-width: 480px) {
-  .notes-section {
-    .card-text {
-      font-size: 0.85rem;
-    }
-  }
+@media (max-width: 520px) {
+  .notes-grid { grid-template-columns: 1fr; }
+  .notes-title { font-size: 1.7rem; }
 }
