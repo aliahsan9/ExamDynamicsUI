@@ -6,6 +6,7 @@ import { QuestionService } from '../../../core/services/question.service';
 import { OptionService } from '../../../core/services/option.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-manage-physics',
@@ -57,6 +58,7 @@ export class ManagePhysicsComponent implements OnInit {
   // add option
   addOption() {
     this.options.push(this.fb.group({
+      optionId: [null as number | null],
       text: ['', Validators.required],
       isCorrect: [false]
     }));
@@ -99,10 +101,19 @@ export class ManagePhysicsComponent implements OnInit {
         correctAnswer: formValue.correctAnswer
       };
 
-      this.questionService.update(updateDto).subscribe(() => {
-        this.resetForm();
-        this.loadPhysicsQuestions();
-      });
+      const formOptions = this.options.getRawValue() as {
+        optionId?: number | null;
+        text: string;
+        isCorrect: boolean;
+      }[];
+
+      this.questionService
+        .update(updateDto)
+        .pipe(switchMap(() => this.optionService.syncOptionsForQuestion(this.editingQuestionId!, formOptions)))
+        .subscribe(() => {
+          this.resetForm();
+          this.loadPhysicsQuestions();
+        });
     } else {
       // Create new Physics question
       const newQuestion: CreateQuestionDto = {
@@ -150,6 +161,7 @@ export class ManagePhysicsComponent implements OnInit {
     this.optionService.getByQuestionId(question.questionId).subscribe(opts => {
       opts.forEach(opt => {
         this.options.push(this.fb.group({
+          optionId: [opt.optionId],
           text: [opt.text, Validators.required],
           isCorrect: [opt.isCorrect]
         }));

@@ -1,0 +1,114 @@
+<div class="perf-page container py-5">
+  <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
+    <div>
+      <h1 class="title mb-1">Performance hub</h1>
+      <p class="text-muted mb-0">
+        Track progress over time. Data syncs from the server — this view refreshes every 30 seconds.
+      </p>
+      <p class="small text-muted mb-0" *ngIf="lastSynced">
+        Last updated: {{ lastSynced | date : 'medium' }}
+      </p>
+    </div>
+    <div class="d-flex gap-2">
+      <button type="button" class="btn btn-outline-primary" (click)="refreshNow()">Refresh now</button>
+      <a routerLink="/profile" class="btn btn-primary">Edit profile</a>
+    </div>
+  </div>
+
+  <div *ngIf="error" class="alert alert-warning">{{ error }}</div>
+
+  <div class="row g-4 mb-4" *ngIf="summary">
+    <div class="col-6 col-md-3">
+      <div class="stat-card">
+        <div class="stat-label">Exams completed</div>
+        <div class="stat-value">{{ summary.totalExamsCompleted }}</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="stat-card">
+        <div class="stat-label">Average %</div>
+        <div class="stat-value">{{ summary.averagePercentage | number : '1.0-1' }}%</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="stat-card">
+        <div class="stat-label">Best raw score</div>
+        <div class="stat-value">{{ summary.bestScore }}</div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="stat-card">
+        <div class="stat-label">Last exam</div>
+        <div class="stat-value small-line">
+          {{ summary.lastCompletedAtUtc ? (summary.lastCompletedAtUtc | date : 'mediumDate') : '—' }}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="card border-0 shadow-sm chart-card">
+        <div class="card-body">
+          <h2 class="h5 fw-bold mb-3">Score trend (30 days)</h2>
+          <div class="chart-wrap position-relative">
+            <div *ngIf="chartLoading" class="chart-skeleton position-absolute top-0 start-0 w-100 rounded-3"></div>
+            <canvas #lineCanvas height="120"></canvas>
+          </div>
+          <p *ngIf="!chartLoading && chartPoints.length === 0" class="text-muted mb-0 mt-2">
+            Complete a few MCQ exams to see your trend line here.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-body">
+          <h2 class="h5 fw-bold mb-3">Recent activity</h2>
+          <ul class="activity-list list-unstyled mb-0">
+            <li *ngFor="let a of activity" class="activity-item">
+              <span class="dot"></span>
+              <div>
+                <div class="fw-semibold">{{ a.activityType }}</div>
+                <div class="small text-muted" *ngIf="a.description">{{ a.description }}</div>
+                <div class="tiny text-muted">{{ a.createdAtUtc | date : 'short' }}</div>
+              </div>
+            </li>
+          </ul>
+          <p *ngIf="activity.length === 0" class="text-muted small mb-0">No activity yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card border-0 shadow-sm mt-4">
+    <div class="card-body">
+      <h2 class="h5 fw-bold mb-3">Recent exam attempts</h2>
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>Exam</th>
+              <th>Score</th>
+              <th>%</th>
+              <th>When</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let e of attempts">
+              <td>{{ e.examTitle }}</td>
+              <td>{{ e.score }} / {{ e.totalQuestions }}</td>
+              <td>{{ e.percentage | number : '1.0-1' }}%</td>
+              <td>{{ e.completedAtUtc | date : 'short' }}</td>
+              <td>
+                <a class="btn btn-sm btn-outline-primary" [routerLink]="['/certificate', e.id]">Certificate</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p *ngIf="attempts.length === 0" class="text-muted mb-0">No attempts recorded yet.</p>
+    </div>
+  </div>
+</div>

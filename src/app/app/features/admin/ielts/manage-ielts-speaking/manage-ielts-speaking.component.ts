@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { switchMap } from 'rxjs';
 import { CreateQuestionDto, QuestionDto, UpdateQuestionDto } from '../../../../../models/question.moel';
 import { OptionCreate, OptionDto } from '../../../../../models/option.model';
 import { QuestionService } from '../../../../core/services/question.service';
@@ -96,7 +97,16 @@ export class ManageIeltsSpeakingComponent implements OnInit {
         correctAnswer: formValue.correctAnswer
       };
 
-      this.questionService.update(updateDto).subscribe(() => {
+      const formOptions = this.options.getRawValue() as {
+        optionId?: number | null;
+        text: string;
+        isCorrect: boolean;
+      }[];
+
+      this.questionService
+        .update(updateDto)
+        .pipe(switchMap(() => this.optionService.syncOptionsForQuestion(this.editingQuestionId!, formOptions)))
+        .subscribe(() => {
         this.resetForm();
         this.loadChemistryQuestions();
       });

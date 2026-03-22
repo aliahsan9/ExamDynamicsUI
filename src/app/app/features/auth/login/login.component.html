@@ -44,18 +44,43 @@
         <div class="invalid-feedback">Password must be at least 6 characters</div>
       </div>
 
+      <div class="d-flex justify-content-end mb-2">
+        <a routerLink="/forgot-password" class="small text-decoration-none">Forgot password?</a>
+      </div>
+
            <!-- Error Message -->
       <div *ngIf="errorMessage" class="alert alert-danger py-2">{{ errorMessage }}</div>
 
       <!-- Sign In Button -->
       <button
         type="submit"
-        class="btn btn-primary w-100 mb-3 d-flex align-items-center justify-content-center"
+        class="btn btn-primary w-100 mb-2 d-flex align-items-center justify-content-center"
         [disabled]="loading"
       >
         <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
         Sign in
       </button>
+
+      <div class="d-grid gap-2 mb-3">
+        <button
+          type="button"
+          class="btn btn-outline-secondary d-flex align-items-center justify-content-center gap-2"
+          (click)="authService.startGoogleLogin()"
+          [disabled]="loading"
+        >
+          <i class="bi bi-google"></i>
+          Continue with Google
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary d-flex align-items-center justify-content-center gap-2"
+          (click)="authService.startFacebookLogin()"
+          [disabled]="loading"
+        >
+          <i class="bi bi-facebook"></i>
+          Continue with Facebook
+        </button>
+      </div>
 
         <!-- Signup Link -->
       <p class="text-center small">

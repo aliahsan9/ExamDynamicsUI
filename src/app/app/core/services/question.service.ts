@@ -29,9 +29,15 @@ export class QuestionService {
     return this.http.post<QuestionDto>(this.apiUrl, question);
   }
 
-  // Update a question
-  update(question: QuestionDto | UpdateQuestionDto & { id: number }): Observable<QuestionDto> {
-    return this.http.put<QuestionDto>(this.apiUrl, question);
+  // Update a question (strips nested options; maps legacy `id` to `questionId` for API binding)
+  update(question: QuestionDto | (UpdateQuestionDto & { id?: number }) | Record<string, unknown>): Observable<QuestionDto> {
+    const payload = { ...(question as Record<string, unknown>) };
+    delete payload['options'];
+    if (payload['id'] != null && payload['questionId'] == null) {
+      payload['questionId'] = payload['id'];
+    }
+    delete payload['id'];
+    return this.http.put<QuestionDto>(this.apiUrl, payload as unknown);
   }
 
   // Delete a question

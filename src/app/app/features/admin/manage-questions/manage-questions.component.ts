@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { QuestionDto, CreateQuestionDto } from '../../../../models/question.moel';
+import { QuestionDto, CreateQuestionDto, UpdateQuestionDto } from '../../../../models/question.moel';
 import { OptionDto, OptionCreate } from '../../../../models/option.model';
 import { QuestionService } from '../../../core/services/question.service';
 import { OptionService } from '../../../core/services/option.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-manage-questions',
@@ -37,6 +38,7 @@ export class ManageQuestionsComponent implements OnInit {
       examId: [1, Validators.required],   // hardcoded for demo, replace as needed
       topicId: [1, Validators.required],
       text: ['', Validators.required],
+      explanation: [''],
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([]) // dynamic options
@@ -51,6 +53,7 @@ export class ManageQuestionsComponent implements OnInit {
   // ✅ add option to form
   addOption() {
     this.options.push(this.fb.group({
+      optionId: [null as number | null],
       text: ['', Validators.required],
       isCorrect: [false]
     }));
@@ -81,17 +84,37 @@ export class ManageQuestionsComponent implements OnInit {
     const formValue = this.questionForm.value;
 
     if (this.isEditing && this.editingQuestionId) {
-      // Update
-      this.questionService.update({ ...formValue, id: this.editingQuestionId }).subscribe(() => {
-        this.resetForm();
-        this.loadQuestions();
-      });
+      const updateDto: UpdateQuestionDto = {
+        questionId: this.editingQuestionId,
+        examId: formValue.examId,
+        topicId: formValue.topicId,
+        subjectId: 0,
+        text: formValue.text,
+        explanation: formValue.explanation,
+        questionType: formValue.questionType,
+        correctAnswer: formValue.correctAnswer
+      };
+
+      const formOptions = this.options.getRawValue() as {
+        optionId?: number | null;
+        text: string;
+        isCorrect: boolean;
+      }[];
+
+      this.questionService
+        .update(updateDto)
+        .pipe(switchMap(() => this.optionService.syncOptionsForQuestion(this.editingQuestionId!, formOptions)))
+        .subscribe(() => {
+          this.resetForm();
+          this.loadQuestions();
+        });
     } else {
       // Create
       const newQuestion: CreateQuestionDto = {
         examId: formValue.examId,
         topicId: formValue.topicId,
         text: formValue.text,
+        explanation: formValue.explanation,
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -122,8 +145,9 @@ export class ManageQuestionsComponent implements OnInit {
       examId: question.examId,
       topicId: question.topicId,
       text: question.text,
+      explanation: question.explanation ?? '',
       questionType: question.questionType,
-      correctAnswer: question.questionType
+      correctAnswer: question.correctAnswer
     });
 
     // Clear and refill options
@@ -131,6 +155,7 @@ export class ManageQuestionsComponent implements OnInit {
     this.optionService.getByQuestionId(question.questionId).subscribe(opts => {
       opts.forEach(opt => {
         this.options.push(this.fb.group({
+          optionId: [opt.optionId],
           text: [opt.text, Validators.required],
           isCorrect: [opt.isCorrect]
         }));
@@ -155,6 +180,7 @@ export class ManageQuestionsComponent implements OnInit {
       examId: 1,
       topicId: 1,
       text: '',
+      explanation: '',
       questionType: 'MCQ',
       correctAnswer: ''
     });

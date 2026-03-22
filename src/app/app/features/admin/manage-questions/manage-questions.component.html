@@ -13,6 +13,11 @@
       <input type="text" formControlName="correctAnswer" class="form-control" placeholder="Enter correct answer" />
     </div>
 
+    <div class="mb-3">
+      <label>Explanation</label>
+      <textarea formControlName="explanation" class="form-control" rows="4" placeholder="Markdown or HTML: use ## for headings, lists, etc."></textarea>
+    </div>
+
     <div formArrayName="options">
       <h5>Options</h5>
       <div *ngFor="let opt of options.controls; let i = index" [formGroupName]="i" class="d-flex align-items-center mb-2">

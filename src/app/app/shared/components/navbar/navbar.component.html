@@ -40,7 +40,9 @@
       </div>
 
       <ng-template #profileBlock>
-        <div class="profile-section">
+        <div class="profile-section d-flex flex-wrap align-items-center gap-2">
+          <a routerLink="/profile" class="btn outline" (click)="closeMenu()">Profile</a>
+          <a routerLink="/performance" class="btn outline" (click)="closeMenu()">Performance</a>
           <button class="btn logout" (click)="logout()">Logout</button>
         </div>
       </ng-template>

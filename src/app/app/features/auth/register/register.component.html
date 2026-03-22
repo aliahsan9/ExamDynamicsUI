@@ -36,6 +36,17 @@
         />
       </div>
 
+      <div class="mb-3">
+        <label for="fullName" class="form-label fw-semibold">Full name</label>
+        <input
+          type="text"
+          id="fullName"
+          class="form-control"
+          formControlName="fullName"
+          placeholder="Your name (shown on certificates)"
+        />
+      </div>
+
       <!-- Email -->
       <div class="mb-3">
         <label for="email" class="form-label fw-semibold">Email</label>
@@ -60,8 +71,28 @@
         />
       </div>
 
+      <div class="d-grid gap-2 mb-3">
+        <button
+          type="button"
+          class="btn btn-outline-secondary d-flex align-items-center justify-content-center gap-2"
+          (click)="authService.startGoogleLogin()"
+        >
+          <i class="bi bi-google"></i>
+          Continue with Google
+        </button>
+        <button
+          type="button"
+          class="btn btn-outline-primary d-flex align-items-center justify-content-center gap-2"
+          (click)="authService.startFacebookLogin()"
+        >
+          <i class="bi bi-facebook"></i>
+          Continue with Facebook
+        </button>
+      </div>
+
       <!-- Register Button -->
       <button
+        type="submit"
         class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2"
         [disabled]="registerForm.invalid"
       >

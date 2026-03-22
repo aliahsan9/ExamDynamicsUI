@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
-import { OptionCreate, OptionDto, OptionUpdate } from '../../../models/option.model';
+import { OptionCreate, OptionDto, OptionFormSync, OptionUpdate } from '../../../models/option.model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +41,45 @@ export class OptionService {
   // Get all options by QuestionId
   getByQuestionId(questionId: number): Observable<OptionDto[]> {
     return this.http.get<OptionDto[]>(`${this.apiUrl}/question/${questionId}`);
+  }
+
+  /**
+   * After updating a question, apply option creates/updates/deletes so admin edits persist.
+   */
+  syncOptionsForQuestion(questionId: number, formOptions: OptionFormSync[]): Observable<void> {
+    return this.getByQuestionId(questionId).pipe(
+      switchMap((existing) => {
+        const withIds = formOptions.filter(
+          (o): o is OptionFormSync & { optionId: number } =>
+            o.optionId != null && o.optionId !== undefined
+        );
+        const newOnes = formOptions.filter((o) => o.optionId == null || o.optionId === undefined);
+
+        const keptIds = new Set(withIds.map((o) => o.optionId));
+        const toRemove = existing.filter((o) => !keptIds.has(o.optionId));
+
+        const deleteOps = toRemove.map((o) => this.delete(o.optionId));
+        const updateOps = withIds.map((o) =>
+          this.update(o.optionId, {
+            text: o.text,
+            isCorrect: o.isCorrect,
+            questionId
+          })
+        );
+        const createOps = newOnes.map((o) =>
+          this.create({
+            text: o.text,
+            isCorrect: o.isCorrect,
+            questionId
+          } as OptionCreate)
+        );
+
+        const all = [...deleteOps, ...updateOps, ...createOps];
+        if (all.length === 0) {
+          return of(void 0);
+        }
+        return forkJoin(all).pipe(map(() => void 0));
+      })
+    );
   }
 }

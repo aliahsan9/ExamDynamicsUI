@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { QuestionDto, CreateQuestionDto } from '../../../../models/question.moel';
+import { QuestionDto, CreateQuestionDto, UpdateQuestionDto } from '../../../../models/question.moel';
 import { OptionDto, OptionCreate } from '../../../../models/option.model';
 import { QuestionService } from '../../../core/services/question.service';
 import { OptionService } from '../../../core/services/option.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-manage-math',
@@ -57,6 +58,7 @@ export class ManageMathComponent implements OnInit {
   // add option
   addOption() {
     this.options.push(this.fb.group({
+      optionId: [null as number | null],
       text: ['', Validators.required],
       isCorrect: [false]
     }));
@@ -87,14 +89,30 @@ export class ManageMathComponent implements OnInit {
     const formValue = this.questionForm.value;
 
     if (this.isEditing && this.editingQuestionId) {
-      // Update
-      this.questionService.update({
-        ...formValue,
-        id: this.editingQuestionId
-      }).subscribe(() => {
-        this.resetForm();
-        this.loadMathQuestions();
-      });
+      const updateDto: UpdateQuestionDto = {
+        questionId: this.editingQuestionId,
+        examId: this.MATH_EXAM_ID,
+        topicId: formValue.topicId,
+        subjectId: 0,
+        text: formValue.text,
+        explanation: formValue.explanation,
+        questionType: formValue.questionType,
+        correctAnswer: formValue.correctAnswer
+      };
+
+      const formOptions = this.options.getRawValue() as {
+        optionId?: number | null;
+        text: string;
+        isCorrect: boolean;
+      }[];
+
+      this.questionService
+        .update(updateDto)
+        .pipe(switchMap(() => this.optionService.syncOptionsForQuestion(this.editingQuestionId!, formOptions)))
+        .subscribe(() => {
+          this.resetForm();
+          this.loadMathQuestions();
+        });
     } else {
       // Create new Math question
       const newQuestion: CreateQuestionDto = {
@@ -142,6 +160,7 @@ export class ManageMathComponent implements OnInit {
     this.optionService.getByQuestionId(question.questionId).subscribe(opts => {
       opts.forEach(opt => {
         this.options.push(this.fb.group({
+          optionId: [opt.optionId],
           text: [opt.text, Validators.required],
           isCorrect: [opt.isCorrect]
         }));

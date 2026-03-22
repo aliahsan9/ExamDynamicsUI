@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './app/features/dashboard/home/home.component';
 import { LoginComponent } from './app/features/auth/login/login.component';
+import { ForgotPasswordComponent } from './app/features/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './app/features/auth/reset-password/reset-password.component';
+import { AuthCallbackComponent } from './app/features/auth/auth-callback/auth-callback.component';
 import { AdminComponent } from './app/features/admin/admin/admin.component';
 import { RegisterComponent } from './app/features/auth/register/register.component';
 import { authGuard } from './app/core/guards/auth.guard';
@@ -57,12 +60,18 @@ import { ManageCssPoliticalScienceComponent } from './app/features/admin/css/man
 import { ManageCssIslamicStudiesComponent } from './app/features/admin/css/manage-css-islamic-studies/manage-css-islamic-studies.component';
 import { ChatComponent } from './app/features/chat/chat.component';
 import { LoaderComponent } from './app/shared/components/loader/loader.component';
+import { StudentProfileComponent } from './app/features/student/student-profile/student-profile.component';
+import { PerformanceDashboardComponent } from './app/features/student/performance-dashboard/performance-dashboard.component';
+import { CertificateViewComponent } from './app/features/student/certificate-view/certificate-view.component';
 
 export const routes: Routes = [
   //  Public routes
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'auth/callback', component: AuthCallbackComponent },
   { path: 'about', component: AboutComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'loader', component: LoaderComponent },
@@ -131,6 +140,9 @@ export const routes: Routes = [
 
   // Normal user dashboard (any logged-in user)
   { path: 'dashboard', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'profile', component: StudentProfileComponent, canActivate: [authGuard] },
+  { path: 'performance', component: PerformanceDashboardComponent, canActivate: [authGuard] },
+  { path: 'certificate/:attemptId', component: CertificateViewComponent, canActivate: [authGuard] },
 
   // Admin-only dashboard
   // { path: 'admin', component: AdminComponent, canActivate: [authGuard, adminGuard] },

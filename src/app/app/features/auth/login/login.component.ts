@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import AOS from 'aos';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommonModule } from '@angular/common';
@@ -20,12 +20,20 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
-    private router: Router
+    public authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
     AOS.init();
+
+    this.route.queryParamMap.subscribe((params) => {
+      const oauthErr = params.get('oauthError');
+      if (oauthErr) {
+        this.errorMessage = oauthErr;
+      }
+    });
 
     // Initialize Reactive Form
     this.loginForm = this.fb.group({
@@ -71,7 +79,7 @@ export class LoginComponent implements OnInit {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err?.error || 'Invalid email or password';
+        this.errorMessage = AuthService.getHttpErrorMessage(err);
       }
     });
   }

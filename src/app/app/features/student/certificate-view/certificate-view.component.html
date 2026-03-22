@@ -1,0 +1,52 @@
+<div class="cert-page py-5">
+  <div class="container">
+    <div *ngIf="loading" class="text-center py-5">
+      <div class="spinner-border text-primary"></div>
+    </div>
+
+    <div *ngIf="error && !loading" class="alert alert-danger max-w mx-auto">{{ error }}</div>
+
+    <div *ngIf="data && !loading" class="cert-actions no-print mb-4 d-flex flex-wrap gap-2 justify-content-center">
+      <button type="button" class="btn btn-primary btn-lg" (click)="print()">
+        <i class="bi bi-printer me-1"></i> Print / Save as PDF
+      </button>
+      <a routerLink="/performance" class="btn btn-outline-secondary btn-lg">Back to performance</a>
+    </div>
+
+    <div *ngIf="data && !loading" class="cert-frame mx-auto">
+      <div class="cert-inner">
+        <div class="cert-ribbon">ExamDynamics</div>
+        <p class="cert-eyebrow">Certificate of achievement</p>
+        <h1 class="cert-title">Outstanding performance</h1>
+        <p class="cert-presented">This certificate is proudly presented to</p>
+        <h2 class="cert-name">{{ data.studentName }}</h2>
+        <div class="cert-divider"></div>
+        <p class="cert-body">
+          For successfully completing the MCQ assessment
+          <strong>{{ data.examTitle }}</strong>
+          with a score of
+          <strong>{{ data.score }} / {{ data.totalQuestions }}</strong>
+          (<strong>{{ data.percentage | number : '1.0-1' }}%</strong>).
+        </p>
+        <div class="cert-meta row text-center mt-4">
+          <div class="col-md-4">
+            <div class="meta-label">Date</div>
+            <div class="meta-value">{{ data.completedAtUtc | date : 'longDate' }}</div>
+          </div>
+          <div class="col-md-4">
+            <div class="meta-label">Verification code</div>
+            <div class="meta-value code">{{ data.certificateCode }}</div>
+          </div>
+          <div class="col-md-4">
+            <div class="meta-label">Platform</div>
+            <div class="meta-value">ExamDynamics</div>
+          </div>
+        </div>
+        <div class="cert-footer mt-4">
+          <div class="seal">✦</div>
+          <p class="small text-muted mb-0">Share your progress — inspire fellow students.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

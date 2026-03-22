@@ -6,6 +6,7 @@ import { QuestionService } from '../../../core/services/question.service';
 import { OptionService } from '../../../core/services/option.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-manage-biology',
@@ -96,7 +97,16 @@ export class ManageBiologyComponent implements OnInit {
         correctAnswer: formValue.correctAnswer
       };
 
-      this.questionService.update(updateDto).subscribe(() => {
+      const formOptions = this.options.getRawValue() as {
+        optionId?: number | null;
+        text: string;
+        isCorrect: boolean;
+      }[];
+
+      this.questionService
+        .update(updateDto)
+        .pipe(switchMap(() => this.optionService.syncOptionsForQuestion(this.editingQuestionId!, formOptions)))
+        .subscribe(() => {
         this.resetForm();
         this.loadBiologyQuestions();
       });

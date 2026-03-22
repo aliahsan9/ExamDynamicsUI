@@ -15,4 +15,11 @@ export interface OptionUpdate {
   text: string;
   isCorrect: boolean;
   questionId: number;
-} 
+}
+
+/** Used when syncing options after editing a question in admin. */
+export interface OptionFormSync {
+  optionId?: number | null;
+  text: string;
+  isCorrect: boolean;
+}
