@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { SubscriptionListComponent } from '../../subscriptions/subscription-list/subscription-list.component';
 import { AboutComponent } from '../about/about.component';
 import { ExamDetailComponent } from '../../exams/exam-detail/exam-detail.component';
 import { ContactComponent } from '../contact/contact.component';
@@ -9,7 +8,7 @@ import { ContactComponent } from '../contact/contact.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule, ExamDetailComponent, AboutComponent, SubscriptionListComponent, ContactComponent],
+  imports: [CommonModule, RouterModule, ExamDetailComponent, AboutComponent, ContactComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })

@@ -22,7 +22,6 @@ import { ManageReadingWritingComponent } from './app/features/admin/sat/manage-r
 import { SatDetailComponent } from './app/features/sat/sat-detail/sat-detail.component';
 import { PrivacyPolicyComponent } from './app/features/dashboard/privacy-policy/privacy-policy.component';
 import { FaqComponent } from './app/features/dashboard/faq/faq.component';
-import { SubscriptionListComponent } from './app/features/subscriptions/subscription-list/subscription-list.component';
 import { SingleExamComponent } from './app/features/exams/single-exam/single-exam.component';
 import { EcatQuizComponent } from './app/features/Quiz/ecat-quiz/ecat-quiz.component';
 import { MdcatQuizComponent } from './app/features/Quiz/mdcat-quiz/mdcat-quiz.component';
@@ -72,7 +71,6 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'scholarships', component: ScholarshipsComponent },
   { path: 'privacy', component: PrivacyPolicyComponent },
-  { path: 'subscribe', component: SubscriptionListComponent },
   { path: 'faq', component: FaqComponent },
   { path: 'notes', component: NotesComponent },
     { path: 'exams', component: ExamDetailComponent },
