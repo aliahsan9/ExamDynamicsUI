@@ -25,7 +25,6 @@ import { FaqComponent } from './app/features/dashboard/faq/faq.component';
 import { SingleExamComponent } from './app/features/exams/single-exam/single-exam.component';
 import { EcatQuizComponent } from './app/features/Quiz/ecat-quiz/ecat-quiz.component';
 import { MdcatQuizComponent } from './app/features/Quiz/mdcat-quiz/mdcat-quiz.component';
-import { NotesComponent } from './app/features/Notes/notes/notes.component';
 import { GreExamsComponent } from './app/features/GRE/gre-exams/gre-exams.component';
 import { GmatExamsComponent } from './app/features/GMAT/gmat-exams/gmat-exams.component';
 import { IeltsExamsComponent } from './app/features/IELTS/ielts-exams/ielts-exams.component';
@@ -70,7 +69,6 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'privacy', component: PrivacyPolicyComponent },
   { path: 'faq', component: FaqComponent },
-  { path: 'notes', component: NotesComponent },
     { path: 'exams', component: ExamDetailComponent },
     { path: 'exam/:id', component: SingleExamComponent },
     { path: 'ecat-quiz', component: EcatQuizComponent },
