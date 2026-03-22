@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { CreateQuestionDto, QuestionDto } from '../../../../../models/question.moel';
+import { switchMap } from 'rxjs';
+import { CreateQuestionDto, QuestionDto, UpdateQuestionDto } from '../../../../../models/question.moel';
 import { OptionCreate, OptionDto } from '../../../../../models/option.model';
 import { QuestionService } from '../../../../core/services/question.service';
 import { OptionService } from '../../../../core/services/option.service';
@@ -57,6 +58,7 @@ export class ManageAlgebraComponent implements OnInit {
   // ✅ add option
   addOption() {
     this.options.push(this.fb.group({
+      optionId: [null as number | null],
       text: ['', Validators.required],
       isCorrect: [false]
     }));
@@ -87,14 +89,30 @@ export class ManageAlgebraComponent implements OnInit {
     const formValue = this.questionForm.value;
 
     if (this.isEditing && this.editingQuestionId) {
-      // Update
-      this.questionService.update({
-        ...formValue,
-        id: this.editingQuestionId
-      }).subscribe(() => {
-        this.resetForm();
-        this.loadAlgebraQuestions();
-      });
+      const updateDto: UpdateQuestionDto = {
+        questionId: this.editingQuestionId,
+        examId: this.ALGEBRA_EXAM_ID,
+        topicId: formValue.topicId,
+        subjectId: 0,
+        text: formValue.text,
+        explanation: formValue.explanation,
+        questionType: formValue.questionType,
+        correctAnswer: formValue.correctAnswer
+      };
+
+      const formOptions = this.options.getRawValue() as {
+        optionId?: number | null;
+        text: string;
+        isCorrect: boolean;
+      }[];
+
+      this.questionService
+        .update(updateDto)
+        .pipe(switchMap(() => this.optionService.syncOptionsForQuestion(this.editingQuestionId!, formOptions)))
+        .subscribe(() => {
+          this.resetForm();
+          this.loadAlgebraQuestions();
+        });
     } else {
       // Create new Algebra question
       const newQuestion: CreateQuestionDto = {
@@ -142,6 +160,7 @@ export class ManageAlgebraComponent implements OnInit {
     this.optionService.getByQuestionId(question.questionId).subscribe(opts => {
       opts.forEach(opt => {
         this.options.push(this.fb.group({
+          optionId: [opt.optionId],
           text: [opt.text, Validators.required],
           isCorrect: [opt.isCorrect]
         }));

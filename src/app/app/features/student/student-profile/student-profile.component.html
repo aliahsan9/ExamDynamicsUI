@@ -1,0 +1,64 @@
+<div class="profile-page container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="hero-card mb-4">
+        <h1 class="title">Your profile</h1>
+        <p class="subtitle">
+          Keep your details up to date so certificates and progress feel personal and motivating.
+        </p>
+      </div>
+
+      <div *ngIf="loading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status"></div>
+      </div>
+
+      <div *ngIf="!loading && profile" class="card shadow-lg border-0 profile-card">
+        <div class="card-body p-4 p-md-5">
+          <div class="mb-4">
+            <span class="badge rounded-pill badge-soft">Account</span>
+            <p class="text-muted small mb-0 mt-2">
+              Signed in as <strong>{{ profile.email }}</strong>
+            </p>
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="save()">
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Full name</label>
+              <input class="form-control form-control-lg" formControlName="fullName" />
+            </div>
+            <div class="mb-3">
+              <label class="form-label fw-semibold">Bio</label>
+              <textarea
+                class="form-control"
+                rows="3"
+                formControlName="bio"
+                placeholder="What are you preparing for?"
+              ></textarea>
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">School / institution</label>
+                <input class="form-control" formControlName="institution" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label fw-semibold">Country</label>
+                <input class="form-control" formControlName="country" />
+              </div>
+            </div>
+
+            <div class="d-flex flex-wrap gap-2 mt-4">
+              <button type="submit" class="btn btn-primary btn-lg px-4" [disabled]="saving || form.invalid">
+                <span *ngIf="!saving">Save changes</span>
+                <span *ngIf="saving">Saving…</span>
+              </button>
+              <a routerLink="/performance" class="btn btn-outline-secondary btn-lg">View performance</a>
+            </div>
+          </form>
+
+          <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{ error }}</div>
+          <div *ngIf="success" class="alert alert-success mt-3 mb-0">{{ success }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

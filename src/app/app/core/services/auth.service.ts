@@ -27,6 +27,12 @@ export class AuthService {
           const roles = response.user?.roles || [];
           localStorage.setItem('role', roles.join(','));
 
+          if (response.user?.id != null) {
+            localStorage.setItem('userId', String(response.user.id));
+            localStorage.setItem('user', JSON.stringify(response.user));
+            localStorage.setItem('roles', JSON.stringify(response.user.roles ?? []));
+          }
+
           this.authStatusSubject.next(true);
         }
       })
@@ -43,6 +49,12 @@ export class AuthService {
           const roles = response.user?.roles || [];
           localStorage.setItem('role', roles.join(','));
 
+          if (response.user?.id != null) {
+            localStorage.setItem('userId', String(response.user.id));
+            localStorage.setItem('user', JSON.stringify(response.user));
+            localStorage.setItem('roles', JSON.stringify(response.user.roles ?? []));
+          }
+
           this.authStatusSubject.next(true);
         }
       })
@@ -55,10 +67,14 @@ export class AuthService {
     if (!token) return null;
 
     try {
-      const payload = JSON.parse(atob(token.split('.')[1])); // decode JWT
-      return payload?.nameid ? Number(payload.nameid) : null; 
-      // Use 'sub' or 'userId' if your backend sets a different claim
-    } catch (e) {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      const raw =
+        payload['UserId'] ??
+        payload['nameid'] ??
+        payload['sub'] ??
+        payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+      return raw != null && raw !== '' ? Number(raw) : null;
+    } catch {
       return null;
     }
   }
@@ -78,6 +94,9 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('user');
+    localStorage.removeItem('roles');
     this.authStatusSubject.next(false);
   }
 

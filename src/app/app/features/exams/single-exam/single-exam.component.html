@@ -16,6 +16,21 @@
       Score: <strong>{{ score }}</strong> / {{ questions.length }}
       ({{ (score / questions.length * 100) | number:'1.0-0' }}%)
     </p>
+
+    <div *ngIf="saveError" class="alert alert-warning text-center">{{ saveError }}</div>
+    <p *ngIf="savingAttempt" class="text-center text-muted">Saving your result and generating your certificate…</p>
+
+    <div *ngIf="progressSaved && lastAttemptId" class="text-center my-3 d-flex flex-wrap gap-2 justify-content-center">
+      <button type="button" class="btn btn-primary btn-lg" (click)="openCertificate()">
+        View certificate
+      </button>
+      <a routerLink="/performance" class="btn btn-outline-primary btn-lg">Open performance hub</a>
+    </div>
+
+    <p *ngIf="!isLoggedIn() && questions.length" class="text-center text-muted small">
+      <a routerLink="/login">Sign in</a> to save scores to your profile, track performance with charts, and earn certificates.
+    </p>
+
     <hr>
 
     <div *ngFor="let q of questions; let i = index" class="mb-4">
@@ -42,8 +57,9 @@
       <div *ngIf="showAnswer[q.questionId]" class="alert alert-success">
         ✅ Correct Answer: {{ q.correctAnswer }}
       </div>
-      <div *ngIf="showExplanation[q.questionId]" class="alert alert-info">
-        💡 Explanation: {{ q.explanation }}
+      <div *ngIf="showExplanation[q.questionId]" class="alert alert-info explanation-alert">
+        <div class="explanation-label">💡 Explanation</div>
+        <div class="explanation-content" [innerHTML]="q.explanation | markdownExplanation"></div>
       </div>
       <hr>
     </div>
@@ -80,8 +96,9 @@
       <div *ngIf="showAnswer[questions[currentIndex].questionId]" class="alert alert-success mt-2">
         ✅ Correct Answer: {{ questions[currentIndex].correctAnswer }}
       </div>
-      <div *ngIf="showExplanation[questions[currentIndex].questionId]" class="alert alert-info mt-2">
-        💡 Explanation: {{ questions[currentIndex].explanation }}
+      <div *ngIf="showExplanation[questions[currentIndex].questionId]" class="alert alert-info mt-2 explanation-alert">
+        <div class="explanation-label">💡 Explanation</div>
+        <div class="explanation-content" [innerHTML]="questions[currentIndex].explanation | markdownExplanation"></div>
       </div>
 
       <div class="d-flex justify-content-between mt-4 flex-wrap gap-2">

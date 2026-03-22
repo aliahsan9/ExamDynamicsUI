@@ -22,6 +22,7 @@ export class RegisterComponent {
   ) {
     this.registerForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
+      fullName: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
@@ -29,16 +30,23 @@ export class RegisterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      this.authService.register(this.registerForm.value).subscribe({
+      const v = this.registerForm.value;
+      this.authService
+        .register({
+          username: v.username!,
+          email: v.email!,
+          password: v.password!,
+          fullName: v.fullName!,
+          role: 'Student'
+        })
+        .subscribe({
         next: (response) => {
-          // Show success message from backend
           this.successMessage = response.message || 'Registration successful!';
           this.errorMessage = '';
 
-          // Redirect after short delay
           setTimeout(() => {
-            this.router.navigate(['/']);
-          }, 1500);
+            this.router.navigate(['/dashboard']);
+          }, 800);
         },
         error: (err) => {
           this.errorMessage = err?.error?.message || 'Registration failed. Please try again.';

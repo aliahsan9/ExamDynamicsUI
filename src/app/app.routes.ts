@@ -57,6 +57,9 @@ import { ManageCssPoliticalScienceComponent } from './app/features/admin/css/man
 import { ManageCssIslamicStudiesComponent } from './app/features/admin/css/manage-css-islamic-studies/manage-css-islamic-studies.component';
 import { ChatComponent } from './app/features/chat/chat.component';
 import { LoaderComponent } from './app/shared/components/loader/loader.component';
+import { StudentProfileComponent } from './app/features/student/student-profile/student-profile.component';
+import { PerformanceDashboardComponent } from './app/features/student/performance-dashboard/performance-dashboard.component';
+import { CertificateViewComponent } from './app/features/student/certificate-view/certificate-view.component';
 
 export const routes: Routes = [
   //  Public routes
@@ -131,6 +134,9 @@ export const routes: Routes = [
 
   // Normal user dashboard (any logged-in user)
   { path: 'dashboard', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'profile', component: StudentProfileComponent, canActivate: [authGuard] },
+  { path: 'performance', component: PerformanceDashboardComponent, canActivate: [authGuard] },
+  { path: 'certificate/:attemptId', component: CertificateViewComponent, canActivate: [authGuard] },
 
   // Admin-only dashboard
   // { path: 'admin', component: AdminComponent, canActivate: [authGuard, adminGuard] },
