@@ -1,6 +1,9 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './app/features/dashboard/home/home.component';
 import { LoginComponent } from './app/features/auth/login/login.component';
+import { ForgotPasswordComponent } from './app/features/auth/forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './app/features/auth/reset-password/reset-password.component';
+import { AuthCallbackComponent } from './app/features/auth/auth-callback/auth-callback.component';
 import { AdminComponent } from './app/features/admin/admin/admin.component';
 import { RegisterComponent } from './app/features/auth/register/register.component';
 import { authGuard } from './app/core/guards/auth.guard';
@@ -66,6 +69,9 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'auth/callback', component: AuthCallbackComponent },
   { path: 'about', component: AboutComponent },
   { path: 'chat', component: ChatComponent },
   { path: 'loader', component: LoaderComponent },

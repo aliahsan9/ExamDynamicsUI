@@ -1,67 +1,112 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, tap, BehaviorSubject } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { LoginDto } from '../../../models/AuthModels/login.model';
 import { RegisterDto } from '../../../models/AuthModels/register.model';
-import { UserResponse } from '../../../models/AuthModels/user.model';
+import { User, UserResponse } from '../../../models/AuthModels/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = `${environment.apiUrl}/Auth`;
+  /** Matches API routes `api/auth` and `api/Auth` (case-insensitive on server). */
+  private readonly baseUrl = `${environment.apiUrl}/auth`;
 
   private authStatusSubject = new BehaviorSubject<boolean>(this.hasToken());
   authStatus$ = this.authStatusSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  // 🔹 Login
   login(model: LoginDto): Observable<UserResponse> {
     return this.http.post<UserResponse>(`${this.baseUrl}/login`, model).pipe(
-      tap((response) => {
-        if (response?.token) {
-          localStorage.setItem('token', response.token);
-
-          const roles = response.user?.roles || [];
-          localStorage.setItem('role', roles.join(','));
-
-          if (response.user?.id != null) {
-            localStorage.setItem('userId', String(response.user.id));
-            localStorage.setItem('user', JSON.stringify(response.user));
-            localStorage.setItem('roles', JSON.stringify(response.user.roles ?? []));
-          }
-
-          this.authStatusSubject.next(true);
-        }
-      })
+      tap((response) => this.persistSession(response))
     );
   }
 
-  // 🔹 Register
   register(model: RegisterDto): Observable<UserResponse> {
     return this.http.post<UserResponse>(`${this.baseUrl}/register`, model).pipe(
-      tap((response) => {
-        if (response?.token) {
-          localStorage.setItem('token', response.token);
+      tap((response) => this.persistSession(response))
+    );
+  }
 
-          const roles = response.user?.roles || [];
-          localStorage.setItem('role', roles.join(','));
+  forgotPassword(email: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.baseUrl}/forgot-password`, { email });
+  }
 
-          if (response.user?.id != null) {
-            localStorage.setItem('userId', String(response.user.id));
-            localStorage.setItem('user', JSON.stringify(response.user));
-            localStorage.setItem('roles', JSON.stringify(response.user.roles ?? []));
-          }
+  resetPassword(payload: { email: string; token: string; newPassword: string }): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.baseUrl}/reset-password`, payload);
+  }
 
-          this.authStatusSubject.next(true);
-        }
+  /** Full URL to start Google OAuth (browser redirect). */
+  getGoogleOAuthUrl(): string {
+    return `${this.baseUrl}/oauth/google`;
+  }
+
+  /** Full URL to start Facebook OAuth (browser redirect). */
+  getFacebookOAuthUrl(): string {
+    return `${this.baseUrl}/oauth/facebook`;
+  }
+
+  startGoogleLogin(): void {
+    window.location.href = this.getGoogleOAuthUrl();
+  }
+
+  startFacebookLogin(): void {
+    window.location.href = this.getFacebookOAuthUrl();
+  }
+
+  /** After OAuth redirect, JWT is in localStorage; loads profile from API. */
+  syncSessionFromServer(): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/me`).pipe(
+      tap((user) => {
+        localStorage.setItem('userId', String(user.id));
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('role', user.roles.join(','));
+        localStorage.setItem('roles', JSON.stringify(user.roles ?? []));
+        this.authStatusSubject.next(true);
       })
     );
   }
 
-  // Get userId from token
+  private persistSession(response: UserResponse): void {
+    if (response?.token) {
+      localStorage.setItem('token', response.token);
+
+      const roles = response.user?.roles || [];
+      localStorage.setItem('role', roles.join(','));
+
+      if (response.user?.id != null) {
+        localStorage.setItem('userId', String(response.user.id));
+        localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.setItem('roles', JSON.stringify(response.user.roles ?? []));
+      }
+
+      this.authStatusSubject.next(true);
+    }
+  }
+
+  static getHttpErrorMessage(err: unknown): string {
+    if (!(err instanceof HttpErrorResponse)) {
+      return 'Something went wrong. Please try again.';
+    }
+    const body = err.error;
+    if (typeof body === 'string' && body.trim()) {
+      return body;
+    }
+    if (body && typeof body === 'object') {
+      const nested = (body as { error?: { message?: string } }).error?.message;
+      if (nested) return nested;
+      const msg = (body as { message?: string; title?: string }).message
+        ?? (body as { errors?: string[] }).errors?.join(' ');
+      if (msg) return msg;
+    }
+    if (err.status === 0) {
+      return 'Cannot reach the server. Check your connection and API URL.';
+    }
+    return err.message || 'Request failed.';
+  }
+
   getUserId(): number | null {
     const token = localStorage.getItem('token');
     if (!token) return null;
@@ -79,18 +124,15 @@ export class AuthService {
     }
   }
 
-  // Check if logged in
   isLoggedIn(): boolean {
     return this.hasToken();
   }
 
-  // Get roles as array
   getRoles(): string[] {
     const roles = localStorage.getItem('role');
     return roles ? roles.split(',') : [];
   }
 
-  // Logout
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('role');

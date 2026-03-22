@@ -17,7 +17,7 @@ export class RegisterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router
   ) {
     this.registerForm = this.fb.group({
@@ -49,7 +49,7 @@ export class RegisterComponent {
           }, 800);
         },
         error: (err) => {
-          this.errorMessage = err?.error?.message || 'Registration failed. Please try again.';
+          this.errorMessage = AuthService.getHttpErrorMessage(err);
           this.successMessage = '';
         }
       });
