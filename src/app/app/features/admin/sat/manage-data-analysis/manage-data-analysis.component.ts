@@ -22,7 +22,7 @@ export class ManageDataAnalysisComponent implements OnInit {
   isEditing: boolean = false;
   editingQuestionId: number | null = null;
 
-  // ✅Data Analysis  examId (replace with actual ID for Data Analysis subject in your DB)
+  // Data Analysis  examId (replace with actual ID for Data Analysis subject in your DB)
   readonly DATA_EXAM_ID = 21;
 
   constructor(
@@ -37,25 +37,25 @@ export class ManageDataAnalysisComponent implements OnInit {
     this.addOption(); // start with one option
   }
 
-  // ✅ initialize form
+  // initialize form
   initForm() {
     this.questionForm = this.fb.group({
       examId: [this.DATA_EXAM_ID, Validators.required],
       topicId: [1, Validators.required], // can replace with dynamic topic selection
       text: ['', Validators.required],
-      explanation: [''], // ✅ NEW
+      explanation: [''], 
       questionType: ['MCQ', Validators.required],
       correctAnswer: ['', Validators.required],
       options: this.fb.array([])
     });
   }
 
-  // ✅ getter for options array
+  // getter for options array
   get options(): FormArray {
     return this.questionForm.get('options') as FormArray;
   }
 
-  // ✅ add option
+  // add option
   addOption() {
     this.options.push(this.fb.group({
       optionId: [null as number | null],
@@ -64,12 +64,12 @@ export class ManageDataAnalysisComponent implements OnInit {
     }));
   }
 
-  // ✅ remove option
+  // remove option
   removeOption(index: number) {
     this.options.removeAt(index);
   }
 
-  // ✅ load only data questions
+  // load only data questions
   loadDataQuestions() {
     this.questionService.getAll().subscribe(qs => {
       this.dataQuestions = qs.filter(q => q.examId === this.DATA_EXAM_ID);
@@ -82,7 +82,7 @@ export class ManageDataAnalysisComponent implements OnInit {
     });
   }
 
-  // ✅ submit question
+  // submit question
   onSubmit() {
     if (this.questionForm.invalid) return;
 
@@ -119,7 +119,7 @@ export class ManageDataAnalysisComponent implements OnInit {
         examId: this.DATA_EXAM_ID,
         topicId: formValue.topicId,
         text: formValue.text,
-        explanation: formValue.explanation, // ✅ NEW
+        explanation: formValue.explanation, 
         questionType: formValue.questionType,
         correctAnswer: formValue.correctAnswer
       };
@@ -141,7 +141,7 @@ export class ManageDataAnalysisComponent implements OnInit {
     }
   }
 
-  // ✅ edit DATA question
+  // edit DATA question
   editQuestion(question: QuestionDto) {
     this.isEditing = true;
     this.editingQuestionId = question.questionId;
@@ -150,7 +150,7 @@ export class ManageDataAnalysisComponent implements OnInit {
       examId: this.DATA_EXAM_ID,
       topicId: question.topicId,
       text: question.text,
-      explanation: question.explanation || '', // ✅ NEW
+      explanation: question.explanation || '', 
       questionType: question.questionType,
       correctAnswer: question.correctAnswer
     });
@@ -168,7 +168,7 @@ export class ManageDataAnalysisComponent implements OnInit {
     });
   }
 
-  // ✅ delete Data question
+  // delete Data question
   deleteQuestion(id: number) {
     if (confirm('Are you sure you want to delete this Data question?')) {
       this.questionService.delete(id).subscribe(() => {
@@ -177,7 +177,7 @@ export class ManageDataAnalysisComponent implements OnInit {
     }
   }
 
-  // ✅ reset form
+  // reset form
   resetForm() {
     this.isEditing = false;
     this.editingQuestionId = null;
@@ -185,7 +185,7 @@ export class ManageDataAnalysisComponent implements OnInit {
       examId: this.DATA_EXAM_ID,
       topicId: 1,
       text: '',
-      explanation: '', // ✅ NEW
+      explanation: '', 
       questionType: 'MCQ',
       correctAnswer: ''
     });
