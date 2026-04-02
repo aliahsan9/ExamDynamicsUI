@@ -34,7 +34,7 @@ export class AiService {
 
   // Send question (HTTP triggers backend)
   askQuestion(question: string) {
-    const payload = { message: question }; // ✅ wrap in object
+    const payload = { message: question }; // wrap in object
     return this.http.post(this.apiUrl, payload, {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
