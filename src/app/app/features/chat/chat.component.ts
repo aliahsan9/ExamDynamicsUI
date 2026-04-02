@@ -28,10 +28,10 @@ export class ChatComponent implements OnInit {
   constructor(private aiService: AiService) {}
 
   async ngOnInit() {
-    // 🔌 Start SignalR
+    // Start SignalR
     await this.aiService.startConnection();
 
-    // 🎧 Listen for AI stream
+    // Listen for AI stream
     this.aiService.onReceiveMessage((chunk: string) => {
       this.isTyping = false;
 
@@ -48,7 +48,7 @@ export class ChatComponent implements OnInit {
   sendQuestion() {
     if (!this.question.trim()) return;
 
-    // 👤 User message
+    // User message
     this.messages.push({ text: this.question, type: 'user' });
 
     const userQuestion = this.question;
@@ -58,7 +58,7 @@ export class ChatComponent implements OnInit {
     this.currentAiIndex = -1;
     this.isTyping = true;
 
-    // 🚀 Trigger backend
+    // Trigger backend
     this.aiService.askQuestion(userQuestion).subscribe({
       next: (res: string) => {
         this.isTyping = false;
