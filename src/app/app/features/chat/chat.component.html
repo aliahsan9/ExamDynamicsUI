@@ -2,47 +2,56 @@
 
   <div class="chat-card p-4 shadow-lg" data-aos="zoom-in">
 
+    <!-- Header -->
     <div class="text-center mb-4">
       <h2 class="fw-bold">AI Chat Assistant</h2>
       <p class="text-muted">
-        Ask your questions and get instant help.
+        Ask questions from your syllabus, notes, or past papers.
       </p>
     </div>
 
     <!-- Chat History -->
     <div class="chat-history mb-3" #chatHistory>
+
+      <!-- Messages -->
       <div *ngFor="let msg of messages" [ngClass]="msg.type" class="chat-row">
         <div class="chat-bubble">
           {{ msg.text }}
         </div>
       </div>
 
-      <!-- Typing indicator -->
+      <!-- 🔥 Streaming Typing Indicator -->
       <div *ngIf="isTyping" class="chat-row ai">
         <div class="chat-bubble typing">
-          AI is typing
+          AI is thinking...
           <span class="dot"></span>
           <span class="dot"></span>
           <span class="dot"></span>
         </div>
       </div>
+
     </div>
 
     <!-- Input -->
-    <div class="chat-input">
+    <div class="chat-input d-flex gap-2">
+
       <input
         type="text"
         [(ngModel)]="question"
-        placeholder="Ask your question..."
+        placeholder="Ask about exams, notes, MCQs..."
         (keydown.enter)="sendQuestion()"
         class="form-control"
       />
+
       <button
         class="btn btn-gradient"
         (click)="sendQuestion()"
+        [disabled]="isTyping"
       >
-        <i class="bi bi-send-fill me-1"></i>Ask
+        <i class="bi bi-send-fill me-1"></i>
+        Ask
       </button>
+
     </div>
 
   </div>
