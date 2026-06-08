@@ -27,7 +27,7 @@
     </a>
 
     <!-- External URL -->
-    <a *ngIf="link.href" [href]="link.href" target="_blank" rel="noopener noreferrer" (click)="closeMenu()">
+    <a *ngIf="link.href" [href]="link.href" rel="noopener noreferrer" (click)="closeMenu()">
       {{ link.label }}
     </a>
   </li>
