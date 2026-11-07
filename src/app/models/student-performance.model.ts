@@ -3,6 +3,13 @@ export interface SubmitExamAttempt {
   examTitle: string;
   score: number;
   totalQuestions: number;
+  answers?: SubmittedAnswer[];
+}
+
+export interface SubmittedAnswer {
+  questionId: number;
+  optionId?: number | null;
+  selectedText?: string | null;
 }
 
 export interface ExamAttemptResponse {

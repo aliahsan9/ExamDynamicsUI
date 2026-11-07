@@ -106,15 +106,28 @@ export class SingleExamComponent implements OnInit {
 
     this.savingAttempt = true;
     const title = this.examTitle || `Exam #${this.examId}`;
+    const answers = this.questions
+      .filter(q => !!this.selectedAnswers[q.questionId])
+      .map(q => {
+        const selectedText = this.selectedAnswers[q.questionId];
+        const option = (this.optionsMap[q.questionId] || []).find(opt => opt.text === selectedText);
+        return {
+          questionId: q.questionId,
+          optionId: option?.optionId ?? null,
+          selectedText
+        };
+      });
     this.performanceService
       .submitAttempt({
         examId: this.examId,
         examTitle: title,
         score: correct,
-        totalQuestions: total
+        totalQuestions: total,
+        answers
       })
       .subscribe({
         next: (res) => {
+          this.score = res.score;
           this.lastAttemptId = res.id;
           this.progressSaved = true;
           this.savingAttempt = false;
